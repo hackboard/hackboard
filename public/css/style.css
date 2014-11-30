@@ -1,0 +1,13 @@
+.background-cover {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 0;
+    /*padding: 20px;*/
+    background: rgba(34, 34, 34, 0.2);
+    
+    transition-duration: 5s;
+    transition-timing-function: linear;
+}
