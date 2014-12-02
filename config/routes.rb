@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   get '/' => 'view#index'
   post 'user/login' => 'user#login'
+  post 'user/register' => 'user#register'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
