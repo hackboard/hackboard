@@ -23,30 +23,31 @@ class UserController < ApplicationController
   end
 
 
-  #1. 輸入是空的會彈出錯誤
-  #2.
-  #
   def register
     input = register_params
 
     name = input[:name]
     email = input[:email]
+    email = email.downcase
     password = input[:password]
     password_confirmation = input[:password_confirmation]
 
-    unless password == password_confirmation
-      response = 'UMSE04'
-    else
+
+    if password == password_confirmation
       if User::find_by_email email
         response = 'UMSE03'
       else
         user = User.new(:email => email,:name =>name,:password => password,:sign_in_count => 0)
         user.save
         response = 'success'
+        render :json => response.to_json
+        return
       end
+    else
+      response = 'UMSE04'
     end
 
-    render :json => response.to_json
+    render :json => response.to_json , :status => :forbidden
 
   end
 
