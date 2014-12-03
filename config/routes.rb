@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'user/register' => 'user#register'
   get 'board/index' => 'board#index'
   post 'board/create' => 'board#create'
+  delete 'board/:id' => 'board#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

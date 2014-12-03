@@ -39,4 +39,33 @@ class BoardController < ApplicationController
     end
     render :json => response.to_json ,:status => :forbidden
   end
+
+  def destroy
+    email = session[:login_user]
+    email = email.downcase
+    user = User::find_by_email(email)
+
+    if user
+      input = input_params
+      board = Board.find(input[:id])
+      if board.user_id != user.id
+        response = 'DAPIE03'
+        render :json => response.to_json
+        return
+      end
+      board.destroy
+      response = 'delete success'
+    else
+      response = 'Not login'
+      render :json => response.to_json, :status => :unauthorized
+      return
+    end
+    render :json => response.to_json
+  end
+
+  private
+
+  def input_params
+    {:id => params.require(:id)}
+  end
 end
