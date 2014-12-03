@@ -63,6 +63,29 @@ class BoardController < ApplicationController
     render :json => response.to_json
   end
 
+  def flows
+    email = session[:login_user]
+    email = email.downcase
+    user = User::find_by_email(email)
+    if user
+      input = input_params
+      board = Board.find(input[:id])
+      member = BoardMember.where(:board_id => board.id,:user_id => user.id)
+      if board.user_id != user.id  || !member # if not board owner neither board member
+        response = 'DAPIE04'
+        render :json => response.to_json
+        return
+      end
+      flows = Flow.where(:board_id => board.id)
+      render :json => flows.to_json
+      return
+    else
+      response = 'Not login'
+      render :json => response.to_json, :status => :unauthorized
+      return
+    end
+  end
+
   private
 
   def input_params
