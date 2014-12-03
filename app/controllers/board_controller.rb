@@ -24,7 +24,6 @@ class BoardController < ApplicationController
   end
 
   def create
-    session[:login_user] = 'bruce@meigic.tw'
     email = session[:login_user]
     email = email.downcase
     user = User::find_by_email(email)
