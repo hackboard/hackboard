@@ -1,16 +1,16 @@
 
 
 #users
-user1 = User.new(:email => 'Bob@meigic.tw',:name =>'Bob',:password =>'Bob0000',:sign_in_count => 0)
+user1 = User.new(:email => 'bob@meigic.tw',:name =>'Bob',:password =>'Bob0000',:sign_in_count => 0)
 user1.save
 
-user2 = User.new(:email => 'Alice@meigic.tw',:name =>'Alice',:password => 'Alice0000',:sign_in_count => 0)
+user2 = User.new(:email => 'alice@meigic.tw',:name =>'Alice',:password => 'Alice0000',:sign_in_count => 0)
 user2.save
 
-user3 = User.new(:email => 'John@meigic.tw',:name =>'John',:password => 'John0000',:sign_in_count => 0)
+user3 = User.new(:email => 'john@meigic.tw',:name =>'John',:password => 'John0000',:sign_in_count => 0)
 user3.save
 
-user4 = User.new(:email => 'Bruce@meigic.tw',:name =>'Bruce',:password => 'Bruce0000',:sign_in_count => 0)
+user4 = User.new(:email => 'bruce@meigic.tw',:name =>'Bruce',:password => 'Bruce0000',:sign_in_count => 0)
 user4.save
 
 #board1
