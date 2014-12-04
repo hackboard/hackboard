@@ -1,66 +1,159 @@
 <div class="background-cover"></div>
-<div class="container">
-  <br>
-  <br>
-  <div class="row">
-    <div class="col-md-offset-3 col-xs-offset-1 through">
-      <flippy id="loginCard" style="display:none;position:fixed;" class="col-md-8 col-sm-10 col-xs-11 t2b">
-        <flippy-front>
-          <div class="thumbnail text-center">
-            <div class="caption">
-              <h1><span class="fa fa-rocket"></span> Hackboard</h1>
-            </div>
-            <p>
-              <button class="btn btn-success btn-lg" id="goButton">Let's Go!</button>
-            </p>
-            <p>
-              Accelerate, Customize, Board
-            </p>
-          </div>
-        </flippy-front>
-        <flippy-back>
-          <div class="thumbnail text-center">
-            <div class="pull-right">
-              <a class="btn btn-default fa fa-arrow-up" id="backButton"></a>
-            </div>
-            <div class="caption">
-              <form role=form>
-                <h1 class="form-inline">
-                  <img class="fileinput-new img-circle" src="img/icons/rocket.svg">
-                  <input type="text" placeholder="Nickname" class="form-control input-hg flat" />
-                </h1>
-                <input type="email" placeholder="Email" class="form-group form-control input-lg" required/>
-                <input type="password" placeholder="Password" class="form-group form-control input-lg" required/>
-                <div class="form-inline form-group">
-                  <label class="form-group checkbox text-left" for="checkbox1">
-                    <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">Remember Me
-                  </label>
-                </div>
-                <div class="form-inline">
-                  <input type="submit" class="btn btn-info btn-hg" value="Join Us" />
-                  <input type="submit" class="btn btn-success btn-hg" value="Sign In" />
-                  <br>
-                </div>
-              </form>
+<div class="container" id="page" style="display: none;">
+  <div class="ui grid page">
+    <div class="ui grid centered through">
+      <div class="ui ten wide column raised segment center aligned" id="selectCard">
+        <div class="content">
+          <div class="ui huge icon header">
+            <i class="rocket icon"></i>
+
+            <div class="content">
+              Hackboard
             </div>
           </div>
-        </flippy-back>
-      </flippy>
+          <div class="ui hidden divider"></div>
+          <div class="ui red button" id="signupButton">Sign up</div>
+          <div class="ui green button" id="loginButton">Log in</div>
+          <div class="ui hidden divider"></div>
+          <div class="description">
+            Accelerate, Customize, Board
+          </div>
+        </div>
+      </div>
+      <div class="ui ten wide column segment center aligned hidden" id="signupCard" style="display: none;">
+        <div class="ui grid center aligned">
+          <div class="ui column">
+            <div class="ui right floated circular icon button backButton">
+              <i class="ui arrow up icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <form class="ui error warning form">
+          <div class="field ui right labeled input">
+            <input placeholder="user@email.com" type="email" required>
+
+            <div class="ui tag label">
+              Email
+            </div>
+          </div>
+          <div class="inline fields">
+            <div class="field">
+              <img class="ui tiny circular image middle aligned" src="http://semantic-ui.com/images/wireframe/square-image.png">
+            </div>
+            <div class="field">
+              <input placeholder="shortname" type="text" required>
+            </div>
+          </div>
+          <div class="field ui right labeled input">
+            <input placeholder="at least 8 chars" type="password" required>
+
+            <div class="ui tag label">
+              Password
+            </div>
+          </div>
+          <div class="field ui right labeled input">
+            <input placeholder="type password again" type="password" required>
+
+            <div class="ui tag label">
+              Confirm
+            </div>
+          </div>
+          <div class="inline field">
+            <div class="ui checkbox">
+              <input type="checkbox">
+              <label>I agree to the Terms and Conditions</label>
+            </div>
+          </div>
+          <div class="ui hidden divider"></div>
+          <div class="ui warning message">
+            <div class="header">
+              <i class="info circle icon"></i>Could you check something!
+            </div>
+            <ul class="list">
+              <li>
+                Test
+              </li>
+            </ul>
+          </div>
+          <div class="ui error message">
+            <div class="header">
+              <i class="remove circle icon"></i>Something went wrong :(
+            </div>
+            <ul class="list">
+              <li>
+                Test
+              </li>
+            </ul>
+          </div>
+          <input type="submit" class="ui blue button" value="Sign Up">
+        </form>
+      </div>
+      <div class="ui ten wide column segment center aligned hidden" id="loginCard" style="display: none;">
+        <div class="ui grid center aligned">
+          <div class="ui column">
+            <div class="ui right floated circular icon button backButton">
+              <i class="ui arrow up icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <form class="ui error warning form">
+          <div class="field ui right labeled input">
+            <input placeholder="user@email.com" type="email" required>
+
+            <div class="ui tag label">
+              Email
+            </div>
+          </div>
+          <div class="field ui right labeled input">
+            <input placeholder="at least 8 chars" type="password" required>
+
+            <div class="ui tag label">
+              Password
+            </div>
+          </div>
+          <div class="inline field">
+            <div class="ui checkbox">
+              <input type="checkbox">
+              <label>Remember me</label>
+            </div>
+          </div>
+          <div class="ui hidden divider"></div>
+          <div class="ui warning message">
+            <div class="header">
+              <i class="info circle icon"></i>Could you check something!
+            </div>
+            <ul class="list">
+              <li>
+                Test
+              </li>
+            </ul>
+          </div>
+          <div class="ui error message">
+            <div class="header">
+              <i class="remove circle icon"></i>Something went wrong :(
+            </div>
+            <ul class="list">
+              <li>
+                Test
+              </li>
+            </ul>
+          </div>
+          <input type="submit" class="ui blue button" value="Log in">
+        </form>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
 <script src="js/vendor/jquery.min.js"></script>
-<script src="js/vendor/video.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/flat-ui-pro.js"></script>
+<script src="vendor/semantic-ui-1.1.2/semantic.min.js"></script>
 <script src="js/jquery.backstretch.js"></script>
 <script src="js/angular.min.js"></script>
-<!--    <script src="js/flippy.js"></script>-->
 
 <script>
-    $(':checkbox').radiocheck();
+    $('.ui.checkbox').checkbox();
     $.backstretch([
         "img/pot-holder.jpg",
         "img/coffee.jpg",
@@ -69,18 +162,19 @@
         fade: 2000,
         duration: 18000
     });
-    $("#loginCard").fadeIn(1000);
-
-    function flip() {
-        if ($("#loginCard").hasClass("flipped"))
-            $("#loginCard").removeClass("flipped");
-        else
-            $("#loginCard").addClass("flipped");
+    $("#page").transition('fade', '1000ms');
+    $("#signupButton").click(function () {
+        switchCard($(this).parent().parent(), $("#signupCard"));
+    });
+    $("#loginButton").click(function () {
+        switchCard($(this).parent().parent(), $("#loginCard"));
+    });
+    $(".backButton").click(function () {
+        switchCard($(this).parent().parent().parent(), $("#selectCard"));
+    });
+    function switchCard(hideCard, showCard) {
+        $(hideCard).transition('vertical flip', '100ms', function () {
+            $(showCard).transition('vertical flip', '100ms');
+        });
     }
-    $("#goButton").click(function () {
-        flip();
-    });
-    $("#backButton").click(function () {
-        flip();
-    });
 </script>
