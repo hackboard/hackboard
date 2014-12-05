@@ -1,5 +1,7 @@
 class UserController < ApplicationController
 
+  protect_from_forgery with: :exception , except: :logout
+
   def login
     input = login_params
     email = input[:email]
@@ -49,6 +51,15 @@ class UserController < ApplicationController
 
     render :json => response.to_json , :status => :forbidden
 
+  end
+
+  def logout
+    if session.has_key? :login_user
+      session.delete :login_user
+      render :json => 'success'.to_json
+    else
+      render :json => 'UMSE05'.to_json
+    end
   end
 
   private

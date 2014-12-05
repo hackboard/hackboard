@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get '/' => 'view#index'
   post 'user/login' => 'user#login'
+  post 'user/logout' => 'user#logout'
   post 'user/register' => 'user#register'
   get 'board/index' => 'board#index'
   post 'board/create' => 'board#create'
