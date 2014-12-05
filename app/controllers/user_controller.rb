@@ -1,11 +1,9 @@
 class UserController < ApplicationController
 
-
-
-
   def login
-    email = params[:email]
-    password = params[:password]
+    input = login_params
+    email = input[:email]
+    password = input[:password]
 
     user = User::find_by_email email
 
@@ -13,13 +11,15 @@ class UserController < ApplicationController
       if user.authenticate(password)
         session[:login_user] = email
         response = 'success'
+        render :json => response.to_json
+        return
       else
         response = 'UMSE01'
       end
     else
       response = 'UMSE02'
     end
-    render :json => response.to_json
+    render :json => response.to_json , status: :forbidden
   end
 
 
@@ -61,4 +61,12 @@ class UserController < ApplicationController
         :password_confirmation => params.require(:password_confirmation)
     }
   end
+
+  def login_params
+    {
+        :email => params.require(:email),
+        :password => params.require(:password)
+    }
+  end
+
 end
