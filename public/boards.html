@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <title>Hackboard - Accelerate your works!</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link href="vendor/semantic-ui-1.1.2/semantic.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="vendor/semantic-ui-1.1.2/semantic.min.js"></script>
+
+</head>
+<body>
+<div class="ui main borderless fixed inverted large menu ui grid page">
+    <div class="item">
+        <i class="rocket icon"></i> All boards
+    </div>
+
+    <div class="ui icon buttons item">
+        <div class="ui button basic inverted disabled">Mode</div>
+        <div class="ui button yellow inverted active"><i class="list icon"></i></div>
+        <div class="ui button red inverted"><i class="sitemap icon"></i></div>
+    </div>
+    <div class="item">
+        <div class="ui icon button blue inverted">
+            <i class="plus icon"></i>
+            New board
+        </div>
+    </div>
+    <div class="right menu">
+        <div class="ui dropdown item">
+            <img class="ui avatar image" src="img/square-image.png">
+            <span>User</span>
+            <i class="caret down icon"></i>
+
+            <div class="menu">
+                <!--<a class="item"><i class="edit icon"></i> Edit Profile</a>-->
+                <!--<a class="item"><i class="globe icon"></i> Choose Language</a>-->
+                <a class="item"><i class="settings icon"></i> Settings</a>
+                <a class="item"><i class="sign out icon"></i> Log out</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="background-cover"></div>
+<div class="container" id="page">
+    <div class="ui grid page">
+        <div class="ui grid" id="pinned-boards">
+            <div class="ui column">
+                <div class="ui medium header">
+                    <i class="pin icon"></i>
+
+                    <div class="content">
+                        Pinned
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="ui grid stackable four column">
+                    <div class="ui divider"></div>
+                    <div class="ui column">
+                        <div class="ui segment draggable">
+                            test
+                        </div>
+                    </div>
+                    <div class="ui column">
+                        <div class="ui segment">
+                            test
+                        </div>
+                    </div>
+                    <div class="ui column">
+                        <div class="ui segment">
+                            test
+                        </div>
+                    </div>
+                    <div class="ui column">
+                        <div class="ui segment">
+                            test
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui grid" id="other-boards">
+            <div class="ui column">
+                <div class="ui medium header">
+                    <div class="content">
+                        Others
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="ui grid stackable four column">
+                    <div class="ui divider"></div>
+                    <div class="ui column">
+                        <div class="ui segment">
+                            test
+                        </div>
+                    </div>
+                    <div class="ui column">
+                        <div class="ui segment">
+                            test
+                        </div>
+                    </div>
+                    <div class="ui column">
+                        <div class="ui segment">
+                            test
+                        </div>
+                    </div>
+                    <div class="ui column">
+                        <div class="ui segment">
+                            test
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(".ui.dropdown").dropdown();
+    $(".ui.checkbox").checkbox();
+    $('.main .ui.buttons .button').on('click', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+    $( ".draggable" ).draggable();
+</script>
