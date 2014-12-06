@@ -1,11 +1,9 @@
 class BoardController < ApplicationController
+  before_action :login_require
   def index
-    email = session[:login_user]
-    email = email.downcase
-    user = User::find_by_email(email)
-    if user
-      own_boards = Board.where(:user_id => user.id)
-      members = BoardMember.select("board_id,id").where(:user_id => user.id)
+    if current_user
+      own_boards = Board.where(:user_id => current_user.id)
+      members = BoardMember.select("board_id,id").where(:user_id => current_user.id)
       arr = []
 
       members.each do |m|
@@ -24,12 +22,8 @@ class BoardController < ApplicationController
   end
 
   def create
-    email = session[:login_user]
-    email = email.downcase
-    user = User::find_by_email(email)
-
-    if user
-      board =Board.new(:name => 'NewBoard',:wip =>'10',:description =>'New Board',:user_id => user.id)
+    if current_user
+      board =Board.new(:name => 'NewBoard',:wip =>'10',:description =>'New Board',:user_id => current_user.id)
       board.save
       response = 'success'
       render :json => response.to_json
@@ -41,14 +35,10 @@ class BoardController < ApplicationController
   end
 
   def destroy
-    email = session[:login_user]
-    email = email.downcase
-    user = User::find_by_email(email)
-
-    if user
+    if current_user
       input = input_params
       board = Board.find(input[:id])
-      if board.user_id != user.id
+      if board.user_id != current_user.id
         response = 'DAPIE03'
         render :json => response.to_json
         return
@@ -64,14 +54,11 @@ class BoardController < ApplicationController
   end
 
   def flows
-    email = session[:login_user]
-    email = email.downcase
-    user = User::find_by_email(email)
-    if user
+    if current_user
       input = input_params
       board = Board.find(input[:id])
-      member = BoardMember.where(:board_id => board.id,:user_id => user.id)
-      if board.user_id != user.id  || !member # if not board owner neither board member
+      member = BoardMember.where(:board_id => board.id,:user_id => current_user.id)
+      if board.user_id != current_user.id  || !member # if not board owner neither board member
         response = 'DAPIE04'
         render :json => response.to_json
         return
@@ -85,9 +72,7 @@ class BoardController < ApplicationController
       return
     end
   end
-
   private
-
   def input_params
     {:id => params.require(:id)}
   end
