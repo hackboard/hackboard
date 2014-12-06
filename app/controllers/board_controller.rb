@@ -1,5 +1,4 @@
 class BoardController < ApplicationController
-  before_action :login_require
   def index
     if current_user
       own_boards = Board.where(:user_id => current_user.id)
