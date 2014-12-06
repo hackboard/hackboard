@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   post 'board/create' => 'board#create'
   delete 'board/:id' => 'board#destroy'
   get 'board/:id/flows' => 'board#flows'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
