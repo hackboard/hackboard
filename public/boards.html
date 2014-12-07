@@ -247,4 +247,11 @@
         },
         on: 'click'
     });
+    $(".card").each(function(index, value) {
+        var $this = $(this);
+        $this.hide();
+        setTimeout(function() {
+            $this.transition('fade up');
+        }, index * 100);
+    });
 </script>
