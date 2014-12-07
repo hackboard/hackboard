@@ -1,4 +1,21 @@
-class BoardController < ApplicationController
+class BoardsController < ApplicationController
+
+  def new
+
+  end
+
+  def update
+
+  end
+
+  def edit
+
+  end
+
+  def show
+
+  end
+
   def index
     if current_user
       own_boards = Board.where(:user_id => current_user.id)
