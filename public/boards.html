@@ -40,8 +40,6 @@
             <i class="caret down icon"></i>
 
             <div class="menu">
-                <!--<a class="item"><i class="edit icon"></i> Edit Profile</a>-->
-                <!--<a class="item"><i class="globe icon"></i> Choose Language</a>-->
                 <a class="item"><i class="settings icon"></i> Settings</a>
                 <a class="item"><i class="sign out icon"></i> Log out</a>
             </div>
@@ -220,11 +218,9 @@
         $("#other-boards-content").append($("#sample-other-board").clone());
     }
     $(".ui.dropdown").dropdown();
-    $(".ui.checkbox").checkbox();
     $('.main .ui.buttons .button').on('click', function () {
         $(this).addClass('active').siblings().removeClass('active');
     });
-    //    $(".draggable").draggable();
     $(".pin").state();
     $(".people").popup({
         position: 'top right',
