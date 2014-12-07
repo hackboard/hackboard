@@ -1,7 +1,8 @@
 <div class="background-cover"></div>
-<div class="container" id="page" style="display: none;">
+<div class="container" id="page" style="display: none;" ng-app="hackboardApp" ng-controller="UserCtrl">
   <div class="ui grid page">
     <div class="ui grid centered through">
+      <!-- Home Page -->
       <div class="ui ten wide column raised segment center aligned" id="selectCard">
         <div class="content">
           <div class="ui huge icon header">
@@ -19,6 +20,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Register Page -->
       <div class="ui ten wide column segment center aligned hidden" id="signupCard" style="display: none;">
         <div class="ui grid center aligned">
           <div class="ui column">
@@ -28,9 +31,9 @@
           </div>
         </div>
         <div class="ui hidden divider"></div>
-        <form class="ui error warning form">
+        <form class="ui error warning form" ng-submit="">
           <div class="field ui right labeled input">
-            <input placeholder="user@email.com" type="email" required>
+            <input placeholder="user@email.com" type="email" required ng-model="registerInfo.email">
 
             <div class="ui tag label">
               Email
@@ -41,18 +44,18 @@
               <img class="ui tiny circular image middle aligned" src="img/square-image.png">
             </div>
             <div class="field">
-              <input placeholder="shortname" type="text" required>
+              <input placeholder="shortname" type="text" required ng-model="registerInfo.nickname">
             </div>
           </div>
           <div class="field ui right labeled input">
-            <input placeholder="at least 8 chars" type="password" required>
+            <input placeholder="at least 8 chars" type="password" required ng-model="registerInfo.password">
 
             <div class="ui tag label">
               Password
             </div>
           </div>
           <div class="field ui right labeled input">
-            <input placeholder="type password again" type="password" required>
+            <input placeholder="type password again" type="password" required ng-model="registerInfo.password_confirmation">
 
             <div class="ui tag label">
               Confirm
@@ -60,12 +63,12 @@
           </div>
           <div class="inline field">
             <div class="ui checkbox">
-              <input type="checkbox">
+              <input type="checkbox" ng-model="registerInfo.agree">
               <label>I agree to the Terms and Conditions</label>
             </div>
           </div>
           <div class="ui hidden divider"></div>
-          <div class="ui warning message">
+          <div class="ui warning message" ng-show="registerInfo.hasWarning">
             <div class="header">
               <i class="info circle icon"></i>Could you check something!
             </div>
@@ -75,7 +78,7 @@
               </li>
             </ul>
           </div>
-          <div class="ui error message">
+          <div class="ui error message" ng-show="registerInfo.hasError">
             <div class="header">
               <i class="remove circle icon"></i>Something went wrong :(
             </div>
@@ -88,6 +91,7 @@
           <input type="submit" class="ui blue button" value="Sign Up">
         </form>
       </div>
+      <!-- Login Page -->
       <div class="ui ten wide column segment center aligned hidden" id="loginCard" style="display: none;">
         <div class="ui grid center aligned">
           <div class="ui column">
@@ -97,16 +101,16 @@
           </div>
         </div>
         <div class="ui hidden divider"></div>
-        <form class="ui error warning form">
+        <form class="ui error warning form" ng-submit="btnLogin()">
           <div class="field ui right labeled input">
-            <input placeholder="user@email.com" type="email" required>
+            <input placeholder="user@email.com" type="email" required ng-model="loginInfo.email">
 
             <div class="ui tag label">
               Email
             </div>
           </div>
           <div class="field ui right labeled input">
-            <input placeholder="at least 8 chars" type="password" required>
+            <input placeholder="at least 8 chars" type="password" required ng-model="loginInfo.password">
 
             <div class="ui tag label">
               Password
@@ -114,28 +118,31 @@
           </div>
           <div class="inline field">
             <div class="ui checkbox">
-              <input type="checkbox">
+              <input type="checkbox" ng-model="loginInfo.rememberMe">
               <label>Remember me</label>
             </div>
           </div>
           <div class="ui hidden divider"></div>
-          <div class="ui warning message">
+          <div class="ui warning message" ng-show="loginInfo.hasWarning">
             <div class="header">
               <i class="info circle icon"></i>Could you check something!
             </div>
             <ul class="list">
               <li>
-                Test
+                帳號或密碼錯誤？
+              </li>
+              <li ng-click="btnRegister()">
+                <a href="#">還沒註冊嗎?</a>
               </li>
             </ul>
           </div>
-          <div class="ui error message">
+          <div class="ui error message" ng-show="loginInfo.hasError">
             <div class="header">
               <i class="remove circle icon"></i>Something went wrong :(
             </div>
             <ul class="list">
               <li>
-                Test
+                抱歉，可能是伺服器正在維修，請稍候30分鐘再試，如果持續發生這個狀況，請聯絡我們！
               </li>
             </ul>
           </div>
