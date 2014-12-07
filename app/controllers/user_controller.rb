@@ -5,6 +5,7 @@ class UserController < ApplicationController
   def login
     input = login_params
     email = input[:email]
+    email = email.downcase
     password = input[:password]
 
     user = User::find_by_email email
