@@ -54,10 +54,9 @@
             <i class="check icon"></i>
           </div>
           <div class="inline field">
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="registerInfo.agree">
-              <label>I agree to the <a>Terms and Conditions</a></label>
-            </div>
+            <checkbox ng-model="registerInfo.agree">
+              I agree to the <a>Terms and Conditions</a>
+            </checkbox>
           </div>
           <div class="ui hidden divider"></div>
           <div class="ui warning message" ng-show="registerInfo.hasWarning">
@@ -105,10 +104,7 @@
             <i class="privacy icon"></i>
           </div>
           <div class="inline field">
-            <div class="ui checkbox">
-              <input type="checkbox" ng-model="loginInfo.rememberMe">
-              <label>Remember me</label>
-            </div>
+            <checkbox ng-model="loginInfo.rememberMe">Remember me</checkbox>
           </div>
           <div class="ui hidden divider"></div>
           <div class="ui warning message" ng-show="loginInfo.hasWarning">
