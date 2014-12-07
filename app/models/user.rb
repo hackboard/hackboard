@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+   before_save {
+     self.email = email.downcase
+   }
   has_secure_password
   validates_presence_of :password_digest ,:on => :create
   has_many :boards
