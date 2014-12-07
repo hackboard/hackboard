@@ -39,3 +39,4 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'angularjs-rails', '~> 1.3.4'
+gem 'ng-rails-csrf'

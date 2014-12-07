@@ -1,0 +1,1 @@
+hackboard = angular.module 'hackboardApp', ['ng-rails-csrf', 'hackboardControllers', 'hackboardServices']
