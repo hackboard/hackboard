@@ -35,7 +35,17 @@
 .solid {
     opacity: 1;
 }
+
+.ui.fixed.menu {
+    height: 65px;
+    z-index: 1000;
+}
+
 .ui.fixed.menu > *, .ui.fixed.menu > .menu > .item {
     line-height: 40px;
     vertical-align: middle;
+}
+
+.pin:hover, .pin.active {
+    color: #d95c5c !important;
 }
