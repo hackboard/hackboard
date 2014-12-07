@@ -1,5 +1,24 @@
+html, body {
+    overflow-x: hidden;
+}
+
+header {
+    height: 65px;
+    z-index: 1000;
+}
+
 .container {
+    position: relative;
+    min-height: 100%;
     padding-top: 100px;
+    padding-bottom: 100px;
+    margin-bottom: -46px;
+}
+
+footer {
+    height: 46px;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.55);
 }
 
 .align-middle {
@@ -22,7 +41,7 @@
     right: 0px;
     z-index: 0;
     /*padding: 20px;*/
-    background: rgba(34, 34, 34, 0.2);
+    background-color: rgba(34, 34, 34, 0.2);
     
     transition-duration: 5s;
     transition-timing-function: linear;
@@ -34,11 +53,6 @@
 
 .solid {
     opacity: 1;
-}
-
-.ui.fixed.menu {
-    height: 65px;
-    z-index: 1000;
 }
 
 .ui.fixed.menu > *, .ui.fixed.menu > .menu > .item {
