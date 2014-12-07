@@ -1,5 +1,5 @@
 <div class="background-cover"></div>
-<div class="container" id="page" style="display: none;" ng-app="hackboardApp" ng-controller="UserCtrl">
+<div class="container" id="page" ng-app="hackboardApp" ng-controller="UserCtrl">
   <div class="ui grid page">
     <div class="ui grid sixteen wide mobile eight wide tablet eight wide computer column centered through">
       <!-- Home Page -->
@@ -168,7 +168,8 @@
         fade: 2000,
         duration: 18000
     });
-    $("#page").transition('fade', '1000ms');
+    $("#page").hide().transition('fade', '1000ms');
+    $("footer").hide().transition('fade');
     $("#signupButton").click(function () {
         switchCard($(this).parent().parent(), $("#signupCard"));
     });

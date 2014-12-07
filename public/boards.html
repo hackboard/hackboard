@@ -252,6 +252,8 @@
         $this.hide();
         setTimeout(function() {
             $this.transition('fade up');
-        }, index * 100);
+        }, index * 50);
     });
+    $("header").hide().transition('fade');
+    $("footer").hide().transition('fade');
 </script>
