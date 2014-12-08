@@ -10,6 +10,13 @@ services.factory 'User' , ['$http' , ($http)->
     )
   logout: ()->
     return
-  register: ()->
-    return
+  signUp: (email,nickName,password,passwordConfirmation)->
+    #Authenticity Token?
+    $http.post(
+      '/user/register',
+      email:email,
+      name:nickName,
+      password:password,
+      password_confirmation:passwordConfirmation
+    )
 ]
