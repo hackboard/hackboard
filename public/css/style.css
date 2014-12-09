@@ -12,6 +12,11 @@ header {
 
 }
 
+.thin-padding {
+    padding-top: 80px !important;
+    padding-bottom: 50px !important;
+}
+
 .container {
     position: relative;
     min-height: 100%;
@@ -68,7 +73,6 @@ footer {
 }
 
 .sidebar.menu {
-    margin-top: 10px !important;
     width: 200px !important;
 }
 
@@ -121,4 +125,16 @@ footer {
 
 .black p {
     color: black !important;
+}
+
+.ui-list {
+    width: 350px !important;
+}
+
+.pushable {
+    background-color: #f7f7f7 !important;
+}
+
+.pusher {
+    background-color: transparent !important;
 }

@@ -46,14 +46,16 @@
                 Notification
             </div>
             <div class="content">
-                <p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+                <p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a
+                    welcome guest in many households across the world.</p>
             </div>
             <div class="title">
                 <i class="protect icon"></i>
                 Permission
             </div>
             <div class="content">
-                <p>There are many breeds of dogs. Each breed varies in size and temperament. Owners often select a breed of dog that they find to be compatible with their own lifestyle and desires from a companion.</p>
+                <p>There are many breeds of dogs. Each breed varies in size and temperament. Owners often select a breed
+                    of dog that they find to be compatible with their own lifestyle and desires from a companion.</p>
             </div>
         </div>
     </div>
@@ -61,35 +63,92 @@
 <div class="ui black big launch left attached button">
     <i class="content icon"></i>
 </div>
-<header class="ui main top borderless fixed inverted large menu ui grid page" id="page">
+<header class="ui main top borderless fixed inverted large menu" id="page">
     <div class="item">
         <i class="rocket icon"></i> HackMD
     </div>
     <div class="item ui tablet only computer only row column">
     </div>
-    <div class="right menu">
-
-    </div>
 </header>
 <div class="pusher">
-    <div class="container">
-    </div>
-    <footer class="ui grid page">
-        <div class="ui column">
-            <div class="ui left floated column divided large horizontal list">
-                <div class="item">
-                    &copy 2014 MeiGic
-                </div>
-            </div>
-            <div class="ui right floated column divided large horizontal list">
-                <div class="item">
-                    <a>
-                        Terms of Service
-                    </a>
+    <div class="container thin-padding" style="overflow-x: scroll; overflow-y: hidden;">
+        <div class="ui horizontal list">
+            <div class="item ui grid" style="display: inline-flex;" id="board-content">
+                <div class="ui ui-list column" id="sample-list">
+                    <div class="ui segment">
+                        <div class="ui medium header">
+                            To Do
+                        </div>
+                        <div class="ui divider"></div>
+                        <div class="ui-list-content" id="list-content" style="overflow-y: scroll; padding: 1px; padding-right: 15px">
+                            <div class="ui card" id="sample-card" style="width: auto;">
+                                <div class="content">
+                                    <i class="right floated pin link icon active"></i>
+
+                                    <div class="header">HackMD</div>
+                                    <div class="meta">
+                                        updated 2 days ago
+                                    </div>
+                                    <div class="description">
+                                        <p>HackMD is a real-time collaborate note which syntax in Markdown.</p>
+                                    </div>
+                                </div>
+                                <div class="extra content">
+                                    <div class="ui labels">
+                                        <div class="ui teal label">
+                                            WIP
+                                            <div class="detail">214</div>
+                                        </div>
+                                        <div class="ui blue label">
+                                            Done
+                                            <div class="detail">84</div>
+                                        </div>
+                                    </div>
+                                    <div class="right floated author">
+                                    <span>
+                                        <a class="ui circular label people">
+                                            CH
+                                        </a>
+
+                                        <div class="ui popup">
+                                            <div class="item">
+                                                <img class="ui avatar image" src="img/sample-avatar.jpg"> Cheng-Han Wu
+                                            </div>
+                                        </div>
+                                    </span>
+                                    <span>
+                                        <a class="ui circular label people">
+                                            G+
+                                        </a>
+
+                                        <div class="ui popup">
+                                            <div class="item">
+                                                <img class="ui avatar image" src="img/square-image.png">
+                                                Chi-Cha Sun
+                                            </div>
+                                        </div>
+                                    </span>
+                                    <span>
+                                        <a class="ui circular label people">
+                                            YC
+                                        </a>
+
+                                        <div class="ui popup">
+                                            <div class="item">
+                                                <img class="ui avatar image" src="img/square-image.png">
+                                                Yi-Chun Lin
+                                            </div>
+                                        </div>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
 </div>
 </body>
 </html>
@@ -102,8 +161,20 @@
     $('.launch.button').on('touchstart click', function (event) {
         $('.sidebar').sidebar('setting', {
             dimPage: false,
-            transition: 'overlay'
+            transition: 'overlay',
+            mobileTransition: 'overlay'
         }).sidebar('toggle');
         event.preventDefault();
     });
+    $("#list-content").height($(window).height() - 200);
+    window.onresize = function() {
+        $(".ui-list-content").height($(window).height() - 200);
+    };
+    for (var i = 0; i < 10; i++) {
+        $("#list-content").append($("#sample-card").clone());
+    }
+
+    for (var i = 0; i < 10; i++) {
+        $("#board-content").append($("#sample-list").clone());
+    }
 </script>
