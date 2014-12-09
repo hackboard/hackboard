@@ -4,7 +4,12 @@ html, body {
 
 header {
     height: 65px;
-    z-index: 1000;
+    z-index: 100;
+}
+
+.pusher {
+    height: 100% !important;
+
 }
 
 .container {
@@ -40,9 +45,7 @@ footer {
     left: 0px;
     right: 0px;
     z-index: 0;
-    /*padding: 20px;*/
     background-color: rgba(34, 34, 34, 0.2);
-    
     transition-duration: 5s;
     transition-timing-function: linear;
 }
@@ -62,4 +65,60 @@ footer {
 
 .pin:hover, .pin.active {
     color: #d95c5c !important;
+}
+
+.sidebar.menu {
+    margin-top: 10px !important;
+    width: 200px !important;
+}
+
+.ui.transparent.menu {
+    opacity: 0.95;
+}
+
+.sidebar.menu ~ .launch.button {
+    right: -1px;
+    -webkit-transition: 0.3s width ease,
+    0.5s right ease;
+    -moz-transition: 0.3s width ease,
+    0.5s right ease;
+    -o-transition: 0.3s width ease,
+    0.5s right ease;
+    -ms-transition: 0.3s width ease,
+    0.5s right ease;
+    transition: 0.3s width ease,
+    0.5s right ease;
+}
+
+.sidebar.menu.visible ~ .launch.button {
+    right: 190px;
+    -webkit-transition: 0.3s width ease,
+    0.5s right ease;
+    -moz-transition: 0.3s width ease,
+    0.5s right ease;
+    -o-transition: 0.3s width ease,
+    0.5s right ease;
+    -ms-transition: 0.3s width ease,
+    0.5s right ease;
+    transition: 0.3s width ease,
+    0.5s right ease;
+}
+
+.launch.button {
+    position: fixed;
+    top: 10px;
+    right: -1px;
+    width: 55px;
+    height: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 102;
+}
+
+.launch.button .icon {
+    margin-left: -15px;
+}
+
+.black p {
+    color: black !important;
 }
