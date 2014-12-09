@@ -20,6 +20,7 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User ,
     hasError: false
     hasWarning: false
     warning_message: ''
+    nicknameDirty:false
 
   # 登入按鈕按下時要做的動作
   $scope.btnLogin = ()->
@@ -71,11 +72,6 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User ,
     $scope.registerInfo.hasWarning = false
     $scope.registerInfo.warning_message = ''
 
-    #Check shortname is at least 8 character
-    if $scope.signUpForm.nickName.$error.minlength
-      $scope.registerInfo.hasWarning = true
-      $scope.registerInfo.warning_message = 'Your short name need at least 8 characters.'
-      return
     #Check shortname is match pattern
     if $scope.signUpForm.nickName.$error.required or $scope.signUpForm.nickName.$error.pattern
       $scope.registerInfo.hasWarning = true
@@ -131,6 +127,18 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User ,
         $scope.registerInfo.hasError = true
     )
     return
+
+  #Change shortname when email been done (Cannot change when type in email account)
+  $scope.putToNickname = ()->
+    if(!$scope.registerInfo.nicknameDirty)
+      try
+        $scope.registerInfo.nickname = $scope.registerInfo.email.split("@")[0]
+        return
+      catch err
+        $scope.registerInfo.nickname = document.getElementById("signUpEmail").value
+        return
+    else
+      return
 
   return
 ]

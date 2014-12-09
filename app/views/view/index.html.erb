@@ -33,7 +33,7 @@
         <div class="ui hidden divider"></div>
         <form class="ui error warning large form" name="signUpForm" ng-submit="btnSignUp()">
           <div class="field ui left icon large input">
-            <input placeholder="user@email.com" type="email" required ng-model="registerInfo.email">
+            <input placeholder="user@email.com" id="signUpEmail" type="email" required ng-model="registerInfo.email" ng-blur="putToNickname()">
             <i class="inbox icon"></i>
           </div>
           <div class="inline fields">
@@ -41,7 +41,7 @@
               <img class="ui tiny circular image middle aligned" src="img/square-image.png">
             </div>
             <div class="field">
-              <input placeholder="shortname" name="nickName" type="text" required ng-model="registerInfo.nickname" ng-pattern="/^[a-zA-Z0-9]*$/" ng-minlength="8">
+              <input placeholder="shortname" name="nickName" type="text" required ng-model="registerInfo.nickname" ng-pattern="/^[a-zA-Z0-9]*$/" ng-change="registerInfo.nicknameDirty=true">
             </div>
           </div>
           <div class="field ui left icon large input">
