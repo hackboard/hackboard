@@ -22,9 +22,14 @@
     <div class="item">
         <div class="ui icon header inverted text-center" style="display: block; margin-top: 14px;">
             <img class="ui tiny circular image middle aligned" src="img/sample-avatar.jpg">
+
             <div class="content">
-                User
-                <div class="sub header">U</div>
+                Cheng-Han Wu
+                <div class="sub header">
+                    <div class="ui circular label">
+                        CH
+                    </div>
+                </div>
             </div>
         </div>
         <div class="menu">
@@ -54,14 +59,131 @@
                 Notification
             </div>
             <div class="content">
-                <p></p>
+                <div class="ui toggle checkbox">
+                    <input type="checkbox" name="public">
+                    <label>Enable</label>
+                </div>
+                <p class="grouped fields">
+
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="frequent" checked="checked">
+                        <label>Only mine task</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="frequent">
+                        <label>Any task</label>
+                    </div>
+                </div>
+                </p>
             </div>
             <div class="title">
                 <i class="protect icon"></i>
                 Permission
             </div>
             <div class="content">
-                <p></p>
+                <table class="ui four column very basic small compact table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Dev</th>
+                        <th>Admin</th>
+                        <th>Report</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="ui circular label">
+                                CH
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="dev"><label></label>
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="admin"><label></label>
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="report"><label></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="ui circular label">
+                                G+
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="dev"><label></label>
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="admin"><label></label>
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="report"><label></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="ui circular label">
+                                YC
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="dev"><label></label>
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="admin"><label></label>
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="report"><label></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="ui circular label">
+                                BH
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="dev"><label></label>
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="admin"><label></label>
+                            </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui fitted checkbox">
+                                <input type="checkbox" name="report"><label></label>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -69,46 +191,81 @@
 <div class="ui black big launch left attached button">
     <i class="content icon"></i>
 </div>
-<header class="ui main top borderless fixed inverted large menu" id="page">
+<header class="ui main top borderless fixed inverted large menu ui grid" id="page">
     <div class="item">
         <i class="rocket icon"></i> HackMD
     </div>
     <div class="item ui tablet only computer only row column">
+        <div class="ui buttons">
+            <div class="ui icon button yellow inverted">
+                <i class="linkify icon"></i>
+                Parent
+            </div>
+        </div>
+        <div class="ui buttons">
+            <div class="ui icon button orange inverted">
+                <i class="archive icon"></i>
+                Stash
+            </div>
+        </div>
+        <div class="ui buttons">
+            <div class="ui icon button blue inverted">
+                <i class="dashboard icon"></i>
+                Status
+            </div>
+        </div>
     </div>
 </header>
 <div class="pusher">
     <div class="container thin-padding">
-        <div class="ui-board">
-            <div class="ui horizontal list">
-                <div class="item ui grid ui-board-content" id="board-content">
-                    <div class="ui column ui-list" id="sample-list">
-                        <div class="ui segment">
-                            <div class="ui medium header">
+        <div class="ui basic segment ui-board">
+            <div class="ui grid ui-board-content" id="board-content">
+                <div class="ui column ui-list" id="sample-list">
+                    <div class="ui segment ui-list-wrapper">
+                        <div class="ui medium header center aligned">
+                            <div class="ui-list-title">
                                 To Do
                             </div>
-                            <div class="ui divider"></div>
-                            <div class="ui-list-content" id="list-content">
-                                <div class="ui card" id="sample-card" style="width: auto;">
-                                    <div class="content">
-                                        <i class="right floated pin link icon active"></i>
-
-                                        <div class="header">HackMD</div>
-                                        <div class="meta">
-                                            updated 2 days ago
+                            <div class="left aligned ui top attached mini label">
+                                WIP
+                                <div class="detail">
+                                    1/12
+                                </div>
+                            </div>
+                            <div class="right aligned ui top attached mini label">
+                                <a>
+                                    <i class="add icon"></i>
+                                </a>
+                                <a>
+                                    <i class="edit icon"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!--<div class="ui divider"></div>-->
+                        <div class="ui-list-content" id="list-content">
+                            <div class="ui card ui-task" id="sample-task">
+                                <div class="content">
+                                    <div class="header">
+                                        <div class="ui-task-title">
+                                            <i class="info blue icon"></i>
+                                            Static View
                                         </div>
-                                        <div class="description">
-                                            <p>HackMD is a real-time collaborate note which syntax in Markdown.</p>
+                                        <div class="ui top right attached green label">
+                                            View
                                         </div>
                                     </div>
-                                    <div class="extra content">
-                                        <div class="ui labels">
-                                            <div class="ui teal label">
-                                                WIP
-                                                <div class="detail">214</div>
+                                    <div class="meta">
+                                        <p>updated 2 days ago</p>
+
+                                        <p>Use bootstrap to mock up static view.</p>
+                                    </div>
+                                    <div class="description">
+                                        <div class="ui mini labels">
+                                            <div class="ui label">
+                                                <i class="calendar icon"></i> 2014/12/24
                                             </div>
-                                            <div class="ui blue label">
-                                                Done
-                                                <div class="detail">84</div>
+                                            <div class="ui label">
+                                                <i class="list icon"></i> 1/1
                                             </div>
                                         </div>
                                         <div class="right floated author">
@@ -119,7 +276,8 @@
 
                                                 <div class="ui popup">
                                                     <div class="item">
-                                                        <img class="ui avatar image" src="img/sample-avatar.jpg"> Cheng-Han Wu
+                                                        <img class="ui avatar image" src="img/sample-avatar.jpg">
+                                                        Cheng-Han Wu
                                                     </div>
                                                 </div>
                                             </span>
@@ -151,7 +309,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="ui small button ui-task-new" id="task-new">
+                                <i class="add icon"></i> New Task
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="ui column ui-list-new" id="list-new">
+                    <div class="ui small button">
+                        <i class="add icon"></i> New List
                     </div>
                 </div>
             </div>
@@ -162,9 +328,11 @@
 </html>
 <script>
     $(".ui.dropdown").dropdown();
+    $(".ui.checkbox").checkbox();
     $(".ui.accordion").accordion();
     $("header").hide().transition('fade');
     $("footer").hide().transition('fade');
+    $(".launch.button").hide().transition('fade');
 
     $('.sidebar').sidebar('setting', {
         dimPage: false,
@@ -177,15 +345,30 @@
         if (!$('.sidebar').hasClass("overlay") || !$('.sidebar').hasClass("animating"))
             $('.sidebar').sidebar('toggle');
     });
-    $("#list-content").height($(window).height() - 190);
+    $("#list-content").height($(window).height() - 170);
     window.onresize = function () {
-        $(".ui-list-content").height($(window).height() - 190);
+        $(".ui-list-content").height($(window).height() - 170);
     };
-    for (var i = 0; i < 10; i++) {
-        $("#list-content").append($("#sample-card").clone());
-    }
 
-    for (var i = 0; i < 10; i++) {
-        $("#board-content").append($("#sample-list").clone());
-    }
+    /*
+     for (var i = 0; i < 10; i++) {
+     $("#list-content").append($("#sample-task").clone());
+     }
+
+     for (var i = 0; i < 10; i++) {
+     $("#board-content").append($("#sample-list").clone());
+     }
+     */
+
+    //$("#list-content").append($("#task-new").clone());
+
+    //$("#board-content").append($("#list-new").clone());
+
+    $(".ui-list").each(function (index, value) {
+        var $this = $(this);
+        $this.hide();
+        setTimeout(function () {
+            $this.transition('fade');
+        }, index * 50);
+    });
 </script>

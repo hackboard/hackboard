@@ -14,7 +14,7 @@ header {
 
 .thin-padding {
     padding-top: 80px !important;
-    padding-bottom: 50px !important;
+    padding-bottom: 0px !important;
     overflow: hidden !important;
     -webkit-overflow-scrolling: touch;
 }
@@ -75,7 +75,7 @@ footer {
 }
 
 .sidebar.menu {
-    width: 200px !important;
+    /*width: 200px !important;*/
 }
 
 .ui.transparent.menu {
@@ -84,30 +84,20 @@ footer {
 
 .sidebar.menu ~ .launch.button {
     right: -1px;
-    -webkit-transition: 0.3s width ease,
-    0.5s right ease;
-    -moz-transition: 0.3s width ease,
-    0.5s right ease;
-    -o-transition: 0.3s width ease,
-    0.5s right ease;
-    -ms-transition: 0.3s width ease,
-    0.5s right ease;
-    transition: 0.3s width ease,
-    0.5s right ease;
+    -webkit-transition: 0.5s right ease;
+    -moz-transition: 0.5s right ease;
+    -o-transition: 0.5s right ease;
+    -ms-transition: 0.5s right ease;
+    transition: 0.5s right ease;
 }
 
 .sidebar.menu.visible ~ .launch.button {
-    right: 190px;
-    -webkit-transition: 0.3s width ease,
-    0.5s right ease;
-    -moz-transition: 0.3s width ease,
-    0.5s right ease;
-    -o-transition: 0.3s width ease,
-    0.5s right ease;
-    -ms-transition: 0.3s width ease,
-    0.5s right ease;
-    transition: 0.3s width ease,
-    0.5s right ease;
+    right: 250px;
+    -webkit-transition: 0.5s right ease;
+    -moz-transition: 0.5s right ease;
+    -o-transition: 0.5s right ease;
+    -ms-transition: 0.5s right ease;
+    transition: 0.5s right ease;
 }
 
 .launch.button {
@@ -169,11 +159,26 @@ footer {
 }
 
 .ui-list {
-    width: 350px !important;
+    /*margin-left: 15px !important;*/
+    width: inherit !important;
+    margin-top: 1px !important;
+    margin-bottom: 5px !important;
+}
+
+.ui-list-wrapper {
+    width: 320px !important;
 }
 
 .ui-list-content {
     overflow-x: hidden !important;
     /*overflow-y: scroll !important;*/
-    padding: 1px 5px 1px 5px !important;
+    padding: 2px 5px 2px 5px !important;
+}
+
+.ui-list-new {
+    width: 150px !important;
+}
+
+.ui-task {
+    /*width: 320px !important;*/
 }
