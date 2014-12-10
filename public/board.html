@@ -74,76 +74,77 @@
     </div>
 </header>
 <div class="pusher">
-    <div class="container thin-padding" style="overflow-x: scroll; overflow-y: hidden;">
-        <div class="ui horizontal list">
-            <div class="item ui grid" style="display: inline-flex;" id="board-content">
-                <div class="ui ui-list column" id="sample-list">
-                    <div class="ui segment">
-                        <div class="ui medium header">
-                            To Do
-                        </div>
-                        <div class="ui divider"></div>
-                        <div class="ui-list-content" id="list-content"
-                             style="overflow-y: scroll; padding: 1px; padding-left: 15px; padding-right: 15px">
-                            <div class="ui card" id="sample-card" style="width: auto;">
-                                <div class="content">
-                                    <i class="right floated pin link icon active"></i>
+    <div class="container thin-padding">
+        <div class="ui-board">
+            <div class="ui horizontal list">
+                <div class="item ui grid ui-board-content" id="board-content">
+                    <div class="ui column ui-list" id="sample-list">
+                        <div class="ui segment">
+                            <div class="ui medium header">
+                                To Do
+                            </div>
+                            <div class="ui divider"></div>
+                            <div class="ui-list-content" id="list-content">
+                                <div class="ui card" id="sample-card" style="width: auto;">
+                                    <div class="content">
+                                        <i class="right floated pin link icon active"></i>
 
-                                    <div class="header">HackMD</div>
-                                    <div class="meta">
-                                        updated 2 days ago
-                                    </div>
-                                    <div class="description">
-                                        <p>HackMD is a real-time collaborate note which syntax in Markdown.</p>
-                                    </div>
-                                </div>
-                                <div class="extra content">
-                                    <div class="ui labels">
-                                        <div class="ui teal label">
-                                            WIP
-                                            <div class="detail">214</div>
+                                        <div class="header">HackMD</div>
+                                        <div class="meta">
+                                            updated 2 days ago
                                         </div>
-                                        <div class="ui blue label">
-                                            Done
-                                            <div class="detail">84</div>
+                                        <div class="description">
+                                            <p>HackMD is a real-time collaborate note which syntax in Markdown.</p>
                                         </div>
                                     </div>
-                                    <div class="right floated author">
-                                    <span>
-                                        <a class="ui circular label people">
-                                            CH
-                                        </a>
-
-                                        <div class="ui popup">
-                                            <div class="item">
-                                                <img class="ui avatar image" src="img/sample-avatar.jpg"> Cheng-Han Wu
+                                    <div class="extra content">
+                                        <div class="ui labels">
+                                            <div class="ui teal label">
+                                                WIP
+                                                <div class="detail">214</div>
+                                            </div>
+                                            <div class="ui blue label">
+                                                Done
+                                                <div class="detail">84</div>
                                             </div>
                                         </div>
-                                    </span>
-                                    <span>
-                                        <a class="ui circular label people">
-                                            G+
-                                        </a>
+                                        <div class="right floated author">
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    CH
+                                                </a>
 
-                                        <div class="ui popup">
-                                            <div class="item">
-                                                <img class="ui avatar image" src="img/square-image.png">
-                                                Chi-Cha Sun
-                                            </div>
-                                        </div>
-                                    </span>
-                                    <span>
-                                        <a class="ui circular label people">
-                                            YC
-                                        </a>
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/sample-avatar.jpg"> Cheng-Han Wu
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    G+
+                                                </a>
 
-                                        <div class="ui popup">
-                                            <div class="item">
-                                                <img class="ui avatar image" src="img/square-image.png">
-                                                Yi-Chun Lin
-                                            </div>
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/square-image.png">
+                                                        Chi-Cha Sun
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    YC
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/square-image.png">
+                                                        Yi-Chun Lin
+                                                    </div>
+                                                </div>
+                                            </span>
                                         </div>
-                                    </span>
                                     </div>
                                 </div>
                             </div>
@@ -173,9 +174,9 @@
         if (!$('.sidebar').hasClass("overlay") || !$('.sidebar').hasClass("animating"))
             $('.sidebar').sidebar('toggle');
     });
-    $("#list-content").height($(window).height() - 200);
+    $("#list-content").height($(window).height() - 190);
     window.onresize = function () {
-        $(".ui-list-content").height($(window).height() - 200);
+        $(".ui-list-content").height($(window).height() - 190);
     };
     for (var i = 0; i < 10; i++) {
         $("#list-content").append($("#sample-card").clone());
