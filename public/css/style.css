@@ -76,28 +76,11 @@ footer {
 
 .sidebar.menu {
     /*width: 200px !important;*/
+    z-index: 103 !important;
 }
 
 .ui.transparent.menu {
     opacity: 0.95;
-}
-
-.sidebar.menu ~ .launch.button {
-    right: -1px;
-    -webkit-transition: 0.5s right ease;
-    -moz-transition: 0.5s right ease;
-    -o-transition: 0.5s right ease;
-    -ms-transition: 0.5s right ease;
-    transition: 0.5s right ease;
-}
-
-.sidebar.menu.visible ~ .launch.button {
-    right: 250px;
-    -webkit-transition: 0.5s right ease;
-    -moz-transition: 0.5s right ease;
-    -o-transition: 0.5s right ease;
-    -ms-transition: 0.5s right ease;
-    transition: 0.5s right ease;
 }
 
 .launch.button {

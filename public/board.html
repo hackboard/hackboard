@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="background-cover"></div>
-<div class="ui right vertical inverted large sidebar menu">
+<div class="ui right vertical inverted sidebar menu">
     <div class="item">
         <div class="ui icon header inverted text-center" style="display: block; margin-top: 14px;">
             <img class="ui tiny circular image middle aligned" src="img/sample-avatar.jpg">
@@ -63,21 +63,20 @@
                     <input type="checkbox" name="public">
                     <label>Enable</label>
                 </div>
-                <p class="grouped fields">
-
-                <div class="field">
-                    <div class="ui radio checkbox">
-                        <input type="radio" name="frequent" checked="checked">
-                        <label>Only mine task</label>
+                <div class="ui segment grouped fields">
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="frequent" checked="checked" disabled="disabled">
+                            <label>Only mine task</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="frequent" disabled="disabled">
+                            <label>Any task</label>
+                        </div>
                     </div>
                 </div>
-                <div class="field">
-                    <div class="ui radio checkbox">
-                        <input type="radio" name="frequent">
-                        <label>Any task</label>
-                    </div>
-                </div>
-                </p>
             </div>
             <div class="title">
                 <i class="protect icon"></i>
@@ -88,95 +87,95 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Dev</th>
-                        <th>Admin</th>
-                        <th>Report</th>
+                        <th class="center aligned">Dev</th>
+                        <th class="center aligned">Admin</th>
+                        <th class="center aligned">Report</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>
+                        <td class="center aligned">
                             <div class="ui circular label">
                                 CH
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="dev"><label></label>
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="admin"><label></label>
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="report"><label></label>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td class="center aligned">
                             <div class="ui circular label">
                                 G+
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="dev"><label></label>
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="admin"><label></label>
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="report"><label></label>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td class="center aligned">
                             <div class="ui circular label">
                                 YC
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="dev"><label></label>
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="admin"><label></label>
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="report"><label></label>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td class="center aligned">
                             <div class="ui circular label">
                                 BH
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="dev"><label></label>
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="admin"><label></label>
                             </div>
                         </td>
-                        <td class="collapsing">
+                        <td class="collapsing center aligned">
                             <div class="ui fitted checkbox">
                                 <input type="checkbox" name="report"><label></label>
                             </div>
@@ -187,6 +186,9 @@
             </div>
         </div>
     </div>
+    <a class="item">
+        <i class="cube icon"></i> Archive this board
+    </a>
 </div>
 <div class="ui black big launch left attached button">
     <i class="content icon"></i>
@@ -196,22 +198,158 @@
         <i class="rocket icon"></i> HackMD
     </div>
     <div class="item ui tablet only computer only row column">
-        <div class="ui buttons">
+        <div class="ui buttons ui-popup" id="parentButton">
             <div class="ui icon button yellow inverted">
                 <i class="linkify icon"></i>
                 Parent
             </div>
         </div>
-        <div class="ui buttons">
+        <div class="ui popup">
+            Nobody here!
+        </div>
+        <div class="ui buttons ui-popup" id="stashButton">
             <div class="ui icon button orange inverted">
                 <i class="archive icon"></i>
                 Stash
             </div>
         </div>
-        <div class="ui buttons">
+        <div class="ui popup">
+            Nothing here!
+        </div>
+        <div class="ui buttons ui-popup" id="statusButton">
             <div class="ui icon button blue inverted">
                 <i class="dashboard icon"></i>
                 Status
+            </div>
+        </div>
+        <div class="ui wide popup">
+            <div>
+                <div class="ui header">
+                    Types
+                    <div class="ui top right attached label">
+                        <a>
+                            <i class="edit icon"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="ui labels">
+                        <div class="ui green label">
+                            View
+                            <div class="detail">
+                                1
+                            </div>
+                        </div>
+                        <div class="ui blue label">
+                            Controller
+                            <div class="detail">
+                                0
+                            </div>
+                        </div>
+                        <div class="ui red label">
+                            Model
+                            <div class="detail">
+                                0
+                            </div>
+                        </div>
+                        <div class="ui yellow label">
+                            Docs
+                            <div class="detail">
+                                0
+                            </div>
+                        </div>
+                        <div class="ui label">
+                            Untagged
+                            <div class="detail">
+                                0
+                            </div>
+                        </div>
+                        <div class="ui pink label">
+                            Hurry
+                            <div class="detail">
+                                0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui hidden divider"></div>
+            <div>
+                <div class="ui header">
+                    Statistics
+                </div>
+                <div class="text-center">
+                    <div class="ui mini horizontal statistic">
+                        <div class="value">
+                            1/12
+                        </div>
+                        <div class="label">
+                            Work in progress
+                        </div>
+                    </div>
+                    <div class="ui mini horizontal statistic">
+                        <div class="value">
+                            0/1
+                        </div>
+                        <div class="label">
+                            Done
+                        </div>
+                    </div>
+                    <div class="ui mini horizontal statistic">
+                        <div class="value">
+                            1
+                        </div>
+                        <div class="label">
+                            Assign to
+                            <div class="ui circular label">
+                                CH
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui mini horizontal statistic">
+                        <div class="value">
+                            1
+                        </div>
+                        <div class="label">
+                            Assign to
+                            <div class="ui circular label">
+                                G+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui mini horizontal statistic">
+                        <div class="value">
+                            1
+                        </div>
+                        <div class="label">
+                            Assign to
+                            <div class="ui circular label">
+                                YC
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui buttons ui-popup" id="chartsButton">
+            <div class="ui icon button purple inverted">
+                <i class="bar chart icon"></i>
+                Charts
+            </div>
+        </div>
+        <div class="ui wide popup">
+            <div>
+                <div class="ui header">
+                    Cumulative Flow Diagram
+                </div>
+                <div class="text-center"></div>
+            </div>
+            <div class="ui hidden divider"></div>
+            <div>
+                <div class="ui header">
+                    Burn Down Chart
+                </div>
+                <div class="text-center"></div>
             </div>
         </div>
     </div>
@@ -232,7 +370,7 @@
                                     1/12
                                 </div>
                             </div>
-                            <div class="right aligned ui top attached mini label">
+                            <div class="right aligned ui top attached label">
                                 <a>
                                     <i class="add icon"></i>
                                 </a>
@@ -349,6 +487,23 @@
     window.onresize = function () {
         $(".ui-list-content").height($(window).height() - 170);
     };
+    $(".people").popup({
+        position: 'top right',
+        transition: 'fade',
+        className: {
+            popup: 'ignored ui popup'
+        },
+        on: 'click'
+    });
+
+    $(".ui-popup").popup({
+        position: 'bottom center',
+        transition: 'fade',
+        className: {
+            popup: 'ignored ui popup'
+        },
+        on: 'click'
+    });
 
     /*
      for (var i = 0; i < 10; i++) {
