@@ -4,7 +4,7 @@ services = angular.module 'hackboardServices' , []
 services.factory 'User' , ['$http' , ($http)->
   login:(email , password)->
     $http.post(
-      '/user/login',
+      '/api/user/login',
         email: email,
         password: password
     )
@@ -13,7 +13,7 @@ services.factory 'User' , ['$http' , ($http)->
   signUp: (email,nickName,password,passwordConfirmation)->
     #Authenticity Token?
     $http.post(
-      '/user/register',
+      '/api/user/register',
       email:email,
       name:nickName,
       password:password,

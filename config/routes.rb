@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
 
   get '/' => 'view#index'
-  post 'user/login' => 'user#login'
-  post 'user/logout' => 'user#logout'
-  post 'user/register' => 'user#register'
-  get 'boards/:id/flows' => 'boards#flows'
 
-  resources :boards
+  namespace :api do
+    post 'user/login' => 'user#login'
+    post 'user/logout' => 'user#logout'
+    post 'user/register' => 'user#register'
+    resources :boards
+    get 'boards/:id/flows' => 'boards#flows'
+  end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
