@@ -33,7 +33,7 @@
         <div class="ui hidden divider"></div>
         <form class="ui error warning large form" name="signUpForm" ng-submit="btnSignUp()">
           <div class="field ui left icon large input">
-            <input placeholder="user@email.com" id="signUpEmail" type="email" required ng-model="registerInfo.email" ng-blur="putToNickname()">
+            <input placeholder="user@email.com" name="signUpEmail" type="email" required ng-model="registerInfo.email" ng-blur="putToNickname()" ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/">
             <i class="inbox icon"></i>
           </div>
           <div class="inline fields">
