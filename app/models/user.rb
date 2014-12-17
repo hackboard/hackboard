@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :tasks
   has_many :resources
   has_many :logs
+  has_many :user_pin_boards
+  has_many :pin_boards , through: :user_pin_boards , source: :board
   belongs_to :board_member
 
 end

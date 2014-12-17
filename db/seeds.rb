@@ -17,6 +17,8 @@ user4.save
 board1 =Board.new(:name => 'work1',:wip =>'10',:description =>'Board1 ,has two member,user3 and user4',:user_id => user1.id)
 board1.save
 
+user1.pin_boards << board1
+
 # types of board1
 b1type1 = Type.new(:name => 'normal',:color =>'#00ff00',:board_id => board1.id)
 b1type1.save
