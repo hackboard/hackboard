@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get '/' => 'view#index'
+  get '/boards' => 'view#boards'
 
   namespace :api do
     post 'user/login' => 'user#login'
