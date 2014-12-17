@@ -20,15 +20,7 @@ module Api
 
     def index
       if current_user
-        own_boards = Board.where(:user_id => current_user.id)
-        members = BoardMember.select("board_id,id").where(:user_id => current_user.id)
-        arr = []
-
-        members.each do |m|
-          arr << Board.where(:id => m.board_id)
-        end
-
-        data = {:own_board => own_boards, :participate_boards => arr}
+        data = current_user.myBoards
         response = data.to_json
         render :json => response
         return
