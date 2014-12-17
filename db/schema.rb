@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127113602) do
+ActiveRecord::Schema.define(version: 20141217071426) do
 
   create_table "board_logs", force: true do |t|
     t.integer  "board_id"
@@ -94,6 +94,13 @@ ActiveRecord::Schema.define(version: 20141127113602) do
   create_table "types", force: true do |t|
     t.string   "name"
     t.string   "color"
+    t.integer  "board_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_pin_boards", id: false, force: true do |t|
+    t.integer  "user_id"
     t.integer  "board_id"
     t.datetime "created_at"
     t.datetime "updated_at"
