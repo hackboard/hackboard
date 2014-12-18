@@ -222,109 +222,146 @@
                 Status
             </div>
         </div>
-        <div class="ui wide popup">
-            <div>
-                <div class="ui header">
-                    Types
-                    <div class="ui top right attached label">
-                        <a>
-                            <i class="edit icon"></i>
-                        </a>
+        <div class="ui wide popup ui-toggle">
+            <div class="ui-toggle-front">
+                <div class="ui column">
+                    <div class="ui right floated circular icon button ui-edit-button">
+                        <i class="edit icon"></i>
                     </div>
                 </div>
-                <div class="text-center">
-                    <div class="ui labels">
-                        <div class="ui green label">
-                            View
-                            <div class="detail">
+                <div>
+                    <div class="ui header">
+                        Types
+                    </div>
+                    <div class="text-center">
+                        <div class="ui labels">
+                            <div class="ui green label">
+                                View
+                                <div class="detail">
+                                    1
+                                </div>
+                            </div>
+                            <div class="ui blue label">
+                                Controller
+                                <div class="detail">
+                                    0
+                                </div>
+                            </div>
+                            <div class="ui red label">
+                                Model
+                                <div class="detail">
+                                    0
+                                </div>
+                            </div>
+                            <div class="ui yellow label">
+                                Docs
+                                <div class="detail">
+                                    0
+                                </div>
+                            </div>
+                            <div class="ui label">
+                                Untagged
+                                <div class="detail">
+                                    0
+                                </div>
+                            </div>
+                            <div class="ui pink label">
+                                Hurry
+                                <div class="detail">
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui hidden divider"></div>
+                <div>
+                    <div class="ui header">
+                        Statistics
+                    </div>
+                    <div class="text-center">
+                        <div class="ui mini horizontal statistic">
+                            <div class="value">
+                                1/12
+                            </div>
+                            <div class="label">
+                                Work in progress
+                            </div>
+                        </div>
+                        <div class="ui mini horizontal statistic">
+                            <div class="value">
+                                0/1
+                            </div>
+                            <div class="label">
+                                Done
+                            </div>
+                        </div>
+                        <div class="ui mini horizontal statistic">
+                            <div class="value">
                                 1
                             </div>
-                        </div>
-                        <div class="ui blue label">
-                            Controller
-                            <div class="detail">
-                                0
+                            <div class="label">
+                                Assign to
+                                <div class="ui circular label">
+                                    CH
+                                </div>
                             </div>
                         </div>
-                        <div class="ui red label">
-                            Model
-                            <div class="detail">
-                                0
+                        <div class="ui mini horizontal statistic">
+                            <div class="value">
+                                1
+                            </div>
+                            <div class="label">
+                                Assign to
+                                <div class="ui circular label">
+                                    G+
+                                </div>
                             </div>
                         </div>
-                        <div class="ui yellow label">
-                            Docs
-                            <div class="detail">
-                                0
+                        <div class="ui mini horizontal statistic">
+                            <div class="value">
+                                1
                             </div>
-                        </div>
-                        <div class="ui label">
-                            Untagged
-                            <div class="detail">
-                                0
-                            </div>
-                        </div>
-                        <div class="ui pink label">
-                            Hurry
-                            <div class="detail">
-                                0
+                            <div class="label">
+                                Assign to
+                                <div class="ui circular label">
+                                    YC
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="ui hidden divider"></div>
-            <div>
-                <div class="ui header">
-                    Statistics
+            <div class="ui-toggle-back" style="display: none;">
+                <div class="ui column">
+                    <div class="ui right floated circular icon button ui-back-button">
+                        <i class="arrow up icon"></i>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <div class="ui mini horizontal statistic">
-                        <div class="value">
-                            1/12
-                        </div>
-                        <div class="label">
-                            Work in progress
+                <div>
+                    <div class="ui header">
+                        Types
+                    </div>
+                    <div>
+                        <div class="ui input fluid">
+                            <input type="text" placeholder="View, Controller, Untagged...">
                         </div>
                     </div>
-                    <div class="ui mini horizontal statistic">
-                        <div class="value">
-                            0/1
-                        </div>
-                        <div class="label">
-                            Done
-                        </div>
+                </div>
+                <div class="ui hidden divider"></div>
+                <div>
+                    <div class="ui header">
+                        Statistics
                     </div>
-                    <div class="ui mini horizontal statistic">
-                        <div class="value">
-                            1
-                        </div>
-                        <div class="label">
-                            Assign to
-                            <div class="ui circular label">
-                                CH
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui mini horizontal statistic">
-                        <div class="value">
-                            1
-                        </div>
-                        <div class="label">
-                            Assign to
-                            <div class="ui circular label">
-                                G+
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui mini horizontal statistic">
-                        <div class="value">
-                            1
-                        </div>
-                        <div class="label">
-                            Assign to
-                            <div class="ui circular label">
-                                YC
+                    <div>
+                        <div class="ui form">
+                            <div class="field">
+                                <div class="ui labeled input">
+                                    <div class="ui label">
+                                        Max of Work in progress:
+                                    </div>
+                                    <input type="number" min="0" placeholder="ex: 10">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -358,8 +395,8 @@
     <div class="container thin-padding">
         <div class="ui basic segment ui-board">
             <div class="ui grid ui-board-content" id="board-content">
-                <div class="ui column ui-list" id="sample-list">
-                    <div class="ui segment ui-list-wrapper">
+                <div class="ui column ui-list ui-flip flip" id="sample-list">
+                    <div class="ui segment ui-list-wrapper ui-flip-front">
                         <div class="ui medium header center aligned">
                             <div class="ui-list-title">
                                 To Do
@@ -374,7 +411,7 @@
                                 <a>
                                     <i class="add icon"></i>
                                 </a>
-                                <a>
+                                <a class="ui-edit-button">
                                     <i class="edit icon"></i>
                                 </a>
                             </div>
@@ -452,11 +489,269 @@
                             </div>
                         </div>
                     </div>
+                    <div class="ui segment ui-list-wrapper ui-flip-back" style="display: none;">
+                        <div class="right aligned ui top attached label">
+                            <a class="ui-back-button">
+                                <i class="arrow up icon"></i>
+                            </a>
+                        </div>
+                        <div class="ui form">
+                            <div class="field">
+                                <div class="ui labeled input">
+                                    <div class="ui label">
+                                        Max number of Task:
+                                    </div>
+                                    <input type="number" min="0" placeholder="ex: 10">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui labeled input">
+                                    <div class="ui label">
+                                        Max period of Task (days):
+                                    </div>
+                                    <input type="number" min="0" placeholder="ex: 5">
+                                </div>
+                            </div>
+                            <div class="ui hidden divider"></div>
+                            <div class="field">
+                                <div class="ui header">
+                                    Sub flows
+                                </div>
+                                <div class="ui input">
+                                    <input type="text" placeholder="Ongoing, Done">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="ui column ui-list-new" id="list-new">
                     <div class="ui small button">
                         <i class="add icon"></i> New List
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui modal">
+    <i class="close icon"></i>
+
+    <div class="ui header">
+        Static View
+        <div class="sub header">
+            Use bootstrap to mock up static view.
+        </div>
+    </div>
+    <div class="content">
+        <div class="ui grid stackable two columns">
+            <div class="eleven wide column description">
+                <div class="ui dividing header">Time statistics</div>
+                <blockquote>
+                    <div class="ui form">
+                        <div class="field">
+                            <div class="ui mini horizontal statistic">
+                                <div class="value">
+                                    2014/12/12 06:05:33
+                                </div>
+                                <div class="label">
+                                    created this task
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui mini horizontal statistic">
+                                <div class="value">
+                                    2014/12/18 01:03:48
+                                </div>
+                                <div class="label">
+                                    last updated this task
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui mini horizontal statistic">
+                                <div class="value">
+                                    2 hours
+                                </div>
+                                <div class="label">
+                                    already elapsed
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui mini horizontal statistic">
+                                <div class="value">
+                                    Not sure
+                                </div>
+                                <div class="label">
+                                    estimated to complete
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui mini horizontal statistic">
+                                <div class="value">
+                                    Not yet
+                                </div>
+                                <div class="label">
+                                    done this task
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui mini horizontal statistic">
+                                <div class="value">
+                                    Unknown
+                                </div>
+                                <div class="label">
+                                    as the lead time
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui dividing header">
+                            Cycle time
+                        </div>
+                        <div class="field">
+                            <blockquote>
+                                <div class="field">
+                                    <div class="ui mini horizontal statistic">
+                                        <div class="value">
+                                            2 hours
+                                        </div>
+                                        <div class="label">
+                                            in the Development
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui mini horizontal statistic">
+                                        <div class="value">
+                                            Not yet
+                                        </div>
+                                        <div class="label">
+                                            in the Done
+                                        </div>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </blockquote>
+                <div class="ui minimal comments">
+                    <h3 class="ui dividing header">Comments</h3>
+
+                    <div class="ui form">
+                        <div class="fields">
+                            <div class="thirteen wide field">
+                                <div class="ui input">
+                                    <input type="text" placeholder="Write some comment...">
+                                </div>
+                            </div>
+                            <div class="three wide field">
+                                <div class="ui button">
+                                    Comment
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="/images/avatar/small/matt.jpg">
+                        </a>
+
+                        <div class="content">
+                            <a class="author">Matt</a>
+
+                            <div class="metadata">
+                                <span class="date">Today at 5:42PM</span>
+                            </div>
+                            <div class="text">
+                                How artistic!
+                            </div>
+                            <div class="actions">
+                                <a class="reply">Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="/images/avatar/small/elliot.jpg">
+                        </a>
+
+                        <div class="content">
+                            <a class="author">Elliot Fu</a>
+
+                            <div class="metadata">
+                                <span class="date">Yesterday at 12:30AM</span>
+                            </div>
+                            <div class="text">
+                                <p>This has been very useful for my research. Thanks as well!</p>
+                            </div>
+                            <div class="actions">
+                                <a class="reply">Reply</a>
+                            </div>
+                        </div>
+                        <div class="comments">
+                            <div class="comment">
+                                <a class="avatar">
+                                    <img src="/images/avatar/small/jenny.jpg">
+                                </a>
+
+                                <div class="content">
+                                    <a class="author">Jenny Hess</a>
+
+                                    <div class="metadata">
+                                        <span class="date">Just now</span>
+                                    </div>
+                                    <div class="text">
+                                        Elliot you are always so right :)
+                                    </div>
+                                    <div class="actions">
+                                        <a class="reply">Reply</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="/images/avatar/small/joe.jpg">
+                        </a>
+
+                        <div class="content">
+                            <a class="author">Joe Henderson</a>
+
+                            <div class="metadata">
+                                <span class="date">5 days ago</span>
+                            </div>
+                            <div class="text">
+                                Dude, this is awesome. Thanks so much
+                            </div>
+                            <div class="actions">
+                                <a class="reply">Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="five wide column">
+                <div class="ui large vertical menu">
+                    <div class="item">
+                        <div class="ui transparent left icon input">
+                            <input type="text" placeholder="">
+                            <i class="search icon"></i>
+                        </div>
+                        <div class="ui fluid blue small button">Assign To</div>
+                    </div>
+                    <a class="item">
+                        <i class="tag icon"></i> Type
+                    </a>
+                    <a class="item">
+                        <i class="checkmark box icon"></i> Checklist
+                    </a>
+                    <a class="item">
+                        <i class="calendar icon"></i> Due date
+                    </a>
                 </div>
             </div>
         </div>
@@ -483,8 +778,10 @@
         if (!$('.sidebar').hasClass("overlay") || !$('.sidebar').hasClass("animating"))
             $('.sidebar').sidebar('toggle');
     });
-    $("#list-content").height($(window).height() - 170);
+    $(".ui-list-wrapper").height($(window).height() - 140);
+    $(".ui-list-content").height($(window).height() - 170);
     window.onresize = function () {
+        $(".ui-list-wrapper").height($(window).height() - 140);
         $(".ui-list-content").height($(window).height() - 170);
     };
     $(".people").popup({
@@ -492,8 +789,7 @@
         transition: 'fade',
         className: {
             popup: 'ignored ui popup'
-        },
-        on: 'click'
+        }
     });
 
     $(".ui-popup").popup({
@@ -519,6 +815,13 @@
 
     //$("#board-content").append($("#list-new").clone());
 
+    $(".ui-task").click(function () {
+        $('.ui.modal').modal({
+            transition: 'horizontal flip',
+            duration: '100ms'
+        }).modal('show');
+    });
+
     $(".ui-list").each(function (index, value) {
         var $this = $(this);
         $this.hide();
@@ -526,4 +829,32 @@
             $this.transition('fade');
         }, index * 50);
     });
+
+    $(".ui-edit-button, .ui-back-button").click(function () {
+        var flip_parent = $(this).closest(".ui-flip");
+        flip(flip_parent);
+        var fade_parent = $(this).closest(".ui-toggle");
+        toggle(fade_parent);
+    })
+
+    function toggle(ui) {
+        var front = $(ui).find(".ui-toggle-front");
+        var back = $(ui).find(".ui-toggle-back");
+        front.toggle();
+        back.toggle();
+    }
+
+    function flip(ui) {
+        var front = $(ui).find(".ui-flip-front");
+        var back = $(ui).find(".ui-flip-back");
+        if (!front.hasClass("hidden")) {
+            front.transition('horizontal flip', '100ms', function () {
+                back.transition('horizontal flip', '100ms');
+            });
+        } else {
+            back.transition('horizontal flip', '100ms', function () {
+                front.transition('horizontal flip', '100ms');
+            });
+        }
+    }
 </script>

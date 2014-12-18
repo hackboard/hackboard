@@ -23,7 +23,7 @@ header {
     position: relative;
     min-height: 100%;
     padding-top: 100px;
-    padding-bottom: 100px;
+    padding-bottom: 90px;
     margin-bottom: -46px;
 }
 
@@ -110,21 +110,21 @@ footer {
     background-color: transparent !important;
 }
 
-::-webkit-scrollbar {
+.pusher ::-webkit-scrollbar {
     /*-webkit-appearance: none;*/
     width: 10px;
     height: 10px;
 }
-::-webkit-scrollbar-button {
+.pusher ::-webkit-scrollbar-button {
     display: block;
     height: 0px;
     width: 7px;
 }
-::-webkit-scrollbar-track {
+.pusher ::-webkit-scrollbar-track {
     background-color: rgba(211, 211, 211, 0.55);
     border-radius: 5px;
 }
-::-webkit-scrollbar-thumb {
+.pusher ::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.55);
     box-shadow: 0 0 1px rgba(255, 255, 255, 0.55);
@@ -164,4 +164,20 @@ footer {
 
 .ui-task {
     /*width: 320px !important;*/
+}
+
+.ui-task:hover {
+    cursor: pointer;
+    background-color: #FCFCFC;
+}
+
+.ui-flip-back {
+    margin-top: 0 !important;
+}
+
+.ui .modal .comment .actions {
+    background: none !important;
+    padding: 0 !important;
+    border-top: 0 !important;
+    text-align: left !important;
 }
