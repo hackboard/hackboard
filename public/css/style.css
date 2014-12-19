@@ -1,5 +1,6 @@
 html, body {
     overflow-x: hidden;
+    height: 100% !important;
 }
 
 header {
@@ -9,7 +10,6 @@ header {
 
 .pusher {
     height: 100% !important;
-
 }
 
 .thin-padding {

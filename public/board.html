@@ -46,6 +46,24 @@
     </a>
 
     <div class="item">
+        <div class="ui circular labels">
+            <div class="ui label">
+                CH
+                <i class="delete icon"></i>
+            </div>
+            <div class="ui label">
+                G+
+                <i class="delete icon"></i>
+            </div>
+            <div class="ui label">
+                YC
+                <i class="delete icon"></i>
+            </div>
+            <div class="ui label">
+                BH
+                <i class="delete icon"></i>
+            </div>
+        </div>
         <div class="ui inverted transparent left icon input">
             <input type="text" placeholder="">
             <i class="search icon"></i>
@@ -641,26 +659,26 @@
                     <h3 class="ui dividing header">Comments</h3>
 
                     <div class="ui form">
-                        <div class="fields">
-                            <div class="thirteen wide field">
-                                <div class="ui input">
-                                    <input type="text" placeholder="Write some comment...">
-                                </div>
+                        <div class="field">
+                            <div class="ui input">
+                                <input type="text" placeholder="Write some comment...">
                             </div>
-                            <div class="three wide field">
-                                <div class="ui button">
-                                    Comment
-                                </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui button">
+                                Comment
                             </div>
                         </div>
                     </div>
                     <div class="comment">
                         <a class="avatar">
-                            <img src="/images/avatar/small/matt.jpg">
+                            <img src="img/square-image.png">
                         </a>
 
                         <div class="content">
-                            <a class="author">Matt</a>
+                            <a class="author">
+                                Chi-Cha Sun
+                            </a>
 
                             <div class="metadata">
                                 <span class="date">Today at 5:42PM</span>
@@ -675,11 +693,11 @@
                     </div>
                     <div class="comment">
                         <a class="avatar">
-                            <img src="/images/avatar/small/elliot.jpg">
+                            <img src="img/square-image.png">
                         </a>
 
                         <div class="content">
-                            <a class="author">Elliot Fu</a>
+                            <a class="author">Bo-Hong Li</a>
 
                             <div class="metadata">
                                 <span class="date">Yesterday at 12:30AM</span>
@@ -694,11 +712,11 @@
                         <div class="comments">
                             <div class="comment">
                                 <a class="avatar">
-                                    <img src="/images/avatar/small/jenny.jpg">
+                                    <img src="img/square-image.png">
                                 </a>
 
                                 <div class="content">
-                                    <a class="author">Jenny Hess</a>
+                                    <a class="author">Yi-Chun Lin</a>
 
                                     <div class="metadata">
                                         <span class="date">Just now</span>
@@ -715,11 +733,11 @@
                     </div>
                     <div class="comment">
                         <a class="avatar">
-                            <img src="/images/avatar/small/joe.jpg">
+                            <img src="img/sample-avatar.jpg">
                         </a>
 
                         <div class="content">
-                            <a class="author">Joe Henderson</a>
+                            <a class="author">Cheng-Han Wu</a>
 
                             <div class="metadata">
                                 <span class="date">5 days ago</span>
@@ -735,23 +753,94 @@
                 </div>
             </div>
             <div class="five wide column">
-                <div class="ui large vertical menu">
+                <div class="ui large vertical menu" style="width: 100% !important;">
                     <div class="item">
-                        <div class="ui transparent left icon input">
-                            <input type="text" placeholder="">
-                            <i class="search icon"></i>
+                        <div class="ui circular labels">
+                            <div class="ui label">
+                                CH
+                                <i class="delete icon"></i>
+                            </div>
+                            <div class="ui label">
+                                G+
+                                <i class="delete icon"></i>
+                            </div>
+                            <div class="ui label">
+                                YC
+                                <i class="delete icon"></i>
+                            </div>
                         </div>
-                        <div class="ui fluid blue small button">Assign To</div>
+                        <div class="ui fluid dropdown labeled search icon button">
+                            <i class="users icon"></i>
+                            <span class="text">Add assignee</span>
+                            <div class="menu">
+                                <div class="item">
+                                    <img class="ui mini avatar image" src="img/square-image.png">
+                                    Chi-Cha Sun
+                                </div>
+                                <div class="item">
+                                    <img class="ui mini avatar image" src="img/square-image.png">
+                                    Bo-Hong Li
+                                </div>
+                                <div class="item">
+                                    <img class="ui mini avatar image" src="img/square-image.png">
+                                    Yi-Chun Lin
+                                </div>
+                                <div class="item">
+                                    <img class="ui mini avatar image" src="img/sample-avatar.jpg">
+                                    Cheng-Han Wu
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <a class="item">
-                        <i class="tag icon"></i> Type
-                    </a>
-                    <a class="item">
-                        <i class="checkmark box icon"></i> Checklist
-                    </a>
-                    <a class="item">
-                        <i class="calendar icon"></i> Due date
-                    </a>
+                </div>
+                <div class="ui form">
+                    <div class="field ui fluid dropdown labeled search icon button">
+                        <i class="tag icon"></i>
+                        <span class="text">Select Type</span>
+                        <div class="menu">
+                            <div class="item">
+                                <div class="ui green empty circular label"></div>
+                                View
+                            </div>
+                            <div class="item">
+                                <div class="ui blue empty circular label"></div>
+                                Controller
+                            </div>
+                            <div class="item">
+                                <div class="ui red empty circular label"></div>
+                                Model
+                            </div>
+                            <div class="item">
+                                <div class="ui yellow empty circular label"></div>
+                                Docs
+                            </div>
+                            <div class="item">
+                                <div class="ui pink empty circular label"></div>
+                                Hurry
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field ui fluid labeled icon button">
+                        <i class="checkmark box icon"></i>
+                        <span class="text">Add Checklist</span>
+                    </div>
+                    <div class="field ui labeled fluid input">
+                        <div class="ui label">
+                            Due date
+                        </div>
+                        <input type="date" placeholder="Not Sure" style="padding-right: 0px !important;">
+                    </div>
+                    <div class="field ui labeled fluid input">
+                        <div class="ui label">
+                            Estimate hours
+                        </div>
+                        <input type="number" placeholder="Not Sure">
+                    </div>
+                    <div class="field ui action fluid left icon input">
+                        <i class="wait icon"></i>
+                        <input type="number" placeholder="Work hours">
+                        <div class="ui button">Submit</div>
+                    </div>
                 </div>
             </div>
         </div>
