@@ -435,7 +435,7 @@
                             </div>
                         </div>
                         <!--<div class="ui divider"></div>-->
-                        <div class="ui-list-content" id="list-content">
+                        <div class="ui-list-content">
                             <div class="ui card ui-task" id="sample-task">
                                 <div class="content">
                                     <div class="header">
@@ -502,8 +502,220 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ui small button ui-task-new" id="task-new">
+                            <div class="ui small button ui-task-new">
                                 <i class="add icon"></i> New Task
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui segment ui-list-wrapper ui-flip-back" style="display: none;">
+                        <div class="right aligned ui top attached label">
+                            <a class="ui-back-button">
+                                <i class="arrow up icon"></i>
+                            </a>
+                        </div>
+                        <div class="ui form">
+                            <div class="field">
+                                <div class="ui labeled input">
+                                    <div class="ui label">
+                                        Max number of Task:
+                                    </div>
+                                    <input type="number" min="0" placeholder="ex: 10">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui labeled input">
+                                    <div class="ui label">
+                                        Max period of Task (days):
+                                    </div>
+                                    <input type="number" min="0" placeholder="ex: 5">
+                                </div>
+                            </div>
+                            <div class="ui hidden divider"></div>
+                            <div class="field">
+                                <div class="ui header">
+                                    Sub flows
+                                </div>
+                                <div class="ui input">
+                                    <input type="text" placeholder="Ongoing, Done">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui column ui-list ui-flip flip" id="sample-subflows-list">
+                    <div class="ui segment ui-list-wrapper ui-flip-front">
+                        <div class="ui medium header center aligned">
+                            <div class="ui-list-title">
+                                Doing
+                            </div>
+                            <div class="left aligned ui top attached mini label">
+                                WIP
+                                <div class="detail">
+                                    1/12
+                                </div>
+                            </div>
+                            <div class="right aligned ui top attached label">
+                                <a>
+                                    <i class="add icon"></i>
+                                </a>
+                                <a class="ui-edit-button">
+                                    <i class="edit icon"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ui two column middle aligned grid">
+                            <div class="column ui-list-flow">
+                                <div class="ui small header text-center">
+                                    Ongoing
+                                </div>
+                                <div class="ui-list-content">
+                                    <div class="ui card ui-task">
+                                        <div class="content">
+                                            <div class="header">
+                                                <div class="ui-task-title">
+                                                    <i class="info blue icon"></i>
+                                                    Static View
+                                                </div>
+                                                <div class="ui top right attached green label">
+                                                    View
+                                                </div>
+                                            </div>
+                                            <div class="meta">
+                                                <p>updated 2 days ago</p>
+
+                                                <p>Use bootstrap to mock up static view.</p>
+                                            </div>
+                                            <div class="description">
+                                                <div class="ui mini labels">
+                                                    <div class="ui label">
+                                                        <i class="calendar icon"></i> 2014/12/24
+                                                    </div>
+                                                    <div class="ui label">
+                                                        <i class="list icon"></i> 1/1
+                                                    </div>
+                                                </div>
+                                                <div class="right floated author">
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    CH
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/sample-avatar.jpg">
+                                                        Cheng-Han Wu
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    G+
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/square-image.png">
+                                                        Chi-Cha Sun
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    YC
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/square-image.png">
+                                                        Yi-Chun Lin
+                                                    </div>
+                                                </div>
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui small button ui-task-new">
+                                        <i class="add icon"></i> New Task
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui-vertical-divider"></div>
+                            <div class="column ui-list-flow">
+                                <div class="ui small header text-center">
+                                    Done
+                                </div>
+                                <div class="ui-list-content">
+                                    <div class="ui card ui-task" id="sample-subflows-task">
+                                        <div class="content">
+                                            <div class="header">
+                                                <div class="ui-task-title">
+                                                    <i class="info blue icon"></i>
+                                                    Static View
+                                                </div>
+                                                <div class="ui top right attached green label">
+                                                    View
+                                                </div>
+                                            </div>
+                                            <div class="meta">
+                                                <p>updated 2 days ago</p>
+
+                                                <p>Use bootstrap to mock up static view.</p>
+                                            </div>
+                                            <div class="description">
+                                                <div class="ui mini labels">
+                                                    <div class="ui label">
+                                                        <i class="calendar icon"></i> 2014/12/24
+                                                    </div>
+                                                    <div class="ui label">
+                                                        <i class="list icon"></i> 1/1
+                                                    </div>
+                                                </div>
+                                                <div class="right floated author">
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    CH
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/sample-avatar.jpg">
+                                                        Cheng-Han Wu
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    G+
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/square-image.png">
+                                                        Chi-Cha Sun
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    YC
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/square-image.png">
+                                                        Yi-Chun Lin
+                                                    </div>
+                                                </div>
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui small button ui-task-new">
+                                        <i class="add icon"></i> New Task
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -906,7 +1118,7 @@
 
     $(".ui-task").click(function () {
         $('.ui.modal').modal({
-            transition: 'horizontal flip',
+            transition: 'slide down',
             duration: '100ms'
         }).modal('show');
     });

@@ -149,7 +149,7 @@ footer {
 }
 
 .ui-list-wrapper {
-    width: 320px !important;
+    min-width: 320px !important;
 }
 
 .ui-list-content {
@@ -163,6 +163,7 @@ footer {
 }
 
 .ui-task {
+    width: 320px !important;
     /*width: 320px !important;*/
 }
 
@@ -180,4 +181,15 @@ footer {
     padding: 0 !important;
     border-top: 0 !important;
     text-align: left !important;
+}
+
+.ui-vertical-divider {
+    position: absolute;
+    padding: 0 !important;
+    top: 10%;
+    bottom: 10%;
+    left: 50%;
+    height: 80%;
+    border-left: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(255,255,255,0.2);
 }
