@@ -180,8 +180,16 @@
         switchCard($(this).parent().parent().parent(), $("#selectCard"));
     });
     function switchCard(hideCard, showCard) {
-        $(hideCard).transition('vertical flip', '100ms', function () {
-            $(showCard).transition('vertical flip', '100ms');
-        });
+        var hide = $(hideCard);
+        var show = $(showCard);
+        if(!hide.hasClass("hidden")) {
+            hide.transition('vertical flip', '100ms', function () {
+                show.transition('vertical flip', '100ms');
+            });
+        } else {
+            show.transition('vertical flip', '100ms', function () {
+                hide.transition('vertical flip', '100ms');
+            });
+        }
     }
 </script>
