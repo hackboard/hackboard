@@ -506,6 +506,72 @@
                                 <i class="add icon"></i> New Task
                             </div>
                         </div>
+                        <div class="ui card ui-emergency-task" id="sample-emergency-task">
+                            <div class="content">
+                                <div class="header">
+                                    <div class="ui-task-title">
+                                        <i class="info blue icon"></i>
+                                        Static View
+                                    </div>
+                                    <div class="ui top right attached pink label">
+                                        Hurry
+                                    </div>
+                                </div>
+                                <div class="meta">
+                                    <p>updated 2 days ago</p>
+
+                                    <p>Use bootstrap to mock up static view.</p>
+                                </div>
+                                <div class="description">
+                                    <div class="ui mini labels">
+                                        <div class="ui label">
+                                            <i class="calendar icon"></i> 2014/12/24
+                                        </div>
+                                        <div class="ui label">
+                                            <i class="list icon"></i> 1/1
+                                        </div>
+                                    </div>
+                                    <div class="right floated author">
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    CH
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/sample-avatar.jpg">
+                                                        Cheng-Han Wu
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    G+
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/square-image.png">
+                                                        Chi-Cha Sun
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    YC
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/square-image.png">
+                                                        Yi-Chun Lin
+                                                    </div>
+                                                </div>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="ui segment ui-list-wrapper ui-flip-back" style="display: none;">
                         <div class="right aligned ui top attached label">
@@ -563,8 +629,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="ui two column middle aligned grid">
-                            <div class="column ui-list-flow">
+                        <div class="ui grid middle aligned grid">
+                            <div class="column ui-list-subflow">
                                 <div class="ui small header text-center">
                                     Ongoing
                                 </div>
@@ -639,9 +705,75 @@
                                         <i class="add icon"></i> New Task
                                     </div>
                                 </div>
+                                <div class="ui card ui-emergency-task" id="sample-emergency-task">
+                                    <div class="content">
+                                        <div class="header">
+                                            <div class="ui-task-title">
+                                                <i class="info blue icon"></i>
+                                                Static View
+                                            </div>
+                                            <div class="ui top right attached pink label">
+                                                Hurry
+                                            </div>
+                                        </div>
+                                        <div class="meta">
+                                            <p>updated 2 days ago</p>
+
+                                            <p>Use bootstrap to mock up static view.</p>
+                                        </div>
+                                        <div class="description">
+                                            <div class="ui mini labels">
+                                                <div class="ui label">
+                                                    <i class="calendar icon"></i> 2014/12/24
+                                                </div>
+                                                <div class="ui label">
+                                                    <i class="list icon"></i> 1/1
+                                                </div>
+                                            </div>
+                                            <div class="right floated author">
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    CH
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/sample-avatar.jpg">
+                                                        Cheng-Han Wu
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    G+
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/square-image.png">
+                                                        Chi-Cha Sun
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <a class="ui circular label people">
+                                                    YC
+                                                </a>
+
+                                                <div class="ui popup">
+                                                    <div class="item">
+                                                        <img class="ui avatar image" src="img/square-image.png">
+                                                        Yi-Chun Lin
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="ui-vertical-divider"></div>
-                            <div class="column ui-list-flow">
+                            <div class="column ui-list-subflow">
                                 <div class="ui small header text-center">
                                     Done
                                 </div>
@@ -1080,10 +1212,10 @@
             $('.sidebar').sidebar('toggle');
     });
     $(".ui-list-wrapper").height($(window).height() - 140);
-    $(".ui-list-content").height($(window).height() - 170);
+    $(".ui-list-content").height($(window).height() - 200);
     window.onresize = function () {
         $(".ui-list-wrapper").height($(window).height() - 140);
-        $(".ui-list-content").height($(window).height() - 170);
+        $(".ui-list-content").height($(window).height() - 200);
     };
     $(".people").popup({
         position: 'top right',
@@ -1115,6 +1247,11 @@
     //$("#list-content").append($("#task-new").clone());
 
     //$("#board-content").append($("#list-new").clone());
+
+    $(".ui-list-wrapper").each(function (index, value) {
+        var count = $(this).find(".ui-list-subflow").length;
+        $(this).width(306 * count);
+    });
 
     $(".ui-task").click(function () {
         $('.ui.modal').modal({

@@ -148,7 +148,8 @@ footer {
     margin-bottom: 5px !important;
 }
 
-.ui-list-wrapper {
+.ui-list-wrapper, .ui-list-subflow {
+    /*width: 320px !important;*/
     min-width: 320px !important;
 }
 
@@ -163,8 +164,22 @@ footer {
 }
 
 .ui-task {
-    width: 320px !important;
+    width: 100% !important;
     /*width: 320px !important;*/
+    /*min-width: 300px !important;*/
+    /*width: 320px !important;*/
+}
+
+.ui-emergency-task {
+    position: absolute !important;
+    /*width: 320px !important;*/
+    /*width: 96% !important;*/
+    width: 92% !important;
+    /*height: 0px;*/
+    bottom: 10%;
+    /*left: 50%;*/
+    /*left: 25%;*/
+    /*right: 2%;*/
 }
 
 .ui-task:hover {
