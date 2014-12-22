@@ -7,7 +7,6 @@ class BoardsControllerTest < ActionController::TestCase
   end
 
   def teardown
-    # Do nothing
   end
 
   #-- index --

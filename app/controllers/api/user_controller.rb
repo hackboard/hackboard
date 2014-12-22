@@ -16,7 +16,7 @@ module Api
         if user.authenticate(password)
           session[:login_user] = email
           response = 'success'
-          render :json => response
+          render :json => response.to_json
           return
         else
           response = 'UMSE01'
@@ -24,7 +24,7 @@ module Api
       else
         response = 'UMSE02'
       end
-      render :json => response, status: :forbidden
+      render :json => response.to_json, status: :forbidden
     end
 
 
@@ -45,23 +45,23 @@ module Api
           user = User.new(:email => email, :name => name, :password => password, :sign_in_count => 0)
           user.save
           response = 'success'
-          render :json => response
+          render :json => response.to_json
           return
         end
       else
         response = 'UMSE04'
       end
 
-      render :json => response, :status => :forbidden
+      render :json => response.to_json, :status => :forbidden
 
     end
 
     def logout
       if session.has_key? :login_user
         session.delete :login_user
-        render :json => 'success'
+        render :json => 'success'.to_json
       else
-        render :json => 'UMSE05'
+        render :json => 'UMSE05'.to_json
       end
     end
 
