@@ -130,15 +130,9 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User ,
 
   #Change shortname when email been done (Cannot change when type in email account)
   $scope.putToNickname = ()->
-    if(!$scope.registerInfo.nicknameDirty)
-      try
-        $scope.registerInfo.nickname = $scope.registerInfo.email.split("@")[0]
-        return
-      catch err
-        $scope.registerInfo.nickname = document.getElementById("signUpEmail").value
-        return
-    else
-      return
+    if ! $scope.signUpForm.signUpEmail.$error.pattern
+      $scope.registerInfo.nickname = $scope.registerInfo.email.split("@")[0]
+    return
 
   return
 ]

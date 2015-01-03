@@ -1,17 +1,29 @@
 html, body {
     overflow-x: hidden;
+    height: 100% !important;
 }
 
 header {
     height: 65px;
-    z-index: 1000;
+    z-index: 100;
+}
+
+.pusher {
+    height: 100% !important;
+}
+
+.thin-padding {
+    padding-top: 80px !important;
+    padding-bottom: 0px !important;
+    overflow: hidden !important;
+    -webkit-overflow-scrolling: touch;
 }
 
 .container {
     position: relative;
     min-height: 100%;
     padding-top: 100px;
-    padding-bottom: 100px;
+    padding-bottom: 90px;
     margin-bottom: -46px;
 }
 
@@ -40,9 +52,7 @@ footer {
     left: 0px;
     right: 0px;
     z-index: 0;
-    /*padding: 20px;*/
     background-color: rgba(34, 34, 34, 0.2);
-    
     transition-duration: 5s;
     transition-timing-function: linear;
 }
@@ -62,4 +72,139 @@ footer {
 
 .pin:hover, .pin.active {
     color: #d95c5c !important;
+}
+
+.sidebar.menu {
+    /*width: 200px !important;*/
+    z-index: 103 !important;
+}
+
+.ui.transparent.menu {
+    opacity: 0.95;
+}
+
+.launch.button {
+    position: fixed;
+    top: 10px;
+    right: -1px;
+    width: 55px;
+    height: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 102;
+}
+
+.launch.button .icon {
+    margin-left: -15px;
+}
+
+.black p {
+    color: black !important;
+}
+
+.pushable {
+    background-color: #f7f7f7 !important;
+}
+
+.pusher {
+    background-color: transparent !important;
+}
+
+.pusher ::-webkit-scrollbar {
+    /*-webkit-appearance: none;*/
+    width: 10px;
+    height: 10px;
+}
+.pusher ::-webkit-scrollbar-button {
+    display: block;
+    height: 0px;
+    width: 7px;
+}
+.pusher ::-webkit-scrollbar-track {
+    background-color: rgba(211, 211, 211, 0.55);
+    border-radius: 5px;
+}
+.pusher ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.55);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.55);
+}
+
+.ui-board {
+    /*overflow-x: scroll !important;*/
+    overflow-y: hidden !important;
+}
+
+.ui-board-content {
+    display: -webkit-inline-flex !important;
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
+}
+
+.ui-list {
+    /*margin-left: 15px !important;*/
+    width: inherit !important;
+    margin-top: 1px !important;
+    margin-bottom: 5px !important;
+}
+
+.ui-list-wrapper, .ui-list-subflow {
+    /*width: 320px !important;*/
+    min-width: 320px !important;
+}
+
+.ui-list-content {
+    overflow-x: hidden !important;
+    /*overflow-y: scroll !important;*/
+    padding: 2px 5px 2px 5px !important;
+}
+
+.ui-list-new {
+    width: 150px !important;
+}
+
+.ui-task {
+    width: 100% !important;
+    /*width: 320px !important;*/
+    /*min-width: 300px !important;*/
+    /*width: 320px !important;*/
+}
+
+.ui-emergency-task {
+    position: absolute !important;
+    /*width: 320px !important;*/
+    /*width: 96% !important;*/
+    width: 92% !important;
+    /*height: 0px;*/
+    bottom: 10%;
+    /*left: 50%;*/
+    /*left: 25%;*/
+    /*right: 2%;*/
+}
+
+.ui-task:hover {
+    cursor: pointer;
+    background-color: #FCFCFC;
+}
+
+.ui-flip-back {
+    margin-top: 0 !important;
+}
+
+.ui .modal .comment .actions {
+    background: none !important;
+    padding: 0 !important;
+    border-top: 0 !important;
+    text-align: left !important;
+}
+
+.ui-vertical-divider {
+    position: absolute;
+    padding: 0 !important;
+    top: 10%;
+    bottom: 10%;
+    left: 50%;
+    height: 80%;
+    border-left: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(255,255,255,0.2);
 }
