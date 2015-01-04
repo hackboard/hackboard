@@ -126,11 +126,11 @@
         <div>
           <div class="ui grid stackable three column" id="other-boards-content" as-sortable="otherBoardSortOptions" ng-model="boards.other" >
             <div class="ui column" id="sample-other-board" ng-repeat="board in boards.other" as-sortable-item>
-              <div class="ui card" style="width: auto;" as-sortable-item-handle>
+              <div class="ui card" style="width: auto;">
                 <div class="content">
                   <i class="right floated pin link icon" ng-click="pin(board.id)"></i>
 
-                  <div class="header">{{ board.name }}</div>
+                  <div class="header" as-sortable-item-handle >{{ board.name }}</div>
                   <div class="meta">
                     updated {{ board.updated_at | timeAgo }}
                   </div>
