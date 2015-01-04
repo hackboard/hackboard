@@ -37,15 +37,17 @@
         <div class="ui column">
           <div class="ui medium header">
             <i class="pin icon"></i>
+
             <div class="content">
               Pinned
             </div>
           </div>
         </div>
+
         <div>
-          <div class="ui grid stackable three column" id="pinned-boards-content">
-            <div class="ui column board" id="sample-pinned-board" ng-repeat="board in boards.pin">
-              <div class="ui card" style="width: auto;">
+          <div class="ui grid stackable three column" id="pinned-boards-content" as-sortable="pinBoardSortOptions" ng-model="boards.pin">
+            <div class="ui column board" id="sample-pinned-board" ng-repeat="board in boards.pin" as-sortable-item>
+              <div class="ui card" style="width: auto;" as-sortable-item-handle>
                 <div class="content">
                   <i class="right floated pin link icon active" ng-click="unpin(board.id)"></i>
 
@@ -122,9 +124,9 @@
           </div>
         </div>
         <div>
-          <div class="ui grid stackable three column" id="other-boards-content">
-            <div class="ui column board" id="sample-other-board" ng-repeat="board in boards.other">
-              <div class="ui card" style="width: auto;">
+          <div class="ui grid stackable three column" id="other-boards-content" as-sortable="otherBoardSortOptions" ng-model="boards.other" >
+            <div class="ui column" id="sample-other-board" ng-repeat="board in boards.other" as-sortable-item>
+              <div class="ui card" style="width: auto;" as-sortable-item-handle>
                 <div class="content">
                   <i class="right floated pin link icon" ng-click="pin(board.id)"></i>
 
@@ -245,13 +247,13 @@
         },
         on: 'click'
     });
-    $(".card").each(function (index, value) {
-        var $this = $(this);
-        $this.hide();
-        setTimeout(function () {
-            $this.transition('fade up');
-        }, index * 50);
-    });
+    //    $(".card").each(function (index, value) {
+    //        var $this = $(this);
+    //        $this.hide();
+    //        setTimeout(function () {
+    //            $this.transition('fade');
+    //        }, index * 50);
+    //    });
     $("header").hide().transition('fade');
     $("footer").hide().transition('fade');
 </script>

@@ -138,10 +138,36 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User ,
 ]
 
 controllers.controller 'BoardsCtrl' , ['$scope' , 'User' , 'Board' , '$window' , ($scope , User , Board , $window ,timeAgo )->
+
+  $scope.boards = {
+    pin: [],
+    other: []
+  }
+
   Board.boards().success((data , status)->
     $scope.boards = data
     console.log $scope.boards.pin
   )
+
+  $scope.items = [
+    {name: 'item 1'},
+    {name: 'item 2'},
+    {name: 'item 3'},
+  ]
+
+  $scope.pinBoardSortOptions = {
+    containment: '#pinned-boards',
+    additionalPlaceholderClass: 'ui column',
+    accept: (sourceItemHandleScope, destSortableScope)->
+      sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
+  }
+
+  $scope.otherBoardSortOptions = {
+    containment: '#other-boards',
+    additionalPlaceholderClass: 'ui column',
+    accept: (sourceItemHandleScope, destSortableScope)->
+      sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
+  }
 
   $scope.pin = (id)->
     angular.forEach $scope.boards.other , (value , key)->

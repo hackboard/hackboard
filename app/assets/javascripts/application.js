@@ -18,4 +18,5 @@
 //= require ng-rails-csrf
 //= require angular-timeAgo
 //= require angular-semantic-ui
+//= require ng-sortable
 //= require_tree .
