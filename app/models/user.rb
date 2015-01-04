@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
   def myBoards
     {
         :pin => self.pin_boards,
-        :other => (self.boards << self.participate_boards) - self.pin_boards\
-        }
+        :other => (self.boards << self.participate_boards) - self.pin_boards
+    }
   end
 
 end

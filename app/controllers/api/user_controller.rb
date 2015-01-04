@@ -59,10 +59,47 @@ module Api
     def logout
       if session.has_key? :login_user
         session.delete :login_user
-        render :json => 'success'.to_json
+        respond_to do |format|
+          format.html {
+            redirect_to '/'
+          }
+          format.json {
+            'success'.to_json
+          }
+        end
+
       else
         render :json => 'UMSE05'.to_json
       end
+    end
+
+    def pin_board
+      board_id = params[:board_id].to_i
+      myboard = current_user.myBoards
+      myboard[:other].each do |b|
+        if b.id.equal? board_id
+          current_user.pin_boards << b
+          render :json => {
+                     :response => 'success'
+                 }
+          return
+        end
+      end
+      render :json => {
+                 :response => 'fail'
+             }
+    end
+
+    def unpin_board
+      board_id = params[:board_id].to_i
+      myboard = current_user.myBoards
+      myboard[:pin].each do |b|
+        if b.id.equal? board_id
+          current_user.pin_boards.delete(b)
+          break
+        end
+      end
+      render :json => current_user.myBoards
     end
 
     private

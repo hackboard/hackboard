@@ -20,3 +20,23 @@ services.factory 'User' , ['$http' , ($http)->
       password_confirmation:passwordConfirmation
     )
 ]
+
+services.factory 'Board' , ['$http' , ($http)->
+  create: ()->
+    $http.post '/api/boards/'
+
+  boards: ()->
+    $http.get '/api/boards/'
+
+  pin: (id)->
+    $http.post(
+      '/api/user/pinboard',
+      board_id: id
+    )
+
+  unpin: (id)->
+    $http.post(
+      '/api/user/unpinboard',
+      board_id: id
+    )
+]

@@ -36,12 +36,17 @@ module Api
         board =Board.new(:name => 'NewBoard', :wip => '10', :description => 'New Board', :user_id => current_user.id)
         board.save
         response = 'success'
-        render :json => response.to_json
+        render :json => {
+                   :response => response,
+                   :board => board
+               }.to_json
         return
       else
         response = 'DAPIE02'
       end
-      render :json => response.to_json, :status => :forbidden
+      render :json => {
+                 :error => response
+             }.to_json, :status => :forbidden
     end
 
     def destroy
@@ -82,6 +87,8 @@ module Api
         return
       end
     end
+
+
 
     private
     def input_params
