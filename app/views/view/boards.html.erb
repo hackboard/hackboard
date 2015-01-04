@@ -47,11 +47,11 @@
         <div>
           <div class="ui grid stackable three column" id="pinned-boards-content" as-sortable="pinBoardSortOptions" ng-model="boards.pin">
             <div class="ui column board" id="sample-pinned-board" ng-repeat="board in boards.pin" as-sortable-item>
-              <div class="ui card" style="width: auto;" as-sortable-item-handle>
+              <div class="ui card" style="width: auto;" >
                 <div class="content">
                   <i class="right floated pin link icon active" ng-click="unpin(board.id)"></i>
 
-                  <div class="header">{{ board.name }}</div>
+                  <div class="header" as-sortable-item-handle>{{ board.name }}</div>
                   <div class="meta">
                     updated {{ board.updated_at | timeAgo }}
                   </div>
