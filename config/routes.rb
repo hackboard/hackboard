@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
   get '/' => 'view#index'
+  get '/boards' => 'view#boards'
 
   namespace :api do
     post 'user/login' => 'user#login'
     post 'user/logout' => 'user#logout'
     post 'user/register' => 'user#register'
+    post 'user/pinboard' => 'user#pin_board'
+    post 'user/unpinboard' => 'user#unpin_board'
     resources :boards
     get 'boards/:id/flows' => 'boards#flows'
   end

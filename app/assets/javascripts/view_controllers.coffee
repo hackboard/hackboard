@@ -136,3 +136,32 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User ,
 
   return
 ]
+
+controllers.controller 'BoardsCtrl' , ['$scope' , 'User' , 'Board' , '$window' , ($scope , User , Board , $window ,timeAgo )->
+  Board.boards().success((data , status)->
+    $scope.boards = data
+    console.log $scope.boards.pin
+  )
+
+  $scope.pin = (id)->
+    angular.forEach $scope.boards.other , (value , key)->
+      if value.id == id
+        $scope.boards.pin.push $scope.boards.other[key]
+        $scope.boards.other.splice key,1
+        Board.pin(id)
+    return
+
+  $scope.unpin = (id)->
+    angular.forEach $scope.boards.pin , (value , key)->
+      if value.id == id
+        $scope.boards.other.push $scope.boards.pin[key]
+        $scope.boards.pin.splice key,1
+        Board.unpin(id)
+    return
+
+  $scope.newBoard = ()->
+    console.log "test"
+    Board.create().success((data , status)->
+      $scope.boards.other.push data.board
+    )
+]
