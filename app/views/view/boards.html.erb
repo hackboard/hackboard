@@ -72,7 +72,7 @@
                   </div>
                   <div class="right floated author">
                     <div style="display: inline">
-                      <a class="ui circular label people">
+                      <a class="ui circular label people" semantic-popup>
                         CH
                       </a>
 
@@ -83,7 +83,7 @@
                       </div>
                     </div>
                     <div style="display: inline">
-                      <a class="ui circular label people">
+                      <a class="ui circular label people" semantic-popup>
                         G+
                       </a>
 
@@ -95,7 +95,7 @@
                       </div>
                     </div>
                     <div style="display: inline">
-                      <a class="ui circular label people">
+                      <a class="ui circular label people" semantic-popup>
                         YC
                       </a>
 
@@ -150,7 +150,7 @@
                     </div>
                   </div>
                   <div class="right floated author">
-                    <a class="ui circular label people">
+                    <a class="ui circular label people" semantic-popup>
                       CH
                     </a>
 
@@ -159,7 +159,7 @@
                         <img class="ui avatar image" src="img/sample-avatar.jpg"> Cheng-Han Wu
                       </div>
                     </div>
-                    <a class="ui circular label people">
+                    <a class="ui circular label people" semantic-popup>
                       BH
                     </a>
 
@@ -168,7 +168,7 @@
                         <img class="ui avatar image" src="img/square-image.png"> Bo-Hong Li
                       </div>
                     </div>
-                    <a class="ui circular label people">
+                    <a class="ui circular label people" semantic-popup>
                       2 more
                     </a>
 
@@ -239,21 +239,13 @@
         }
     });
 
-    $(".people").popup({
-        position: 'top right',
-        transition: 'fade',
-        className: {
-            popup: 'ignored ui popup'
-        },
-        on: 'click'
-    });
-    //    $(".card").each(function (index, value) {
-    //        var $this = $(this);
-    //        $this.hide();
-    //        setTimeout(function () {
-    //            $this.transition('fade');
-    //        }, index * 50);
-    //    });
+//        $(".card").each(function (index, value) {
+//            var $this = $(this);
+//            $this.hide();
+//            setTimeout(function () {
+//                $this.transition('fade');
+//            }, index * 50);
+//        });
     $("header").hide().transition('fade');
     $("footer").hide().transition('fade');
 </script>

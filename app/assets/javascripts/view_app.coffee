@@ -5,5 +5,17 @@ hackboard = angular.module 'hackboardApp', [
   'ui.sortable',
   'hackboardControllers',
   'hackboardServices',
+  'hackboardDirective'
 ]
 
+angular.module('hackboardDirective',[])
+  .directive 'semanticPopup' , ()->
+    (scope,element,attrs)->
+      $(element).popup({
+        position: 'top right',
+        transition: 'fade',
+        className: {
+          popup: 'ignored ui popup'
+        },
+        on: 'click'
+      })
