@@ -21,7 +21,6 @@ class User < ActiveRecord::Base
     }
   end
 
-  # Added by visualcshape ref.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
@@ -44,4 +43,15 @@ class User < ActiveRecord::Base
   def forget
     update_attribute(:remember_digest,nil)
   end
+  
+  def getBoard(id)
+
+    board = self.boards.find(id) || self.participate_boards.find(id)
+
+    if board
+       return board
+    end
+    return nil
+  end
+
 end

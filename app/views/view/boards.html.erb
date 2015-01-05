@@ -46,12 +46,12 @@
 
         <div>
           <div class="ui grid stackable three column" id="pinned-boards-content" as-sortable="pinBoardSortOptions" ng-model="boards.pin">
-            <div class="ui column board" id="sample-pinned-board" ng-repeat="board in boards.pin" as-sortable-item>
-              <div class="ui card" style="width: auto;" as-sortable-item-handle>
+            <div class="ui column board" id="sample-pinned-board" ng-repeat="board in boards.pin" as-sortable-item ng-click="toBoard(board.id)">
+              <div class="ui card" style="width: auto;">
                 <div class="content">
                   <i class="right floated pin link icon active" ng-click="unpin(board.id)"></i>
 
-                  <div class="header">{{ board.name }}</div>
+                  <div class="header" as-sortable-item-handle>{{ board.name }}</div>
                   <div class="meta">
                     updated {{ board.updated_at | timeAgo }}
                   </div>
@@ -72,7 +72,7 @@
                   </div>
                   <div class="right floated author">
                     <div style="display: inline">
-                      <a class="ui circular label people">
+                      <a class="ui circular label people" semantic-popup>
                         CH
                       </a>
 
@@ -83,7 +83,7 @@
                       </div>
                     </div>
                     <div style="display: inline">
-                      <a class="ui circular label people">
+                      <a class="ui circular label people" semantic-popup>
                         G+
                       </a>
 
@@ -95,7 +95,7 @@
                       </div>
                     </div>
                     <div style="display: inline">
-                      <a class="ui circular label people">
+                      <a class="ui circular label people" semantic-popup>
                         YC
                       </a>
 
@@ -124,13 +124,13 @@
           </div>
         </div>
         <div>
-          <div class="ui grid stackable three column" id="other-boards-content" as-sortable="otherBoardSortOptions" ng-model="boards.other" >
-            <div class="ui column" id="sample-other-board" ng-repeat="board in boards.other" as-sortable-item>
-              <div class="ui card" style="width: auto;" as-sortable-item-handle>
+          <div class="ui grid stackable three column" id="other-boards-content" as-sortable="otherBoardSortOptions" ng-model="boards.other">
+            <div class="ui column" id="sample-other-board" ng-repeat="board in boards.other" as-sortable-item ng-click="toBoard(board.id)">
+              <div class="ui card" style="width: auto;">
                 <div class="content">
                   <i class="right floated pin link icon" ng-click="pin(board.id)"></i>
 
-                  <div class="header">{{ board.name }}</div>
+                  <div class="header" as-sortable-item-handle>{{ board.name }}</div>
                   <div class="meta">
                     updated {{ board.updated_at | timeAgo }}
                   </div>
@@ -150,7 +150,7 @@
                     </div>
                   </div>
                   <div class="right floated author">
-                    <a class="ui circular label people">
+                    <a class="ui circular label people" semantic-popup>
                       CH
                     </a>
 
@@ -159,7 +159,7 @@
                         <img class="ui avatar image" src="img/sample-avatar.jpg"> Cheng-Han Wu
                       </div>
                     </div>
-                    <a class="ui circular label people">
+                    <a class="ui circular label people" semantic-popup>
                       BH
                     </a>
 
@@ -168,7 +168,7 @@
                         <img class="ui avatar image" src="img/square-image.png"> Bo-Hong Li
                       </div>
                     </div>
-                    <a class="ui circular label people">
+                    <a class="ui circular label people" semantic-popup>
                       2 more
                     </a>
 
@@ -216,6 +216,8 @@
 
     var animationDuration = '150ms';
 
+
+
     $(".pin").state({
         onActivate: function () {
             var target = $(this).closest(".board");
@@ -239,21 +241,13 @@
         }
     });
 
-    $(".people").popup({
-        position: 'top right',
-        transition: 'fade',
-        className: {
-            popup: 'ignored ui popup'
-        },
-        on: 'click'
-    });
-    //    $(".card").each(function (index, value) {
-    //        var $this = $(this);
-    //        $this.hide();
-    //        setTimeout(function () {
-    //            $this.transition('fade');
-    //        }, index * 50);
-    //    });
+    //        $(".card").each(function (index, value) {
+    //            var $this = $(this);
+    //            $this.hide();
+    //            setTimeout(function () {
+    //                $this.transition('fade');
+    //            }, index * 50);
+    //        });
     $("header").hide().transition('fade');
     $("footer").hide().transition('fade');
 </script>
