@@ -62,10 +62,11 @@ module Api
 
     def logout
       if session.has_key? :login_user
-        session.delete :login_user
         if cookies.has_key? :login_user and cookies.has_key? :remember_token
+          current_user
           forget @current_user
         end
+        session.delete :login_user
         respond_to do |format|
           format.html {
             redirect_to '/'
