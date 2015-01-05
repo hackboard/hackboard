@@ -15,7 +15,17 @@ module Api
     end
 
     def show
-
+      board_id = params[:id]
+      unless current_user
+        render :json => 'ERROR'.to_json
+        return
+      end
+      board = current_user.getBoard(board_id)
+      if board
+        render :json => current_user.getBoard(board_id).to_json(include: :users)
+      else
+        render :json => 'ERROR'.to_json
+      end
     end
 
     def index
@@ -33,8 +43,13 @@ module Api
 
     def create
       if current_user
-        board =Board.new(:name => 'NewBoard', :wip => '10', :description => 'New Board', :user_id => current_user.id)
+        board = Board.new(:name => 'NewBoard', :wip => '10', :description => 'New Board', :user_id => current_user.id)
         board.save
+
+        Flow.create(:name => 'ToDo', order: 1, max_task: 5, max_day: 5, board_id: board.id)
+        Flow.create(:name => 'Doing', order: 2, max_task: 5, max_day: 5, board_id: board.id)
+        Flow.create(:name => 'Done', order: 3, max_task: 5, max_day: 5, board_id: board.id)
+
         response = 'success'
         render :json => {
                    :response => response,
@@ -44,9 +59,7 @@ module Api
       else
         response = 'DAPIE02'
       end
-      render :json => {
-                 :error => response
-             }.to_json, :status => :forbidden
+      render :json => {:error => response}.to_json, :status => :forbidden
     end
 
     def destroy
@@ -71,15 +84,15 @@ module Api
     def flows
       if current_user
         input = input_params
-        board = Board.find(input[:id])
+        board = current_user.getBoard(input[:id])
         member = BoardMember.where(:board_id => board.id, :user_id => current_user.id)
         if board.user_id != current_user.id || !member # if not board owner neither board member
           response = 'DAPIE04'
           render :json => response.to_json
           return
         end
-        flows = Flow.where(:board_id => board.id)
-        render :json => flows.to_json
+        flows = board.flows
+        render :json => flows.to_json( include:[:tasks , { :flows => {include: :tasks} } ] )
         return
       else
         response = 'Not login'
@@ -88,6 +101,39 @@ module Api
       end
     end
 
+    def add_flow
+      if current_user
+
+        input = input_params
+
+        flow = Flow.create(:name => 'New Flow' , max_task: 5, max_day: 5, board_id: input[:id])
+
+        render :json => flow.to_json( include:[:tasks , { :flows => {include: :tasks} } ] )
+
+      end
+    end
+
+    def add_task
+      if current_user
+
+        id = params[:id]
+        fid = params[:fid]
+
+        task = Task.create( :state => 'normal',
+                            :name => 'new Task',
+                            :description => 'new Task',
+                            :flow_id => fid)
+
+        render :json => task.to_json
+
+      end
+    end
+
+    def get_task
+      if current_user
+        render :json => Task::find(params[:id]).to_json
+      end
+    end
 
 
     private

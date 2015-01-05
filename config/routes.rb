@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get '/' => 'view#index'
   get '/boards' => 'view#boards'
+  get '/board/:id' => 'view#board'
 
   namespace :api do
     post 'user/login' => 'user#login'
@@ -11,6 +12,9 @@ Rails.application.routes.draw do
     post 'user/unpinboard' => 'user#unpin_board'
     resources :boards
     get 'boards/:id/flows' => 'boards#flows'
+    post 'boards/:id/flows/add' => 'boards#add_flow'
+    post 'boards/:id/flows/:fid/task/add' => 'boards#add_task'
+    get 'task/:id' => 'boards#get_task'
   end
 
 

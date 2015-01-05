@@ -11,4 +11,16 @@ class ViewController < ApplicationController
     end
   end
 
+  def board
+    if current_user
+      id = params[:id].to_i
+      @board = Board::find(id)
+      unless @board
+        redirect_to '/boards'
+      end
+    else
+      redirect_to '/boards'
+    end
+  end
+
 end

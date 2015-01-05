@@ -20,4 +20,14 @@ class User < ActiveRecord::Base
     }
   end
 
+  def getBoard(id)
+
+    board = self.boards.find(id) || self.participate_boards.find(id)
+
+    if board
+       return board
+    end
+    return nil
+  end
+
 end

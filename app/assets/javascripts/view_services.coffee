@@ -28,6 +28,12 @@ services.factory 'Board' , ['$http' , ($http)->
   boards: ()->
     $http.get '/api/boards/'
 
+  board: (id)->
+    $http.get '/api/boards/' + id
+
+  flows: (board_id)->
+    $http.get '/api/boards/' + board_id + '/flows'
+
   pin: (id)->
     $http.post(
       '/api/user/pinboard',
@@ -39,4 +45,11 @@ services.factory 'Board' , ['$http' , ($http)->
       '/api/user/unpinboard',
       board_id: id
     )
+]
+
+services.factory 'Flow' , ['$http' , ($http)->
+
+  flow: (board_id)->
+    $http.get '/api/flows/' + board_id
+
 ]

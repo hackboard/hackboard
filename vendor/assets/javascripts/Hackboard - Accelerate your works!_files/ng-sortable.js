@@ -25,6 +25,7 @@
 /*jshint indent: 2 */
 /*global angular: false */
 
+
 (function () {
   'use strict';
   angular.module('ui.sortable', [])
@@ -224,16 +225,16 @@
             }
 
             // modify this.offset(element).width to this.offset(element.children()).width
-            //if (element.x < bounds.left) {
-            //  //element.x = bounds.left;
-            //} else if (element.x >= (bounds.width + bounds.left - this.offset(element.children()).width)) {
-            //  //element.x = bounds.width + bounds.left - this.offset(element.children()).width;
-            //}
-            //if (element.y < bounds.top) {
-            //  //element.y = bounds.top;
-            //} else if (element.y >= bounds.height + bounds.top - this.offset(element.children()).height) {
-            //  //element.y = bounds.height + bounds.top - this.offset(element.children()).height;
-            //}
+            if (element.x < bounds.left) {
+              element.x = bounds.left;
+            } else if (element.x >= (bounds.width + bounds.left - this.offset(element.children()).width)) {
+              element.x = bounds.width + bounds.left - this.offset(element.children()).width;
+            }
+            if (element.y < bounds.top) {
+              element.y = bounds.top;
+            } else if (element.y >= bounds.height + bounds.top - this.offset(element.children()).height) {
+              element.y = bounds.height + bounds.top - this.offset(element.children()).height;
+            }
           }
 
           element.css({

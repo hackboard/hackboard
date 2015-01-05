@@ -144,10 +144,12 @@ controllers.controller 'BoardsCtrl', ['$scope', 'User', 'Board', '$window', ($sc
     other: []
   }
 
+  # async load boards data
   Board.boards().success((data, status)->
     $scope.boards = data
   )
 
+  # sortable setting
   $scope.pinBoardSortOptions = {
     containment: '#pinned-boards',
     additionalPlaceholderClass: 'ui column',
@@ -161,6 +163,8 @@ controllers.controller 'BoardsCtrl', ['$scope', 'User', 'Board', '$window', ($sc
     accept: (sourceItemHandleScope, destSortableScope)->
       sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
   }
+
+  # processing pin and unpin
 
   $scope.pin = (id)->
     angular.forEach $scope.boards.other, (value, key)->
@@ -178,9 +182,91 @@ controllers.controller 'BoardsCtrl', ['$scope', 'User', 'Board', '$window', ($sc
         Board.unpin(id)
     return
 
+  # new board
   $scope.newBoard = ()->
     Board.create().success((data, status)->
-      $scope.boards.other.push data.board
+#      $scope.boards.other.push data.board
+      $window.location.href = '/board/' + data.board.id
     )
     return
+
+  # click card to board
+  $scope.toBoard = (id)->
+    $window.location.href = '/board/' + id
+]
+
+# board Page
+controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board' , '$http', ($scope, $window, Board , $http)->
+  board_id = parseInt($window.location.pathname.split('/')[2])
+  $scope.board = [
+    flows: []
+  ]
+  # flow sortable setting
+  $scope.flowSortOptions = {
+    containment: '#board-content',
+    additionalPlaceholderClass: 'ui grid ui-board-content',
+    accept: (sourceItemHandleScope, destSortableScope)->
+      sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
+  }
+
+  $scope.taskSortOptions = {
+#    containment: '#board-content',
+#    additionalPlaceholderClass: 'ui grid ui-board-content',
+#    accept: (sourceItemHandleScope, destSortableScope)->
+#      sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
+  }
+
+  Board.board(board_id).success((data, status)->
+    $scope.board = data
+
+    Board.flows($scope.board.id).success((data , status)->
+      $scope.board.flows = data
+      console.log $scope.board
+    )
+
+  ).error((data, status)->
+    $window.location.href = "/boards"
+  )
+
+  $scope.taskClick = (id)->
+
+    $http.get('/api/task/' + id).success((data, status)->
+
+      $scope.taskData = data
+
+      $('.ui.modal').modal({
+        transition: 'slide down',
+        duration: '100ms'
+      }).modal('show')
+
+    )
+    return
+
+  $scope.removeBoardMember = (id)->
+    angular.forEach($scope.board.users , (value,key)->
+      if value.id == id
+        $scope.board.users.splice key,1
+    )
+    return
+
+  $scope.newFlow = ()->
+    $http.post('/api/boards/' + $scope.board.id + '/flows/add').success((data,status)->
+      $scope.board.flows.push data
+    )
+    return
+
+  $scope.newTask = (id)->
+    $http.post('/api/boards/' + $scope.board.id + '/flows/' + id + '/task/add').success(
+      (data,status)->
+        angular.forEach($scope.board.flows , (flow , key)->
+          angular.forEach(flow.flows , (subFlow , key2)->
+            if subFlow.id == id
+              subFlow.tasks.push data
+          )
+          if flow.id == id
+            flow.tasks.push data
+        )
+    )
+    return
+
 ]
