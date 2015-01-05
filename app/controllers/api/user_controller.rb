@@ -63,10 +63,19 @@ module Api
     def logout
       if session.has_key? :login_user
         session.delete :login_user
+        if cookies.has_key? :login_user and cookies.has_key? :remember_token
+          forget @current_user
+        end
         render :json => 'success'.to_json
       else
         render :json => 'UMSE05'.to_json
       end
+    end
+
+    def forget(user)
+      user.forget
+      cookies.delete(:login_user)
+      cookies.delete(:remember_token)
     end
 
     private
