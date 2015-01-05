@@ -9,12 +9,16 @@ module Api
       email = input[:email]
       email = email.downcase
       password = input[:password]
+      remember_me = input[:remember_me]
 
       user = User::find_by_email email
 
       if user
         if user.authenticate(password)
           session[:login_user] = email
+          if remember_me
+            remember user
+          end
           response = 'success'
           render :json => response.to_json
           return
@@ -59,6 +63,9 @@ module Api
     def logout
       if session.has_key? :login_user
         session.delete :login_user
+        if cookies.has_key? :login_user and cookies.has_key? :remember_token
+          forget @current_user
+        end
         respond_to do |format|
           format.html {
             redirect_to '/'
@@ -67,7 +74,6 @@ module Api
             'success'.to_json
           }
         end
-
       else
         render :json => 'UMSE05'.to_json
       end
@@ -102,6 +108,12 @@ module Api
       render :json => current_user.myBoards
     end
 
+    def forget(user)
+      user.forget
+      cookies.delete(:login_user)
+      cookies.delete(:remember_token)
+    end
+
     private
 
     def register_params
@@ -116,10 +128,10 @@ module Api
     def login_params
       {
           :email => params.require(:email),
-          :password => params.require(:password)
+          :password => params.require(:password),
+          :remember_me => params.require(:remember_me)
       }
     end
 
   end
-
 end
