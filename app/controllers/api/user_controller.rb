@@ -9,12 +9,16 @@ module Api
       email = input[:email]
       email = email.downcase
       password = input[:password]
+      remember_me = input[:remember_me]
 
       user = User::find_by_email email
 
       if user
         if user.authenticate(password)
           session[:login_user] = email
+          if remember_me
+            remember user
+          end
           response = 'success'
           render :json => response.to_json
           return
@@ -79,7 +83,8 @@ module Api
     def login_params
       {
           :email => params.require(:email),
-          :password => params.require(:password)
+          :password => params.require(:password),
+          :remember_me => params.require(:remember_me)
       }
     end
 

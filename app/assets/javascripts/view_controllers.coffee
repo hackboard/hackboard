@@ -2,11 +2,12 @@ controllers = angular.module 'hackboardControllers', []
 
 # Login, Register Controller
 controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User , $window)->
+
 # 紀錄登入資訊的 Model
   $scope.loginInfo =
     email: "Alice@meigic.tw"
-    password: "Alice0000"
-    rememberMe: ""
+    password: "12345678"
+    rememberMe: false
     hasError: false
     hasWarning: false
 
@@ -31,6 +32,7 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User ,
     User.login(
       $scope.loginInfo.email
       $scope.loginInfo.password
+      $scope.loginInfo.rememberMe
     )
     .success((data, status)->
       $window.location.href = '/boards'
