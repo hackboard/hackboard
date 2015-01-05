@@ -12,5 +12,7 @@
  *
  *= require_tree .
  *= require ng-sortable.css
+ *= require selectize.default.css
+ *= require select.css
  *= require_self
  */

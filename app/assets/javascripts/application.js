@@ -19,4 +19,5 @@
 //= require angular-timeAgo
 //= require angular-semantic-ui
 //= require ng-sortable
+//= require select
 //= require_tree .
