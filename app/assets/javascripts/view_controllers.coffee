@@ -22,6 +22,10 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User, 
     warning_message: ''
     nicknameDirty: false
 
+  $scope.$watch('registerInfo.email', (old, newv)->
+    $scope.registerInfo.avatar = md5($scope.registerInfo.email)
+  )
+
   # 登入按鈕按下時要做的動作
   $scope.btnLogin = ()->
     # reset message
@@ -139,69 +143,77 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User, 
 ]
 
 # Boards Page
-controllers.controller 'BoardsCtrl', ['$scope', 'User', 'Board', '$window', ($scope, User, Board, $window, timeAgo)->
-  $scope.boards = {
-    pin: [],
-    other: []
-  }
+controllers.controller 'BoardsCtrl', ['$scope', 'User', 'Board', '$window', 'timeAgo', '$http',
+  ($scope, User, Board, $window, timeAgo, $http)->
+    $scope.boards = {
+      pin: [],
+      other: []
+    }
 
-  # async load boards data
-  Board.boards().success((data, status)->
-    $scope.boards = data
-  )
-
-  # sortable setting
-  $scope.pinBoardSortOptions = {
-    containment: '#pinned-boards',
-    additionalPlaceholderClass: 'ui column',
-    accept: (sourceItemHandleScope, destSortableScope)->
-      sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
-  }
-
-  $scope.otherBoardSortOptions = {
-    containment: '#other-boards',
-    additionalPlaceholderClass: 'ui column',
-    accept: (sourceItemHandleScope, destSortableScope)->
-      sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
-  }
-
-  # processing pin and unpin
-
-  $scope.pin = (id)->
-    angular.forEach $scope.boards.other, (value, key)->
-      if value.id == id
-        $scope.boards.pin.push $scope.boards.other[key]
-        $scope.boards.other.splice key, 1
-        Board.pin(id)
-    return
-
-  $scope.unpin = (id)->
-    angular.forEach $scope.boards.pin, (value, key)->
-      if value.id == id
-        $scope.boards.other.push $scope.boards.pin[key]
-        $scope.boards.pin.splice key, 1
-        Board.unpin(id)
-    return
-
-  # new board
-  $scope.newBoard = ()->
-    Board.create().success((data, status)->
-#      $scope.boards.other.push data.board
-      $window.location.href = '/board/' + data.board.id
+    $http.get('/api/user/current_user').success((data, status)->
+      $scope.current_user = data
+      $scope.current_user.avatar = md5(data.email)
     )
-    return
 
-  # click card to board
-  $scope.toBoard = (id)->
-    $window.location.href = '/board/' + id
+    # async load boards data
+    Board.boards().success((data, status)->
+      $scope.boards = data
+    )
+
+    # sortable setting
+    $scope.pinBoardSortOptions = {
+      containment: '#pinned-boards',
+      additionalPlaceholderClass: 'ui column',
+      accept: (sourceItemHandleScope, destSortableScope)->
+        sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
+    }
+
+    $scope.otherBoardSortOptions = {
+      containment: '#other-boards',
+      additionalPlaceholderClass: 'ui column',
+      accept: (sourceItemHandleScope, destSortableScope)->
+        sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
+    }
+
+    # processing pin and unpin
+
+    $scope.pin = (id)->
+      angular.forEach $scope.boards.other, (value, key)->
+        if value.id == id
+          $scope.boards.pin.push $scope.boards.other[key]
+          $scope.boards.other.splice key, 1
+          Board.pin(id)
+      return
+
+    $scope.unpin = (id)->
+      angular.forEach $scope.boards.pin, (value, key)->
+        if value.id == id
+          $scope.boards.other.push $scope.boards.pin[key]
+          $scope.boards.pin.splice key, 1
+          Board.unpin(id)
+      return
+
+    # new board
+    $scope.newBoard = ()->
+      Board.create().success((data, status)->
+#      $scope.boards.other.push data.board
+        $window.location.href = '/board/' + data.board.id
+      )
+      return
+
+    # click card to board
+    $scope.toBoard = (id)->
+      $window.location.href = '/board/' + id
 ]
 
 # board Page
-controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board' , '$http', ($scope, $window, Board , $http)->
+controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($scope, $window, Board, $http)->
   board_id = parseInt($window.location.pathname.split('/')[2])
   $scope.board = [
     flows: []
   ]
+  $scope.current_user = {}
+
   # flow sortable setting
   $scope.flowSortOptions = {
     containment: '#board-content',
@@ -220,47 +232,48 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board' , '$http', ($s
   Board.board(board_id).success((data, status)->
     $scope.board = data
 
-    Board.flows($scope.board.id).success((data , status)->
+    Board.flows($scope.board.id).success((data, status)->
       $scope.board.flows = data
       console.log $scope.board
     )
-
   ).error((data, status)->
     $window.location.href = "/boards"
   )
 
+  $http.get('/api/user/current_user').success((data, status)->
+    $scope.current_user = data
+    $scope.current_user.avatar = md5(data.email)
+  )
+
   $scope.taskClick = (id)->
-
     $http.get('/api/task/' + id).success((data, status)->
-
       $scope.taskData = data
 
       $('.ui.modal').modal({
         transition: 'slide down',
         duration: '100ms'
       }).modal('show')
-
     )
     return
 
   $scope.removeBoardMember = (id)->
-    angular.forEach($scope.board.users , (value,key)->
+    angular.forEach($scope.board.users, (value, key)->
       if value.id == id
-        $scope.board.users.splice key,1
+        $scope.board.users.splice key, 1
     )
     return
 
   $scope.newFlow = ()->
-    $http.post('/api/boards/' + $scope.board.id + '/flows/add').success((data,status)->
+    $http.post('/api/boards/' + $scope.board.id + '/flows/add').success((data, status)->
       $scope.board.flows.push data
     )
     return
 
   $scope.newTask = (id)->
     $http.post('/api/boards/' + $scope.board.id + '/flows/' + id + '/task/add').success(
-      (data,status)->
-        angular.forEach($scope.board.flows , (flow , key)->
-          angular.forEach(flow.flows , (subFlow , key2)->
+      (data, status)->
+        angular.forEach($scope.board.flows, (flow, key)->
+          angular.forEach(flow.flows, (subFlow, key2)->
             if subFlow.id == id
               subFlow.tasks.push data
           )

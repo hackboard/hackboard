@@ -3,7 +3,7 @@
   <div class="ui right vertical inverted sidebar menu">
     <div class="item">
       <div class="ui icon header inverted text-center" style="display: block; margin-top: 14px;">
-        <img class="ui tiny circular image middle aligned" src="/img/sample-avatar.jpg">
+        <img class="ui tiny circular image middle aligned" ng-src="http://www.gravatar.com/avatar/{{ current_user.avatar }}s=200" >
 
         <div class="content">
           <%= current_user.name %>

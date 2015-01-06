@@ -38,7 +38,7 @@
           </div>
           <div class="inline fields">
             <div class="field">
-              <img class="ui tiny circular image middle aligned" src="img/square-image.png">
+              <img class="ui tiny circular image middle aligned" ng-src="http://www.gravatar.com/avatar/{{ registerInfo.avatar }}" >
             </div>
             <div class="field">
               <input placeholder="shortname" name="nickName" type="text" required ng-model="registerInfo.nickname" ng-pattern="/^[a-zA-Z0-9]*$/" ng-change="registerInfo.nicknameDirty=true">

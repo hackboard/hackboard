@@ -115,6 +115,9 @@ module Api
       cookies.delete(:remember_token)
     end
 
+    def current
+      render :json => current_user.to_json
+    end
     private
 
     def register_params
