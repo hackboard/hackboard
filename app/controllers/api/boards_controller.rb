@@ -91,8 +91,8 @@ module Api
           render :json => response.to_json
           return
         end
-        flows = board.flows
-        render :json => flows.to_json( include:[{:tasks => {include: :user}} , { :flows => {include: :tasks} } ] )
+        flows = board.flows.order(:order)
+        render :json => flows.to_json( include:[{:tasks => { include: :user}} , { :flows => {include: :tasks , order: :order} } ] )
         return
       else
         response = 'Not login'
@@ -179,10 +179,13 @@ module Api
         board.save
 
         if boardData[:flows]
+          ind = 1
           boardData[:flows].each do |f|
 
             flow = Flow.find(f[:id])
             flow.name = f[:name]
+            flow.order = ind
+            ind = ind + 1
             flow.save
 
             if f[:flows]
@@ -193,10 +196,12 @@ module Api
                 flow.save
 
                 if f2[:tasks]
-
+                  f2oind = 1
                   f2[:tasks].each do |t2|
                     task = Task.find(t2[:id])
                     task.name = t2[:name]
+                    task.order = f2oind
+                    f2oind = f2oind + 1
                     task.description = t2[:description]
                     task.flow_id = f2[:id]
                     task.save
@@ -210,10 +215,13 @@ module Api
             end
 
             if f[:tasks]
+              foind = 1
               f[:tasks].each do |t1|
                 task = Task.find(t1[:id])
                 task.name = t1[:name]
                 task.description = t1[:description]
+                task.order = foind
+                foind = foind + 1
                 task.flow_id = f[:id]
                 task.save
               end
