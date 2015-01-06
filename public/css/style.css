@@ -197,12 +197,13 @@ footer {
     /*width: 96% !important;*/
     width: 92% !important;
     /*height: 0px;*/
+    bottom: 50px;
     /*left: 50%;*/
     /*left: 25%;*/
     /*right: 2%;*/
 }
 
-.ui-task:hover {
+.ui-task:hover, .ui-card:hover {
     cursor: pointer;
     background-color: #FCFCFC;
 }
