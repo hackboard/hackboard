@@ -1,6 +1,6 @@
 <div class="background-cover"></div>
 <div ng-app="hackboardApp" ng-controller="BoardCtrl">
-  <div class="ui right vertical inverted sidebar menu">
+  <div class="ui right vertical inverted sidebar menu" id="page-sidebar">
     <div class="item">
       <div class="ui icon header inverted text-center" style="display: block; margin-top: 14px;">
         <img class="ui tiny circular image middle aligned" ng-src="http://www.gravatar.com/avatar/{{ current_user.avatar }}s=200" >
@@ -178,10 +178,10 @@
       <!--<i class="cube icon"></i> Archive this board-->
     <!--</a>-->
   </div>
-  <div class="ui black big launch left attached button">
+  <div class="ui black big launch left attached button" id="page-launch-button">
     <i class="content icon"></i>
   </div>
-  <header class="ui main top borderless fixed inverted large menu ui grid" id="page">
+  <header class="ui main top borderless fixed inverted large menu ui grid" id="page-menu">
     <a class="item" ng-click="titleClick(board.id)">
       <i class="rocket icon"></i> {{ board.name }}
     </a>
@@ -378,8 +378,8 @@
         <!--</div>-->
       <!--</div>-->
     <!--</div>-->
-  </header>
-  <div class="pusher">
+  </header id=>
+  <div class="pusher" id="page-content">
     <div class="container thin-padding">
       <div class="ui basic segment ui-board">
         <div class="ui grid ui-board-content" id="board-content" as-sortable="flowSortOptions" ng-model="board.flows">
@@ -996,16 +996,23 @@
     $("footer").hide().transition('fade');
     $(".launch.button").hide().transition('fade');
 
-    $('.sidebar').sidebar('setting', {
+    $('#page-sidebar').sidebar('setting', {
         dimPage: false,
         transition: 'overlay',
-        mobileTransition: 'overlay'
+        mobileTransition: 'overlay',
+        closable: false
     });
 
-    $('.launch.button').on('touchstart click', function (event) {
+    $('#page-content, #page-menu').on('touchstart click', function (event) {
         event.preventDefault();
-        if (!$('.sidebar').hasClass("overlay") || !$('.sidebar').hasClass("animating"))
-            $('.sidebar').sidebar('toggle');
+        if (!$('#page-sidebar').hasClass("overlay") || !$('.sidebar').hasClass("animating"))
+            $('#page-sidebar').sidebar('hide');
+    });
+
+    $('#page-launch-button').on('touchstart click', function (event) {
+        event.preventDefault();
+        if (!$('#page-sidebar').hasClass("overlay") || !$('.sidebar').hasClass("animating"))
+            $('#page-sidebar').sidebar('toggle');
     });
     $(".ui-list-wrapper").height($(window).height() - 140);
     $(".ui-list-content").height($(window).height() - 200);
@@ -1022,15 +1029,6 @@
         },
         on: 'click'
     });
-
-    function getlabelname(shortname) {
-        var name = shortname.split(/[\s,]+/);
-        for(var i = 0; i < name.length; i++) {
-            name[i] = name[i].slice(0, 1);
-        }
-        var labelname = name.join("").slice(0, 2).toUpperCase();
-        return labelname;
-    }
 
     /*
      for (var i = 0; i < 10; i++) {

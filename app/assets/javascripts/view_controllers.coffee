@@ -214,6 +214,21 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
   ]
   $scope.current_user = {}
 
+  $scope.getlabelname = (shortname) ->
+    return  unless shortname
+    name = shortname.split(/[\s,]+/)
+    if name.length is 1
+      name = name[0].slice(0, 2)
+      name[0] = name[0].toUpperCase()
+      return name
+    else
+      i = 0
+
+      while i < name.length
+        name[i] = name[i].slice(0, 1)
+        i++
+      return name.join("").slice(0, 2).toUpperCase()
+
   # flow sortable setting
   $scope.flowSortOptions = {
     containment: '#board-content',
