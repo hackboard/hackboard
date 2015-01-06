@@ -133,6 +133,7 @@ footer {
 .ui-board {
     /*overflow-x: scroll !important;*/
     overflow-y: hidden !important;
+    padding-bottom: 20px !important;
 }
 
 .ui-board-content {
@@ -163,15 +164,20 @@ footer {
 }
 
 .ui-list-wrapper, .ui-list-subflow {
-    /*width: 320px !important;*/
+    width: 320px !important;
     min-width: 320px !important;
-    width: inherit;
+    margin-bottom: 0px !important;
 }
 
 .ui-list-content {
     overflow-x: hidden !important;
     /*overflow-y: scroll !important;*/
     padding: 2px 5px 2px 5px !important;
+}
+
+.ui-list-content-tasks {
+    /*min-height: 14px;*/
+    padding-bottom: 14px;
 }
 
 .ui-list-new {
@@ -191,7 +197,6 @@ footer {
     /*width: 96% !important;*/
     width: 92% !important;
     /*height: 0px;*/
-    bottom: 10%;
     /*left: 50%;*/
     /*left: 25%;*/
     /*right: 2%;*/
