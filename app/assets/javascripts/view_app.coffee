@@ -50,3 +50,18 @@ angular.module('hackboardDirective', [])
       fade_parent = $(element).closest(".ui-toggle")
       toggle(fade_parent)
 )
+.directive('contenteditable', ()->
+  require: "ngModel",
+  restrict: "A",
+  link: (scope, element, attrs, ngModel)->
+    read = ()->
+      ngModel.$setViewValue(element.html())
+      return
+    ngModel.$render = ()->
+      element.html(ngModel.$viewValue || "")
+      return
+    element.bind "blur keyup change", ()->
+      scope.$apply(read);
+      return
+    return
+)

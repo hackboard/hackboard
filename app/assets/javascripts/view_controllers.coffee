@@ -243,33 +243,47 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
   $http.get('/api/user/current_user').success((data, status)->
     $scope.current_user = data
     $scope.current_user.avatar = md5(data.email)
+    $scope.current_user.shortname = getlabelname(data.name)
+    $scope.$watch('current_user.name' , (oldv,newv)->
+      $scope.current_user.shortname = getlabelname($scope.current_user.name)
+    )
   )
 
   $scope.titleClick = (id)->
-    $http.get('/api/boards/' + id).success((data, status)->
-      $scope.boardData = data
-
-      $('#board-detail-modal').modal({
-        transition: 'slide down',
-        duration: '100ms'
-      }).modal('show')
-    )
+    $('#board-detail-modal').modal({
+      transition: 'slide down',
+      duration: '100ms'
+    }).modal('show')
     return
 
   $scope.taskClick = (id)->
-    $http.get('/api/task/' + id).success((data, status)->
-      $scope.taskData = data
-
-      $('#task-detail-modal').modal({
-        transition: 'slide down',
-        duration: '100ms'
-      }).modal('show')
+    angular.forEach($scope.board.flows , (value , key)->
+      angular.forEach(value.tasks , (task,key)->
+        if task.id == id
+          $scope.taskData = task
+        return
+      )
+      angular.forEach(value.flows , (subflow , key)->
+        angular.forEach(subflow.tasks , (task,  key)->
+          if task.id == id
+            $scope.taskData = task
+          return
+        )
+        return
+      )
+      return
     )
+
+    $('#task-detail-modal').modal({
+      transition: 'slide down',
+      duration: '100ms'
+    }).modal('show')
     return
 
   $scope.removeBoardMember = (id)->
     angular.forEach($scope.board.users, (value, key)->
       if value.id == id
+        $http.post('/api/baords/' + $scope.board.id + '/users/delete/' + value.id)
         $scope.board.users.splice key, 1
     )
     return
@@ -300,6 +314,9 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     $http.post('/api/boards/' + $scope.board.id + '/users/add/' + $scope.selpeople).success(
       (data, status)->
         $scope.board.users.push(data)
+        $scope.selpeople = ""
+    ).error(()->
+      $scope.selpeople = ""
     )
 
   $scope.people = [

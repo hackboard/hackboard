@@ -145,11 +145,26 @@ module Api
         user = User.where('name like ? or email like ?' ,q , q).select(:id , :email , :name).take(1)[0]
 
         if user
-          Board.find(id).users << user
-          render json: user.to_json
+          board = Board.find(id)
+          unless board.users.include?(user)
+            board.users << user
+            render json: user.to_json
+          end
         end
-
       end
+    end
+
+    def delete_user
+
+      if current_user
+
+        id = params[:id]
+        uid = params[:uid]
+
+        Board.find(id).users.delete(User.find(uid))
+        render :json => "ok".to_json
+      end
+
     end
 
 

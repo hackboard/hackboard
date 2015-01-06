@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get 'boards/:id/flows' => 'boards#flows'
     post 'boards/:id/flows/add' => 'boards#add_flow'
     post 'boards/:id/flows/:fid/task/add' => 'boards#add_task'
+    post 'baords/:id/users/delete/:uid' => 'boards#delete_user'
 
     post 'boards/:id/users/add/:name' => 'boards#add_user'
 
