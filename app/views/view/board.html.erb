@@ -185,7 +185,7 @@
     <a class="item" ng-click="titleClick(board.id)">
       <i class="rocket icon"></i> {{ board.name }}
     </a>
-    <!--<div class="item ui tablet only computer only row column">-->
+    <div class="item ui tablet only computer only row column">
       <!--<div class="ui buttons ui-popup" id="parentButton">-->
         <!--<div class="ui icon button yellow inverted">-->
           <!--<i class="linkify icon"></i>-->
@@ -195,15 +195,54 @@
       <!--<div class="ui popup">-->
         <!--Nobody here!-->
       <!--</div>-->
-      <!--<div class="ui buttons ui-popup" id="stashButton">-->
-        <!--<div class="ui icon button orange inverted">-->
-          <!--<i class="archive icon"></i>-->
-          <!--Stash-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="ui popup">-->
-        <!--Nothing here!-->
-      <!--</div>-->
+      <div class="ui buttons ui-popup" id="stashButton">
+        <div class="ui icon button orange inverted">
+          <i class="archive icon"></i>
+          Stash
+        </div>
+      </div>
+      <div class="ui wide popup">
+        <div class="ui column">
+          <div class="ui vertical list">
+            <div class="item">
+              <div class="right floated ui tiny buttons">
+                <div class="ui button green icon">
+                  <i class="reply icon"></i>
+                </div>
+                <div class="ui button red icon">
+                    <i class="trash icon"></i>
+                </div>
+              </div>
+              <div class="content aligned">
+                <div class="ui large label">
+                  List
+                  <div class="detail">
+                    Old List
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="right floated ui tiny buttons">
+                <div class="ui button green icon">
+                  <i class="reply icon"></i>
+                </div>
+                <div class="ui button red icon">
+                  <i class="trash icon"></i>
+                </div>
+              </div>
+              <div class="content aligned">
+                <div class="ui large label">
+                  Task
+                  <div class="detail">
+                    Old Task
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!--<div class="ui buttons ui-popup" id="statusButton">-->
         <!--<div class="ui icon button blue inverted">-->
           <!--<i class="dashboard icon"></i>-->
@@ -377,7 +416,7 @@
           <!--<div class="text-center"></div>-->
         <!--</div>-->
       <!--</div>-->
-    <!--</div>-->
+    </div>
   </header>
   <div class="pusher" id="page-content">
     <div class="container thin-padding">
