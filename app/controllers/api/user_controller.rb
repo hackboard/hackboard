@@ -126,6 +126,15 @@ module Api
       render json: users.to_json
     end
 
+    def save
+      name = params[:name]
+      id = params[:id]
+      user = User.find(id)
+      user.name = name
+      user.save()
+      render json: "ok"
+    end
+
     private
 
     def register_params

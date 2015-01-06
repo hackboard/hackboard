@@ -92,7 +92,7 @@ module Api
           return
         end
         flows = board.flows
-        render :json => flows.to_json( include:[:tasks , { :flows => {include: :tasks} } ] )
+        render :json => flows.to_json( include:[{:tasks => {include: :user}} , { :flows => {include: :tasks} } ] )
         return
       else
         response = 'Not login'
@@ -163,6 +163,72 @@ module Api
 
         Board.find(id).users.delete(User.find(uid))
         render :json => "ok".to_json
+      end
+
+    end
+
+    def update
+
+      if current_user
+
+        boardData = params[:board]
+
+        board = Board.find(boardData[:id])
+        board.name = boardData[:name]
+        board.description = boardData[:description]
+        board.save
+
+        if boardData[:flows]
+          boardData[:flows].each do |f|
+
+            flow = Flow.find(f[:id])
+            flow.name = f[:name]
+            flow.save
+
+            if f[:flows]
+
+              f[:flows].each do |f2|
+                flow = Flow.find(f2[:id])
+                flow.name = f2[:name]
+                flow.save
+
+                if f2[:tasks]
+
+                  f2[:tasks].each do |t2|
+                    task = Task.find(t2[:id])
+                    task.name = t2[:name]
+                    task.description = t2[:description]
+                    task.flow_id = f2[:id]
+                    task.save
+                  end
+
+                end
+
+
+
+              end
+            end
+
+            if f[:tasks]
+              f[:tasks].each do |t1|
+                task = Task.find(t1[:id])
+                task.name = t1[:name]
+                task.description = t1[:description]
+                task.flow_id = f[:id]
+                task.save
+              end
+
+            end
+
+
+
+          end
+        end
+
+
+
+        render :json => boardData.to_json
+
       end
 
     end

@@ -378,7 +378,7 @@
         <!--</div>-->
       <!--</div>-->
     <!--</div>-->
-  </header id=>
+  </header>
   <div class="pusher" id="page-content">
     <div class="container thin-padding">
       <div class="ui basic segment ui-board">
@@ -422,9 +422,9 @@
                             <i class="info blue icon"></i>
                             {{ task.name }}
                           </div>
-                          <div class="ui top right attached green label">
-                            View
-                          </div>
+                          <!--<div class="ui top right attached green label">-->
+                            <!--View-->
+                          <!--</div>-->
                         </div>
                         <div class="meta">
                           <p>updated {{ task.updated_at | timeAgo }}</p>
@@ -569,9 +569,9 @@
                         <i class="info blue icon"></i>
                         {{ task.name }}
                       </div>
-                      <div class="ui top right attached green label">
-                        View
-                      </div>
+                      <!--<div class="ui top right attached green label">-->
+                        <!--View-->
+                      <!--</div>-->
                     </div>
                     <div class="meta">
                       <p>updated {{ task.updated_at | timeAgo }}</p>
@@ -589,17 +589,17 @@
                       </div>
                       <div class="right floated author">
                             <span>
-                                <a class="ui circular label people">
-                                  CH
-                                </a>
+                                <!--<a class="ui circular label people">-->
+                                  <!--CH-->
+                                <!--</a>-->
 
-                                <div class="ui popup">
-                                  <div class="item">
-                                    <img class="ui avatar image" src="img/sample-avatar.jpg">
-                                    Cheng-Han Wu
-                                  </div>
-                                </div>
-                            </span>
+                                <!--<div class="ui popup">-->
+                                  <!--<div class="item">-->
+                                    <!--<img class="ui avatar image" src="img/sample-avatar.jpg">-->
+                                    <!--Cheng-Han Wu-->
+                                  <!--</div>-->
+                                <!--</div>-->
+                            <!--</span>-->
                             <!--<span>-->
                                 <!--<a class="ui circular label people">-->
                                   <!--G+-->
@@ -908,12 +908,12 @@
               <!--</div>-->
               <!--<div class="ui fluid dropdown labeled search icon button">-->
                 <!--<i class="users icon"></i>-->
-                <!--<span class="text">Add assignee</span>-->
+                <!--<span class="text" >{{ getUser(taskData.user_id) }}</span>-->
 
                 <!--<div class="menu">-->
-                  <!--<div class="item">-->
-                    <!--<img class="ui mini avatar image" src="img/square-image.png">-->
-                    <!--Chi-Cha Sun-->
+                  <!--<div class="item" ng-repeat="user in board.users">-->
+                    <!--&lt;!&ndash;<img class="ui mini avatar image"  src="img/square-image.png">&ndash;&gt;-->
+                    <!--{{ user.name }}-->
                   <!--</div>-->
                   <!--<div class="item">-->
                     <!--<img class="ui mini avatar image" src="img/square-image.png">-->

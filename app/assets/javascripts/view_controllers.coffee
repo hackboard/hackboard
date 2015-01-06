@@ -218,8 +218,8 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     return  unless shortname
     name = shortname.split(/[\s,]+/)
     if name.length is 1
-      name = name[0].slice(0, 2)
-      name[0] = name[0].toUpperCase()
+      name = name[0].slice(0, 2).toUpperCase()
+#      name[0] = name[0]
       return name
     else
       i = 0
@@ -249,7 +249,13 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
 
     Board.flows($scope.board.id).success((data, status)->
       $scope.board.flows = data
-      console.log $scope.board
+
+      $scope.$watch('board' , ((old,nv)->
+        $http.post('/api/update' , {
+          board: $scope.board
+        })
+      ), true)
+
     )
   ).error((data, status)->
     $window.location.href = "/boards"
@@ -258,9 +264,10 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
   $http.get('/api/user/current_user').success((data, status)->
     $scope.current_user = data
     $scope.current_user.avatar = md5(data.email)
-    $scope.current_user.shortname = getlabelname(data.name)
+    $scope.current_user.shortname = $scope.getlabelname(data.name)
     $scope.$watch('current_user.name' , (oldv,newv)->
-      $scope.current_user.shortname = getlabelname($scope.current_user.name)
+      $scope.current_user.shortname = $scope.getlabelname($scope.current_user.name)
+      $http.post('/api/user/' + $scope.current_user.id + '/save' , $scope.current_user );
     )
   )
 

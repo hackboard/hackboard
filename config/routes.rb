@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     post 'user/unpinboard' => 'user#unpin_board'
     get 'user/find/:name' => 'user#find'
     get 'user/current_user' => 'user#current'
+    post 'user/:id/save' => 'user#save'
 
     resources :boards
     get 'boards/:id/flows' => 'boards#flows'
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
     post 'baords/:id/users/delete/:uid' => 'boards#delete_user'
 
     post 'boards/:id/users/add/:name' => 'boards#add_user'
+
+    post 'update' => 'boards#update'
 
     get 'task/:id' => 'boards#get_task'
   end
