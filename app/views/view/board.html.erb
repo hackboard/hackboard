@@ -1022,6 +1022,15 @@
         on: 'click'
     });
 
+    function getlabelname(shortname) {
+        var name = shortname.split(/[\s,]+/);
+        for(var i = 0; i < name.length; i++) {
+            name[i] = name[i].slice(0, 1);
+        }
+        var labelname = name.join("").slice(0, 2).toUpperCase();
+        return labelname;
+    }
+
     /*
      for (var i = 0; i < 10; i++) {
      $("#list-content").append($("#sample-task").clone());
