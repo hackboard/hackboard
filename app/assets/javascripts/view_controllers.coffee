@@ -237,7 +237,7 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
   # flow sortable setting
   $scope.flowSortOptions = {
     containment: '#board-content',
-    additionalPlaceholderClass: 'ui grid ui-board-content',
+    additionalPlaceholderClass: 'ui-list-placeholder',
     accept: (sourceItemHandleScope, destSortableScope)->
       sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
   }

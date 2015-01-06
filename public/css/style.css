@@ -148,13 +148,24 @@ footer {
     margin-bottom: 5px !important;
 }
 
+.ui-list-placeholder {
+    margin: 14px !important;
+    width: 320px !important;
+    height: 100px !important;
+}
+
 .ui-list-title {
     width: 100%;
+}
+
+.ui-list-title span {
+    max-width: 50% !important;
 }
 
 .ui-list-wrapper, .ui-list-subflow {
     /*width: 320px !important;*/
     min-width: 320px !important;
+    width: inherit;
 }
 
 .ui-list-content {
@@ -191,6 +202,10 @@ footer {
     background-color: #FCFCFC;
 }
 
+.ui-flip-front {
+    margin-top: 0 !important;
+}
+
 .ui-flip-back {
     margin-top: 0 !important;
 }
@@ -217,7 +232,7 @@ span.editable {
     cursor: text;
     display: inline-block;
     min-width: 10%;
-    max-width: 50%;
+    max-width: inherit;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: clip;

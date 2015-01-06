@@ -1056,13 +1056,15 @@
         }).modal('show');
     });
 
-    $(".ui-list").each(function (index, value) {
-        var $this = $(this);
-        $this.hide();
-        setTimeout(function () {
-            $this.transition('fade');
-        }, index * 50);
-    });
+//    $(document).ready(function() {
+//        $(".ui-list").each(function (index, value) {
+//            var $this = $(this);
+//            $this.hide();
+//            setTimeout(function () {
+//                $this.transition('fade');
+//            }, index * 50);
+//        });
+//    });
 
     $(".ui-edit-button, .ui-back-button").click(function () {
         var flip_parent = $(this).closest(".ui-flip");
