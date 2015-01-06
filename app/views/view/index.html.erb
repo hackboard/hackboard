@@ -41,11 +41,11 @@
               <img class="ui tiny circular image middle aligned" ng-src="http://www.gravatar.com/avatar/{{ registerInfo.avatar }}" >
             </div>
             <div class="field">
-              <input placeholder="shortname" name="nickName" type="text" required ng-model="registerInfo.nickname" ng-pattern="/^[a-zA-Z0-9]*$/" ng-change="registerInfo.nicknameDirty=true">
+              <input placeholder="shortname" name="nickName" type="text" required ng-model="registerInfo.nickname" ng-pattern="/^[a-zA-Z0-9_]*$/" ng-change="registerInfo.nicknameDirty=true">
             </div>
           </div>
           <div class="field ui left icon large input">
-            <input placeholder="at least 8 chars" name="password" type="password" required ng-model="registerInfo.password" ng-pattern="/^[a-zA-Z0-9!@#$%^&*-=+\/]*$/" ng-minlength="8">
+            <input placeholder="at least 8 chars" name="password" type="password" required ng-model="registerInfo.password" ng-pattern="/^[a-zA-Z0-9!@#$%^&*-=+\/_]*$/" ng-minlength="8">
 
             <i class="privacy icon"></i>
           </div>
