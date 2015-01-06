@@ -390,10 +390,10 @@
                 <div class="ui-list-title" as-sortable-item-handle>
                   <span class="editable" contenteditable ng-model="flow.name"></span>
                 </div>
-                <div class="left aligned ui top attached mini label">
+                <div class="left aligned ui top attached mini label" ng-class="(flow.tasks.length > flow.max_task) && (flow.max_task > 0) ? 'red' : ''">
                   WIP
                   <div class="detail">
-                    1/{{flow.max_task}}
+                    {{ flow.tasks.length }}/{{flow.max_task}}
                   </div>
                 </div>
                 <div class="right aligned ui top attached label">
