@@ -413,7 +413,7 @@
                     <span class="editable" contenteditable="true" ng-model="subflow.name"></span>
                   </div>
                   <div class="ui-list-content" as-sortable="taskSortOptions" ng-model="subflow.tasks">
-                    <div class="ui-list-content-tasks" ng-model="flow.tasks" as-sortable>
+                    <div class="ui-list-content-tasks" ng-model="flow.tasks">
                       <!-- begin Task -->
                       <div class="ui card ui-task" ng-click="taskClick(task.id)" ng-repeat="task in subflow.tasks" as-sortable-item>
                         <div class="content">
@@ -561,7 +561,7 @@
 
               <!-- single flow -->
               <div class="ui-list-content" ng-if="flow.flows.length == 0">
-                <div class="ui-list-content-tasks" ng-model="flow.tasks" as-sortable>
+                <div class="ui-list-content-tasks" ng-model="flow.tasks" as-sortable="taskSortOptions">
                   <div class="ui card ui-task" ng-click="taskClick(task.id)" ng-repeat="task in flow.tasks" as-sortable-item>
                     <div class="content">
                       <div class="header">

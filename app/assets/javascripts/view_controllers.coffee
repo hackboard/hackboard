@@ -245,8 +245,10 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
   $scope.taskSortOptions = {
 #    containment: '#board-content',
 #    additionalPlaceholderClass: 'ui grid ui-board-content',
-#    accept: (sourceItemHandleScope, destSortableScope)->
-#      sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
+    accept: (sourceItemHandleScope, destSortableScope)->
+      if sourceItemHandleScope.itemScope.hasOwnProperty('flow')
+        return false
+      true
   }
 
   Board.board(board_id).success((data, status)->
