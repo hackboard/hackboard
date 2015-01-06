@@ -245,11 +245,22 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     $scope.current_user.avatar = md5(data.email)
   )
 
+  $scope.titleClick = (id)->
+    $http.get('/api/boards/' + id).success((data, status)->
+      $scope.boardData = data
+
+      $('#board-detail-modal').modal({
+        transition: 'slide down',
+        duration: '100ms'
+      }).modal('show')
+    )
+    return
+
   $scope.taskClick = (id)->
     $http.get('/api/task/' + id).success((data, status)->
       $scope.taskData = data
 
-      $('.ui.modal').modal({
+      $('#task-detail-modal').modal({
         transition: 'slide down',
         duration: '100ms'
       }).modal('show')

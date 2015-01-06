@@ -182,9 +182,9 @@
     <i class="content icon"></i>
   </div>
   <header class="ui main top borderless fixed inverted large menu ui grid" id="page">
-    <div class="item">
+    <a class="item" ng-click="titleClick(board.id)">
       <i class="rocket icon"></i> {{ board.name }}
-    </div>
+    </a>
     <div class="item ui tablet only computer only row column">
       <div class="ui buttons ui-popup" id="parentButton">
         <div class="ui icon button yellow inverted">
@@ -388,7 +388,7 @@
             <div class="ui segment ui-list-wrapper ui-flip-front">
               <div class="ui medium header center aligned">
                 <div class="ui-list-title" as-sortable-item-handle>
-                  {{ flow.name }}
+                  <span class="editable" contenteditable="true">{{ flow.name }}</span>
                 </div>
                 <div class="left aligned ui top attached mini label">
                   WIP
@@ -410,7 +410,7 @@
                 <!-- Sub Flow Loop-->
                 <div class="column ui-list-subflow" ng-repeat="subflow in flow.flows">
                   <div class="ui small header text-center">
-                    {{ subflow.name }}
+                    <span class="editable" contenteditable="true">{{ subflow.name }}</span>
                   </div>
                   <div class="ui-list-content" as-sortable="taskSortOptions" ng-model="subflow.tasks">
 
@@ -678,13 +678,22 @@
       </div>
     </div>
   </div>
-  <div class="ui modal">
+  <div class="ui modal" id="board-detail-modal">
+    <i class="close icon"></i>
+    <div class="ui header">
+      <span class="editable" contenteditable="true">Board title</span>
+      <div class="sub header">
+        <span class="editable" contenteditable="true">This is a board.</span>
+      </div>
+    </div>
+  </div>
+  <div class="ui modal" id="task-detail-modal">
     <i class="close icon"></i>
 
     <div class="ui header">
-      Static View
+      <span class="editable" contenteditable="true">Static View</span>
       <div class="sub header">
-        Use bootstrap to mock up static view.
+        <span class="editable" contenteditable="true">Use bootstrap to mock up static view.</span>
       </div>
     </div>
     <div class="content">
@@ -1003,7 +1012,6 @@
         $(".ui-list-wrapper").height($(window).height() - 140);
         $(".ui-list-content").height($(window).height() - 200);
     };
-
 
     $(".ui-popup").popup({
         position: 'bottom center',

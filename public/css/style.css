@@ -148,6 +148,10 @@ footer {
     margin-bottom: 5px !important;
 }
 
+.ui-list-title {
+    width: 100%;
+}
+
 .ui-list-wrapper, .ui-list-subflow {
     /*width: 320px !important;*/
     min-width: 320px !important;
@@ -207,4 +211,22 @@ footer {
     height: 80%;
     border-left: 1px solid rgba(0,0,0,0.1);
     border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+span.editable {
+    cursor: text;
+    display: inline-block;
+    min-width: 10%;
+    max-width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px dashed #f0f0f0;
+    border-radius: 10px;
+}
+
+span.editable:focus {
+    outline: 0;
 }
