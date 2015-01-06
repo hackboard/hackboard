@@ -118,6 +118,14 @@ module Api
     def current
       render :json => current_user.to_json
     end
+
+    def find
+      name = params[:name]
+      q = "%#{name}%"
+      users = User.where('name like ? or email like ?' ,q , q).select(:id , :email , :name)
+      render json: users.to_json
+    end
+
     private
 
     def register_params

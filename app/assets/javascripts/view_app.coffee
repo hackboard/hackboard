@@ -3,6 +3,8 @@ hackboard = angular.module 'hackboardApp', [
   'yaru22.angular-timeago',
   'angularify.semantic.checkbox',
   'ui.sortable',
+  'ui.select',
+  'ngSanitize',
   'hackboardControllers',
   'hackboardServices',
   'hackboardDirective'

@@ -9,7 +9,7 @@
           <%= current_user.name %>
           <div class="sub header">
             <div class="ui circular label">
-              CH
+              <%= current_user.name %>
             </div>
           </div>
         </div>
@@ -35,10 +35,10 @@
         </div>
       </div>
       <div class="ui inverted transparent left icon input">
-        <input type="text" placeholder="">
+        <input type="text" placeholder="" ng-model="selpeople">
         <i class="search icon"></i>
       </div>
-      <div class="ui fluid blue small button">Add Member</div>
+      <div class="ui fluid blue small button" ng-click="addmember()" >Add Member</div>
     </div>
     <div class="item">
       <div class="ui styled fluid accordion black">

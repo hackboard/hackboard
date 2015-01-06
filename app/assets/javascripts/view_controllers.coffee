@@ -283,4 +283,21 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     )
     return
 
+  $scope.selpeople = ""
+
+  $scope.addmember = ()->
+    $http.post('/api/boards/' + $scope.board.id + '/users/add/' + $scope.selpeople).success(
+      (data, status)->
+        $scope.board.users.push(data)
+    )
+
+  $scope.people = [
+    {"id": 2, "email": "alice@meigic.tw", "name": "Alice"},
+    {"id": 5, "email": "a60814billy@gmail.com", "name": "a60814billy"}
+  ]
+
+  $scope.findPeople = (name)->
+    $http.get('/api/user/find/' + name)
+
+
 ]

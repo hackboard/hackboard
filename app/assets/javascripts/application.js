@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require angular
 //= require angular-resource
+//= require angular-sanitize
 //= require ng-rails-csrf
 //= require angular-timeAgo
 //= require angular-semantic-ui

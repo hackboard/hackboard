@@ -10,11 +10,16 @@ Rails.application.routes.draw do
     post 'user/register' => 'user#register'
     post 'user/pinboard' => 'user#pin_board'
     post 'user/unpinboard' => 'user#unpin_board'
+    get 'user/find/:name' => 'user#find'
     get 'user/current_user' => 'user#current'
+
     resources :boards
     get 'boards/:id/flows' => 'boards#flows'
     post 'boards/:id/flows/add' => 'boards#add_flow'
     post 'boards/:id/flows/:fid/task/add' => 'boards#add_task'
+
+    post 'boards/:id/users/add/:name' => 'boards#add_user'
+
     get 'task/:id' => 'boards#get_task'
   end
 

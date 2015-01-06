@@ -135,6 +135,23 @@ module Api
       end
     end
 
+    def add_user
+      if current_user
+
+        id = params[:id]
+        name = params[:name]
+
+        q = "%#{name}%"
+        user = User.where('name like ? or email like ?' ,q , q).select(:id , :email , :name).take(1)[0]
+
+        if user
+          Board.find(id).users << user
+          render json: user.to_json
+        end
+
+      end
+    end
+
 
     private
     def input_params
