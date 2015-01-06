@@ -279,7 +279,10 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
   $scope.titleClick = (id)->
     $('#board-detail-modal').modal({
       transition: 'slide down',
-      duration: '100ms'
+      duration: '100ms',
+      onVisible: ()->
+        $(window).resize()
+        return
     }).modal('show')
     return
 
@@ -303,7 +306,10 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
 
     $('#task-detail-modal').modal({
       transition: 'slide down',
-      duration: '100ms'
+      duration: '100ms',
+      onVisible: ()->
+        $(window).resize()
+        return
     }).modal('show')
     return
 

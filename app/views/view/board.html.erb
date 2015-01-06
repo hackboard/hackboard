@@ -413,34 +413,34 @@
                     <span class="editable" contenteditable="true" ng-model="subflow.name"></span>
                   </div>
                   <div class="ui-list-content" as-sortable="taskSortOptions" ng-model="subflow.tasks">
-
-                    <!-- begin Task -->
-                    <div class="ui card ui-task" ng-click="taskClick(task.id)" ng-repeat="task in subflow.tasks" as-sortable-item>
-                      <div class="content">
-                        <div class="header">
-                          <div class="ui-task-title" as-sortable-item-handle>
-                            <i class="info blue icon"></i>
-                            {{ task.name }}
-                          </div>
-                          <!--<div class="ui top right attached green label">-->
+                    <div class="ui-list-content-tasks" ng-model="flow.tasks" as-sortable>
+                      <!-- begin Task -->
+                      <div class="ui card ui-task" ng-click="taskClick(task.id)" ng-repeat="task in subflow.tasks" as-sortable-item>
+                        <div class="content">
+                          <div class="header">
+                            <div class="ui-task-title" as-sortable-item-handle>
+                              <i class="info blue icon"></i>
+                              {{ task.name }}
+                            </div>
+                            <!--<div class="ui top right attached green label">-->
                             <!--View-->
-                          <!--</div>-->
-                        </div>
-                        <div class="meta">
-                          <p>updated {{ task.updated_at | timeAgo }}</p>
-
-                          <p>{{ task.description }}</p>
-                        </div>
-                        <div class="description">
-                          <div class="ui mini labels">
-                            <div class="ui label">
-                              <i class="calendar icon"></i> 2014/12/24
-                            </div>
-                            <div class="ui label">
-                              <i class="list icon"></i> 1/1
-                            </div>
+                            <!--</div>-->
                           </div>
-                          <div class="right floated author">
+                          <div class="meta">
+                            <p>updated {{ task.updated_at | timeAgo }}</p>
+
+                            <p>{{ task.description }}</p>
+                          </div>
+                          <div class="description">
+                            <div class="ui mini labels">
+                              <!--<div class="ui label">-->
+                              <!--<i class="calendar icon"></i> 2014/12/24-->
+                              <!--</div>-->
+                              <!--<div class="ui label">-->
+                              <!--<i class="list icon"></i> 1/1-->
+                              <!--</div>-->
+                            </div>
+                            <div class="right floated author">
                             <span>
                                 <a class="ui circular label people" board-people-popup>
                                   CH
@@ -477,13 +477,12 @@
                                   </div>
                                 </div>
                             </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
                     </div>
-                    <!-- end of Task-->
-
-
+                      <!-- end of Task-->
+                    </div>
                     <div class="ui small button ui-task-new" ng-click="newTask(subflow.id)">
                       <i class="add icon"></i> New Task
                     </div>
@@ -507,50 +506,50 @@
                       </div>
                       <div class="description">
                         <div class="ui mini labels">
-                          <div class="ui label">
-                            <i class="calendar icon"></i> 2014/12/24
-                          </div>
-                          <div class="ui label">
-                            <i class="list icon"></i> 1/1
-                          </div>
+                          <!--<div class="ui label">-->
+                            <!--<i class="calendar icon"></i> 2014/12/24-->
+                          <!--</div>-->
+                          <!--<div class="ui label">-->
+                            <!--<i class="list icon"></i> 1/1-->
+                          <!--</div>-->
                         </div>
                         <div class="right floated author">
-                                            <span>
-                                                <a class="ui circular label people">
-                                                  CH
-                                                </a>
+                                            <!--<span>-->
+                                                <!--<a class="ui circular label people">-->
+                                                  <!--CH-->
+                                                <!--</a>-->
 
-                                                <div class="ui popup">
-                                                  <div class="item">
-                                                    <img class="ui avatar image" src="img/sample-avatar.jpg">
-                                                    Cheng-Han Wu
-                                                  </div>
-                                                </div>
-                                            </span>
-                                            <span>
-                                                <a class="ui circular label people">
-                                                  G+
-                                                </a>
+                                                <!--<div class="ui popup">-->
+                                                  <!--<div class="item">-->
+                                                    <!--<img class="ui avatar image" src="img/sample-avatar.jpg">-->
+                                                    <!--Cheng-Han Wu-->
+                                                  <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</span>-->
+                                            <!--<span>-->
+                                                <!--<a class="ui circular label people">-->
+                                                  <!--G+-->
+                                                <!--</a>-->
 
-                                                <div class="ui popup">
-                                                  <div class="item">
-                                                    <img class="ui avatar image" src="img/square-image.png">
-                                                    Chi-Cha Sun
-                                                  </div>
-                                                </div>
-                                            </span>
-                                            <span hackboard-calculate-list-width>
-                                                <a class="ui circular label people">
-                                                  YC
-                                                </a>
+                                                <!--<div class="ui popup">-->
+                                                  <!--<div class="item">-->
+                                                    <!--<img class="ui avatar image" src="img/square-image.png">-->
+                                                    <!--Chi-Cha Sun-->
+                                                  <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</span>-->
+                                            <!--<span hackboard-calculate-list-width>-->
+                                                <!--<a class="ui circular label people">-->
+                                                  <!--YC-->
+                                                <!--</a>-->
 
-                                                <div class="ui popup">
-                                                  <div class="item">
-                                                    <img class="ui avatar image" src="img/square-image.png">
-                                                    Yi-Chun Lin
-                                                  </div>
-                                                </div>
-                                            </span>
+                                                <!--<div class="ui popup">-->
+                                                  <!--<div class="item">-->
+                                                    <!--<img class="ui avatar image" src="img/square-image.png">-->
+                                                    <!--Yi-Chun Lin-->
+                                                  <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</span>-->
                         </div>
                       </div>
                     </div>
@@ -561,69 +560,71 @@
               </div>
 
               <!-- single flow -->
-              <div class="ui-list-content" ng-if="flow.flows.length == 0" as-sortable ng-model="flow.tasks">
-                <div class="ui card ui-task" ng-click="taskClick(task.id)" ng-repeat="task in flow.tasks" as-sortable-item>
-                  <div class="content">
-                    <div class="header">
-                      <div class="ui-task-title" as-sortable-item-handle>
-                        <i class="info blue icon"></i>
-                        {{ task.name }}
-                      </div>
-                      <!--<div class="ui top right attached green label">-->
+              <div class="ui-list-content" ng-if="flow.flows.length == 0">
+                <div class="ui-list-content-tasks" ng-model="flow.tasks" as-sortable>
+                  <div class="ui card ui-task" ng-click="taskClick(task.id)" ng-repeat="task in flow.tasks" as-sortable-item>
+                    <div class="content">
+                      <div class="header">
+                        <div class="ui-task-title" as-sortable-item-handle>
+                          <i class="info blue icon"></i>
+                          {{ task.name }}
+                        </div>
+                        <!--<div class="ui top right attached green label">-->
                         <!--View-->
-                      <!--</div>-->
-                    </div>
-                    <div class="meta">
-                      <p>updated {{ task.updated_at | timeAgo }}</p>
-
-                      <p>{{ task.description }}</p>
-                    </div>
-                    <div class="description">
-                      <div class="ui mini labels">
-                        <!--<div class="ui label">-->
-                          <!--<i class="calendar icon"></i> 2014/12/24-->
-                        <!--</div>-->
-                        <!--<div class="ui label">-->
-                          <!--<i class="list icon"></i> 1/1-->
                         <!--</div>-->
                       </div>
-                      <div class="right floated author">
-                            <span>
-                                <!--<a class="ui circular label people">-->
-                                  <!--CH-->
-                                <!--</a>-->
+                      <div class="meta">
+                        <p>updated {{ task.updated_at | timeAgo }}</p>
 
-                                <!--<div class="ui popup">-->
-                                  <!--<div class="item">-->
-                                    <!--<img class="ui avatar image" src="img/sample-avatar.jpg">-->
-                                    <!--Cheng-Han Wu-->
-                                  <!--</div>-->
-                                <!--</div>-->
-                            <!--</span>-->
-                            <!--<span>-->
-                                <!--<a class="ui circular label people">-->
-                                  <!--G+-->
-                                <!--</a>-->
+                        <p>{{ task.description }}</p>
+                      </div>
+                      <div class="description">
+                        <div class="ui mini labels">
+                          <!--<div class="ui label">-->
+                          <!--<i class="calendar icon"></i> 2014/12/24-->
+                          <!--</div>-->
+                          <!--<div class="ui label">-->
+                          <!--<i class="list icon"></i> 1/1-->
+                          <!--</div>-->
+                        </div>
+                        <div class="right floated author">
+                          <!--<span>-->
+                          <!--<a class="ui circular label people">-->
+                          <!--CH-->
+                          <!--</a>-->
 
-                                <!--<div class="ui popup">-->
-                                  <!--<div class="item">-->
-                                    <!--<img class="ui avatar image" src="img/square-image.png">-->
-                                    <!--Chi-Cha Sun-->
-                                  <!--</div>-->
-                                <!--</div>-->
-                            <!--</span>-->
-                            <!--<span>-->
-                                <!--<a class="ui circular label people">-->
-                                  <!--YC-->
-                                <!--</a>-->
+                          <!--<div class="ui popup">-->
+                          <!--<div class="item">-->
+                          <!--<img class="ui avatar image" src="img/sample-avatar.jpg">-->
+                          <!--Cheng-Han Wu-->
+                          <!--</div>-->
+                          <!--</div>-->
+                          <!--</span>-->
+                          <!--<span>-->
+                          <!--<a class="ui circular label people">-->
+                          <!--G+-->
+                          <!--</a>-->
 
-                                <!--<div class="ui popup">-->
-                                  <!--<div class="item">-->
-                                    <!--<img class="ui avatar image" src="img/square-image.png">-->
-                                    <!--Yi-Chun Lin-->
-                                  <!--</div>-->
-                                <!--</div>-->
-                            <!--</span>-->
+                          <!--<div class="ui popup">-->
+                          <!--<div class="item">-->
+                          <!--<img class="ui avatar image" src="img/square-image.png">-->
+                          <!--Chi-Cha Sun-->
+                          <!--</div>-->
+                          <!--</div>-->
+                          <!--</span>-->
+                          <!--<span>-->
+                          <!--<a class="ui circular label people">-->
+                          <!--YC-->
+                          <!--</a>-->
+
+                          <!--<div class="ui popup">-->
+                          <!--<div class="item">-->
+                          <!--<img class="ui avatar image" src="img/square-image.png">-->
+                          <!--Yi-Chun Lin-->
+                          <!--</div>-->
+                          <!--</div>-->
+                          <!--</span>-->
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1014,12 +1015,19 @@
         if (!$('#page-sidebar').hasClass("overlay") || !$('.sidebar').hasClass("animating"))
             $('#page-sidebar').sidebar('toggle');
     });
-    $(".ui-list-wrapper").height($(window).height() - 140);
-    $(".ui-list-content").height($(window).height() - 200);
-    window.onresize = function () {
+
+    resizlistheight();
+    function resizlistheight() {
+        $(".ui-list").height($(window).height() - 120);
         $(".ui-list-wrapper").height($(window).height() - 140);
-        $(".ui-list-content").height($(window).height() - 200);
-    };
+        $(".ui-list-content").height($(window).height() - 185);
+    }
+    $(window).on('resize', function() {
+        resizlistheight();
+    });
+    $(window).on('zoom', function() {
+        resizlistheight();
+    });
 
     $(".ui-popup").popup({
         position: 'bottom center',
@@ -1043,11 +1051,6 @@
     //$("#list-content").append($("#task-new").clone());
 
     //$("#board-content").append($("#list-new").clone());
-
-    $(".ui-list-wrapper").each(function (index, value) {
-        var count = $(this).find(".ui-list-subflow").length;
-        $(this).width(306 * count);
-    });
 
     $(".ui-task").click(function () {
         $('.ui.modal').modal({

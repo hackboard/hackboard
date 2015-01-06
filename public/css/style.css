@@ -133,6 +133,7 @@ footer {
 .ui-board {
     /*overflow-x: scroll !important;*/
     overflow-y: hidden !important;
+    padding-bottom: 20px !important;
 }
 
 .ui-board-content {
@@ -145,7 +146,10 @@ footer {
     /*margin-left: 15px !important;*/
     width: inherit !important;
     margin-top: 1px !important;
-    margin-bottom: 5px !important;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 
 .ui-list-placeholder {
@@ -163,15 +167,20 @@ footer {
 }
 
 .ui-list-wrapper, .ui-list-subflow {
-    /*width: 320px !important;*/
+    width: 320px !important;
     min-width: 320px !important;
-    width: inherit;
+    margin-bottom: 0px !important;
 }
 
 .ui-list-content {
     overflow-x: hidden !important;
     /*overflow-y: scroll !important;*/
     padding: 2px 5px 2px 5px !important;
+}
+
+.ui-list-content-tasks {
+    /*min-height: 14px;*/
+    padding-bottom: 14px;
 }
 
 .ui-list-new {
@@ -191,13 +200,13 @@ footer {
     /*width: 96% !important;*/
     width: 92% !important;
     /*height: 0px;*/
-    bottom: 10%;
+    bottom: 50px;
     /*left: 50%;*/
     /*left: 25%;*/
     /*right: 2%;*/
 }
 
-.ui-task:hover {
+.ui-task:hover, .ui-card:hover {
     cursor: pointer;
     background-color: #FCFCFC;
 }
@@ -233,15 +242,39 @@ span.editable {
     display: inline-block;
     min-width: 10%;
     max-width: inherit;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: clip;
     padding-left: 10px;
     padding-right: 10px;
     border: 1px dashed #f0f0f0;
     border-radius: 10px;
+    word-wrap: break-word;
+
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -o-user-select: text;
 }
 
 span.editable:focus {
     outline: 0;
+}
+
+.meta p, .description p {
+    width: inherit;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header span {
+    white-space: nowrap;
+}
+
+.sub.header span {
+    width: 100%;
+    white-space: pre-wrap;
 }

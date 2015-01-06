@@ -61,7 +61,18 @@ angular.module('hackboardDirective', [])
       element.text(ngModel.$viewValue || "")
       return
     element.bind "blur keyup change", ()->
-      scope.$apply(read);
+      scope.$apply(read)
       return
+    element.bind "blur", ()->
+      document.getSelection().removeAllRanges()
+      return
+    element.bind "mousedown", (event)->
+      event.stopPropagation()
+      return
+    element.bind "keydown", (event)->
+      if event.keyCode is 13 && $(element).css("white-space") == "nowrap"
+        event.stopPropagation()
+        event.preventDefault()
+        false
     return
 )
