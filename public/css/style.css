@@ -146,7 +146,10 @@ footer {
     /*margin-left: 15px !important;*/
     width: inherit !important;
     margin-top: 1px !important;
-    margin-bottom: 5px !important;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 
 .ui-list-placeholder {
@@ -239,15 +242,39 @@ span.editable {
     display: inline-block;
     min-width: 10%;
     max-width: inherit;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: clip;
     padding-left: 10px;
     padding-right: 10px;
     border: 1px dashed #f0f0f0;
     border-radius: 10px;
+    word-wrap: break-word;
+
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -o-user-select: text;
 }
 
 span.editable:focus {
     outline: 0;
+}
+
+.meta p, .description p {
+    width: inherit;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header span {
+    white-space: nowrap;
+}
+
+.sub.header span {
+    width: 100%;
+    white-space: pre-wrap;
 }
