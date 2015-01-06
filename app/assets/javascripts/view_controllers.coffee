@@ -77,10 +77,15 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User, 
     $scope.registerInfo.hasWarning = false
     $scope.registerInfo.warning_message = ''
 
+    #Check e-mail pattern
+    if $scope.signUpForm.signUpEmail.$error.pattern
+      $scope.registerInfo.hasWarning = true
+      $scope.registerInfo.warning_message = 'Your E-Mail does not match the pattern.It Should be abc@efg.com.'
+      return
     #Check shortname is match pattern
     if $scope.signUpForm.nickName.$error.required or $scope.signUpForm.nickName.$error.pattern
       $scope.registerInfo.hasWarning = true
-      $scope.registerInfo.warning_message = 'Your short name dose not match the pattern. '
+      $scope.registerInfo.warning_message = 'Your short name dose not match the pattern. May content illegal character.'
       return
     #Check password and passwordConfirmation at least 8 character
     if $scope.signUpForm.password.$error.minlength or $scope.signUpForm.password_confirmation.$error.minlength
@@ -90,7 +95,7 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User, 
     #Check password and passwordConfirmation match pattern
     if $scope.signUpForm.password.$error.pattern or $scope.signUpForm.password_confirmation.$error.pattern
       $scope.registerInfo.hasWarning = true
-      $scope.registerInfo.warning_message = 'Your password does not match the pattern.'
+      $scope.registerInfo.warning_message = 'Your password does not match the pattern. May content illegal character.'
       return
     #Check password and passwordConfirmation are same...
     if $scope.registerInfo.password != $scope.registerInfo.password_confirmation
