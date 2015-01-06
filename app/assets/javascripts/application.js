@@ -13,6 +13,7 @@
 //= require md5
 //= require jquery
 //= require jquery_ujs
+//= require socket.io-1.2.1
 //= require angular
 //= require angular-resource
 //= require angular-sanitize
