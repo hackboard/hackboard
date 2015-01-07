@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     post 'boards/:id/users/add/:name' => 'boards#add_user'
     post 'boards/:id/task/move' => 'boards#task_move'
 
+    post 'boards/:id/stash' => 'boards#stash'
+
     post 'flows/updateorder' => 'boards#update_flow_order'
 
     post 'update' => 'boards#update'

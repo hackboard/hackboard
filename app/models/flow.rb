@@ -1,5 +1,5 @@
 class Flow < ActiveRecord::Base
-  has_many :tasks , ->{order(:order)}
+  has_many :tasks , ->{ where(:state => "normal").order(:order)}
   has_many :flows , ->{order(:order)}
   belongs_to :board
 

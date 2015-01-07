@@ -81,6 +81,34 @@ module Api
       render :json => response.to_json
     end
 
+    def stash
+      if current_user
+        id = params[:id]
+        uuid = params[:uuid]
+        stash = params[:stash]
+
+
+        stash.each do |s|
+          if s.key?(:status)
+          #   flow
+            flow = Flow.find(s[:id].to_i)
+            flow.status = "stash"
+            flow.save
+            render :json => "ok".to_json
+            return
+          elsif s.key?(:state)
+            task = Task.find(s[:id].to_i)
+            task.state = "stash"
+            task.save
+            render :json => "ok".to_json
+            return
+          end
+
+        end
+
+      end
+    end
+
     def flows
       if current_user
         input = input_params

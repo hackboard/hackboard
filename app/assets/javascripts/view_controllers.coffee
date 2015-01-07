@@ -226,6 +226,13 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
 
   $scope.stash = []
 
+  $scope.$watch('stash' , ((oldVal , newVal)->
+    $http.post('/api/boards/' + $scope.board.id + '/stash/' , {
+      uuid: $scope.uuid,
+      stash: $scope.stash
+    })
+  ) , true)
+
   $scope.getlabelname = (shortname) ->
     return  unless shortname
     name = shortname.split(/[\s,]+/)
@@ -242,8 +249,13 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
 
   $scope.stashSortOptions = {
     accept: (sourceItemHandleScope, destSortableScope)->
-      console.log(sourceItemHandleScope.element);
-      return
+#      console.log(sourceItemHandleScope.element);
+      return true
+    itemMoved:(obj)->
+      console.log "itemMoved"
+      console.log($scope.stash)
+      console.log obj
+
   }
 
   #  # flow sortable setting
@@ -260,7 +272,8 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
         data: flowOrder
       })
       return
-
+    itemMoved: (obj)->
+      console.log obj
   }
 
   $scope.taskSortOptions = {
@@ -424,8 +437,6 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     {"id": 5, "email": "a60814billy@gmail.com", "name": "a60814billy"}
   ]
 
-  $scope.findPeople = (name)->
-    $http.get('/api/user/find/' + name)
 
 
   hbSocket = io.connect 'http://www.meigic.tw:33555'
