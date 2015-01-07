@@ -219,6 +219,8 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
   ]
   $scope.current_user = {}
 
+  $scope.stash = []
+
   $scope.getlabelname = (shortname) ->
     return  unless shortname
     name = shortname.split(/[\s,]+/)
@@ -231,6 +233,13 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
         name[i] = name[i].slice(0, 1)
         i++
       return name.join("").slice(0, 2).toUpperCase()
+
+
+  $scope.stashSortOptions = {
+    accept: (sourceItemHandleScope, destSortableScope)->
+      console.log(sourceItemHandleScope.element);
+      return
+  }
 
   #  # flow sortable setting
   $scope.flowSortOptions = {
