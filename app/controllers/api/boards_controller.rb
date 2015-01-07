@@ -232,15 +232,83 @@ module Api
 
           end
         end
-
-
-
         render :json => boardData.to_json
-
       end
+    end
+
+    def update_flow_order
+      order = params[:data]
+      ind = 1
+      order.each do |i|
+        flow = Flow::find(i)
+        flow.order = ind
+        ind = ind + 1
+        flow.save
+      end
+
+      $redis.publish 'hb' , {
+                              type: "flowOrderChange",
+                              board_id: Flow::find(order[0]).board.id,
+                              order: order
+                          }.to_json
+
+      render :json => "ok".to_json
 
     end
 
+    def update_task_order
+      order = params[:data]
+      id = params[:id]
+      ind = 1
+      order.each do |i|
+        task = Task::find(i)
+        task.order = ind
+        ind = ind + 1
+        task.save
+      end
+
+      $redis.publish 'hb' , {
+                              type: "taskOrderChange",
+                              board_id: id.to_i,
+                              flow_id: Task.find(order[0]).flow_id,
+                              order: order
+                          }.to_json
+      render :json => "ok".to_json
+    end
+
+    def task_move
+
+      board_id = params[:id]
+      task_id  = params[:taskId]
+      sflow = params[:sFlow]
+      dflow = params[:dFlow]
+      order = params[:order]
+
+      # move
+      task = Task::find(task_id)
+      task.flow_id = dflow.to_i
+      task.save
+
+      # order
+      ind = 1
+      order.each do |i|
+        task2 = Task::find(i)
+        task2.order = ind
+        ind = ind + 1
+        task2.save
+      end
+
+      $redis.publish 'hb' , {
+                              type: "taskMove",
+                              board_id: board_id.to_i,
+                              task_id: task_id.to_i,
+                              sFlow: sflow.to_i,
+                              dFlow: dflow.to_i,
+                              order: order
+                          }.to_json
+      render :json => "ok".to_json
+
+    end
 
     private
     def input_params

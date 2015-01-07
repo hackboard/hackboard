@@ -224,22 +224,29 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     name = shortname.split(/[\s,]+/)
     if name.length is 1
       name = name[0].slice(0, 2).toUpperCase()
-#      name[0] = name[0]
       return name
     else
       i = 0
-
       while i < name.length
         name[i] = name[i].slice(0, 1)
         i++
       return name.join("").slice(0, 2).toUpperCase()
 
-  # flow sortable setting
+  #  # flow sortable setting
   $scope.flowSortOptions = {
     containment: '#board-content',
     additionalPlaceholderClass: 'ui-list-placeholder',
     accept: (sourceItemHandleScope, destSortableScope)->
       sourceItemHandleScope.itemScope.sortableScope.$id == destSortableScope.$id
+    orderChanged: (obj)->
+      flowOrder = []
+      for key of $scope.board.flows
+        flowOrder.push $scope.board.flows[key].id
+      $http.post('/api/flows/updateorder' , {
+        data: flowOrder
+      })
+      return
+
   }
 
   $scope.taskSortOptions = {
@@ -249,6 +256,40 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
       if sourceItemHandleScope.itemScope.hasOwnProperty('flow')
         return false
       true
+    orderChanged: (obj)->
+      taskOrder = []
+      for key of obj.dest.sortableScope.modelValue
+        taskOrder.push obj.dest.sortableScope.modelValue[key].id
+      $http.post('/api/boards/' + $scope.board.id + '/updatetaskorder' , {
+        data: taskOrder
+      })
+      return
+    itemMoved: (obj)->
+      console.log obj
+
+      task = obj.source.itemScope.task
+
+      oldFlowID = task.flow_id
+      newFlowID = null
+
+      for key of $scope.board.flows
+        for key2 of $scope.board.flows[key].tasks
+          if $scope.board.flows[key].tasks[key2].id == task.id
+            newFlowID = $scope.board.flows[key].id
+            $scope.board.flows[key].tasks[key2].flow_id =newFlowID
+
+
+      taskOrder = []
+      for key of obj.dest.sortableScope.modelValue
+        taskOrder.push obj.dest.sortableScope.modelValue[key].id
+
+      $http.post('/api/boards/' + $scope.board.id + '/task/move' , {
+        taskId:obj.source.itemScope.modelValue.id
+        sFlow: oldFlowID
+        dFlow: newFlowID
+        order: taskOrder
+      } )
+
   }
 
   Board.board(board_id).success((data, status)->
@@ -257,12 +298,11 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     Board.flows($scope.board.id).success((data, status)->
       $scope.board.flows = data
 
-      $scope.$watch('board' , ((old,nv)->
-        $http.post('/api/update' , {
-          board: $scope.board
-        })
-      ), true)
-
+#      $scope.$watch('board', ((old, nv)->
+#        $http.post('/api/update', {
+#          board: $scope.board
+#        })
+#      ), true)
     )
   ).error((data, status)->
     $window.location.href = "/boards"
@@ -272,12 +312,16 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     $scope.current_user = data
     $scope.current_user.avatar = md5(data.email)
     $scope.current_user.shortname = $scope.getlabelname(data.name)
-    $scope.$watch('current_user.name' , (oldv,newv)->
+    $scope.$watch('current_user.name', (oldValue, newValue)->
       $scope.current_user.shortname = $scope.getlabelname($scope.current_user.name)
-      $http.post('/api/user/' + $scope.current_user.id + '/save' , $scope.current_user );
+      if oldValue != newValue
+        $http.post('/api/user/' + $scope.current_user.id + '/save' , {
+          name: $scope.current_user.name
+        })
+      return
     )
   )
-
+#
   $scope.titleClick = (id)->
     $('#board-detail-modal').modal({
       transition: 'slide down',
@@ -362,5 +406,82 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
   $scope.findPeople = (name)->
     $http.get('/api/user/find/' + name)
 
+
+  hbSocket = io.connect 'http://www.meigic.tw:33555'
+  hbSocket.on 'hb' , (message)->
+#    console.log message
+    if message.board_id == $scope.board.id
+      switch message.type
+        when "flowOrderChange"
+          processFlowOrderChange(message.order)
+        when "taskOrderChange"
+          processTaskOrderChange(message.flow_id , message.order)
+        when "taskMove"
+          processTaskMove(message.task_id , message.sFlow , message.dFlow , message.order)
+        else
+          console.log message
+    return
+
+  processTaskMove = (taskid , oldFlowID , newFlowID , order)->
+    console.log "processTaskMove"
+    for key of $scope.board.flows
+      if $scope.board.flows[key].id == oldFlowID
+        findInOldFlow = null
+        for k2 of $scope.board.flows[key].tasks
+          if $scope.board.flows[key].tasks[k2].id == taskid
+            console.log $scope.board.flows[key].tasks[k2]
+            findInOldFlow = $scope.board.flows[key].tasks[k2]
+            for k3 of $scope.board.flows
+              if $scope.board.flows[k3].id == newFlowID
+                $scope.board.flows[k3].tasks.push findInOldFlow
+                $scope.board.flows[key].tasks.splice k2 , 1
+                break
+            processTaskOrderChange(newFlowID , order)
+            break
+
+    return
+
+  processFlowOrderChange = (newOrder)->
+    console.log "processFlowOrderChange"
+    dirty = false
+    for key of $scope.board.flows
+      if $scope.board.flows[key].id != newOrder[key]
+        dirty = true
+        break
+    if dirty
+      newOrderFlows = []
+      for flowID of newOrder
+        for key of $scope.board.flows
+          if $scope.board.flows[key].id == newOrder[flowID]
+            newOrderFlows.push $scope.board.flows[key]
+            break
+      $scope.board.flows = newOrderFlows
+    return
+
+  processTaskOrderChange = ( flow_id ,  newOrder)->
+    console.log "processTaskOrderChange" , flow_id , newOrder
+    targetFlow = null
+    for key of $scope.board.flows
+      if $scope.board.flows[key].id == flow_id
+        targetFlow = $scope.board.flows[key]
+        break
+
+    dirty = false
+    if targetFlow
+      for key of targetFlow.tasks
+        if targetFlow.tasks[key].id != newOrder[key]
+          dirty = true
+          break
+
+      if dirty
+        newOrderTasks = []
+        for taskKey of newOrder
+          for key of targetFlow.tasks
+            if targetFlow.tasks[key].id == newOrder[taskKey]
+              newOrderTasks.push targetFlow.tasks[key]
+              break
+
+        targetFlow.tasks = newOrderTasks
+    return
 
 ]

@@ -132,7 +132,12 @@ module Api
       user = User.find(id)
       user.name = name
       user.save()
-      render json: "ok"
+
+      # @todo
+      # send user update to redis
+
+      render json: "ok".to_json
+
     end
 
     private

@@ -19,8 +19,11 @@ Rails.application.routes.draw do
     post 'boards/:id/flows/add' => 'boards#add_flow'
     post 'boards/:id/flows/:fid/task/add' => 'boards#add_task'
     post 'baords/:id/users/delete/:uid' => 'boards#delete_user'
-
+    post 'boards/:id/updatetaskorder' => 'boards#update_task_order'
     post 'boards/:id/users/add/:name' => 'boards#add_user'
+    post 'boards/:id/task/move' => 'boards#task_move'
+
+    post 'flows/updateorder' => 'boards#update_flow_order'
 
     post 'update' => 'boards#update'
 
