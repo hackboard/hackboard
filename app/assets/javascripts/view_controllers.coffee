@@ -408,10 +408,8 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     )
     return
 
-  $scope.selpeople = ""
-
-  $scope.addmember = ()->
-    $http.post('/api/boards/' + $scope.board.id + '/users/add/' + $scope.selpeople).success(
+  $scope.addmember = (member)->
+    $http.post('/api/boards/' + $scope.board.id + '/users/add/' + member).success(
       (data, status)->
         $scope.board.users.push(data)
         $scope.selpeople = ""
@@ -419,13 +417,18 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
       $scope.selpeople = ""
     )
 
-  $scope.people = [
-    {"id": 2, "email": "alice@meigic.tw", "name": "Alice"},
-    {"id": 5, "email": "a60814billy@gmail.com", "name": "a60814billy"}
-  ]
+  $scope.selpeople = ""
+
+  $scope.people = []
 
   $scope.findPeople = (name)->
     $http.get('/api/user/find/' + name)
+    .success(
+      (data, status)->
+        console.log data
+        $scope.people = data
+        return
+    )
 
 
   hbSocket = io.connect 'http://www.meigic.tw:33555'

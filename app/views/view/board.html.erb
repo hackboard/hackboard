@@ -38,7 +38,7 @@
         <ui-select-match placeholder="Select or search to add member">
           {{ $select.selected.name }}
         </ui-select-match>
-        <ui-select-choices repeat="item in people | filter: $select.search" ng-click="addmember()">
+        <ui-select-choices repeat="item in people | filter: $select.search" refresh="findPeople($select.search)" refresh-delay="0" ng-click="addmember(selpeople.id)">
           <div ng-bind-html="item.name | highlight: $select.search"></div>
           <small ng-bind-html="item.email | highlight: $select.search"></small>
         </ui-select-choices>
