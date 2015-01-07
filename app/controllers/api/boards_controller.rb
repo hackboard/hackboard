@@ -185,10 +185,9 @@ module Api
       if current_user
 
         id = params[:id]
-        name = params[:name]
+        name = params[:name].to_i
 
-        q = "%#{name}%"
-        user = User.where('name like ? or email like ?' ,q , q).select(:id , :email , :name).take(1)[0]
+        user = User.find(name)
 
         if user
           board = Board.find(id)
@@ -198,6 +197,7 @@ module Api
           end
         end
       end
+      return
     end
 
     def delete_user
