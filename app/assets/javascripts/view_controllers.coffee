@@ -213,11 +213,18 @@ controllers.controller 'BoardsCtrl', ['$scope', 'User', 'Board', '$window', 'tim
 
 # board Page
 controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($scope, $window, Board, $http)->
+
+  $scope.uuid = guid()
+
+  $scope.dontSend = false
+
   board_id = parseInt($window.location.pathname.split('/')[2])
   $scope.board = [
     flows: []
   ]
   $scope.current_user = {}
+
+
 
   $scope.getlabelname = (shortname) ->
     return  unless shortname
@@ -261,6 +268,7 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
       for key of obj.dest.sortableScope.modelValue
         taskOrder.push obj.dest.sortableScope.modelValue[key].id
       $http.post('/api/boards/' + $scope.board.id + '/updatetaskorder' , {
+        uuid: $scope.uuid
         data: taskOrder
       })
       return
@@ -284,6 +292,7 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
         taskOrder.push obj.dest.sortableScope.modelValue[key].id
 
       $http.post('/api/boards/' + $scope.board.id + '/task/move' , {
+        uuid: $scope.uuid
         taskId:obj.source.itemScope.modelValue.id
         sFlow: oldFlowID
         dFlow: newFlowID
@@ -298,11 +307,16 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     Board.flows($scope.board.id).success((data, status)->
       $scope.board.flows = data
 
-#      $scope.$watch('board', ((old, nv)->
-#        $http.post('/api/update', {
-#          board: $scope.board
-#        })
-#      ), true)
+      $scope.$watch('board', ((old, nv)->
+
+        if $scope.dontSend == false
+          $http.post('/api/update', {
+            uuid: $scope.uuid
+            board: $scope.board
+          })
+        else
+          $scope.dontSend = false
+      ), true)
     )
   ).error((data, status)->
     $window.location.href = "/boards"
@@ -368,13 +382,13 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     return
 
   $scope.newFlow = ()->
-    $http.post('/api/boards/' + $scope.board.id + '/flows/add').success((data, status)->
+    $http.post('/api/boards/' + $scope.board.id + '/flows/add' , {uuid:$scope.uuid}).success((data, status)->
       $scope.board.flows.push data
     )
     return
 
   $scope.newTask = (id)->
-    $http.post('/api/boards/' + $scope.board.id + '/flows/' + id + '/task/add').success(
+    $http.post('/api/boards/' + $scope.board.id + '/flows/' + id + '/task/add' , {uuid:$scope.uuid}).success(
       (data, status)->
         angular.forEach($scope.board.flows, (flow, key)->
           angular.forEach(flow.flows, (subFlow, key2)->
@@ -410,7 +424,9 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
   hbSocket = io.connect 'http://www.meigic.tw:33555'
   hbSocket.on 'hb' , (message)->
 #    console.log message
-    if message.board_id == $scope.board.id
+    console.log "message from:" + message.uuid
+    if message.board_id == $scope.board.id and message.uuid != $scope.uuid
+      $scope.dontSend = true
       switch message.type
         when "flowOrderChange"
           processFlowOrderChange(message.order)
@@ -422,8 +438,38 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
           processTaskAdd(message.task)
         when "flowAdd"
           processFlowAdd(message.flow)
+        when "boardChange"
+          processBoardChange(message.board)
+        when "flowDataChange"
+          processFlowChange(message.flow)
+        when "taskDataChange"
+          processDataChange(message.task)
         else
           console.log message
+    return
+
+  processDataChange = (task)->
+    for key of $scope.board.flows
+      for key2 of $scope.board.flows[key].tasks
+        if $scope.board.flows[key].tasks[key2].id == task.id
+          $scope.board.flows[key].tasks[key2].name = task.name
+          $scope.board.flows[key].tasks[key2].description = task.description
+          $scope.board.flows[key].tasks[key2].updated_at = task.updated_at
+          break
+    return
+
+
+  processFlowChange = (flow)->
+    for key of $scope.board.flows
+      if $scope.board.flows[key].id == flow.id
+        $scope.board.flows[key].name = flow.name
+        break
+    return
+
+  processBoardChange = (board)->
+    console.log "processBoardChange"
+    $scope.board.name = board.name
+    $scope.board.description = board.description
     return
 
   processFlowAdd = (flow)->
