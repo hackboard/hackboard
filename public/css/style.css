@@ -292,3 +292,12 @@ span.editable:focus {
     margin: 0 !important;
     color: rgba(0,0,0,.5) !important;
 }
+
+#stashButton .as-sortable-placeholder {
+    background: none !important;
+    border: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}

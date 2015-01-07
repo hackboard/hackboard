@@ -199,14 +199,11 @@
       <!--<div class="ui popup">-->
         <!--Nobody here!-->
       <!--</div>-->
-      <div class="ui buttons ui-popup" ng-model="stash" as-sortable="stashSortOptions" id="stashButton">
-        <div class="ui icon button orange inverted">
-          <i class="archive icon"></i>
-          Stash
-          <div style="display: none;">
-            <span as-sortable-item ng-repeat="item in stash" as-sortable-item-handle >
-
-            </span>
+      <div ng-model="stash" as-sortable="stashSortOptions" id="stashButton">
+        <div class="ui buttons ui-popup">
+          <div class="ui icon button orange inverted">
+            <i class="archive icon"></i>
+            Stash
           </div>
         </div>
       </div>

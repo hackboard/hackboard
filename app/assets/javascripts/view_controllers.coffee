@@ -249,13 +249,12 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
 
   $scope.stashSortOptions = {
     accept: (sourceItemHandleScope, destSortableScope)->
-#      console.log(sourceItemHandleScope.element);
+      $(sourceItemHandleScope.element).css("opacity", 0.5)
       return true
     itemMoved:(obj)->
       console.log "itemMoved"
       console.log($scope.stash)
       console.log obj
-
   }
 
   #  # flow sortable setting
