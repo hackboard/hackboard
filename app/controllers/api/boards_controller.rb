@@ -103,14 +103,16 @@ module Api
 
     def add_flow
       if current_user
-
+        uuid = params[:uuid]
         input = input_params
+
 
         order = Flow.where({ :board_id => input[:id].to_i }).count
 
         flow = Flow.create(:name => 'New Flow' , max_task: 5, max_day: 5, board_id: input[:id] , order:order)
 
         $redis.publish 'hb' , {
+                                uuid: uuid,
                                 type: "flowAdd",
                                 board_id: input[:id].to_i,
                                 flow: flow
@@ -126,6 +128,7 @@ module Api
 
         id = params[:id]
         fid = params[:fid]
+        uuid = params[:uuid]
 
         task = Task.create( :state => 'normal',
                             :name => 'new Task',
@@ -133,6 +136,7 @@ module Api
                             :flow_id => fid)
 
         $redis.publish 'hb' , {
+                                uuid: uuid,
                                 type: "taskAdd",
                                 board_id: id.to_i,
                                 task: task
@@ -185,73 +189,108 @@ module Api
 
       if current_user
 
+        # detect which one if change
+        # 假設一次只會有一種東西改變
+
         boardData = params[:board]
+        uuid = params[:uuid]
 
         board = Board.find(boardData[:id])
-        board.name = boardData[:name]
-        board.description = boardData[:description]
-        board.save
+        id = board.id
+
+        if board.name != boardData[:name] or board.description != boardData[:description]
+          board.name = boardData[:name]
+          board.description = boardData[:description]
+          board.save
+
+        #   send baord change
+
+          $redis.publish 'hb' , {
+                                  uuid: uuid,
+                                  type: "boardChange",
+                                  board_id: id,
+                                  board: board
+                              }.to_json
+          render :json => "ok".to_json
+          return
+        end
 
         if boardData[:flows]
-          ind = 1
           boardData[:flows].each do |f|
 
             flow = Flow.find(f[:id])
-            flow.name = f[:name]
-            flow.order = ind
-            ind = ind + 1
-            flow.save
+            if flow.name != f[:name]
+              flow.name = f[:name]
+              flow.save
+              #   send flow change
 
-            if f[:flows]
-
-              f[:flows].each do |f2|
-                flow = Flow.find(f2[:id])
-                flow.name = f2[:name]
-                flow.save
-
-                if f2[:tasks]
-                  f2oind = 1
-                  f2[:tasks].each do |t2|
-                    task = Task.find(t2[:id])
-                    task.name = t2[:name]
-                    task.order = f2oind
-                    f2oind = f2oind + 1
-                    task.description = t2[:description]
-                    task.flow_id = f2[:id]
-                    task.save
-                  end
-
-                end
-
-
-
-              end
+              $redis.publish 'hb' , {
+                                      uuid: uuid,
+                                      type: "flowDataChange",
+                                      board_id: id,
+                                      flow: flow
+                                  }.to_json
+              render :json => "ok".to_json
+              return
             end
+
+            # sub flow not implement
+            # if f[:flows]
+            #
+            #   f[:flows].each do |f2|
+            #     flow = Flow.find(f2[:id])
+            #     flow.name = f2[:name]
+            #     flow.save
+            #
+            #     if f2[:tasks]
+            #       f2oind = 1
+            #       f2[:tasks].each do |t2|
+            #         task = Task.find(t2[:id])
+            #         task.name = t2[:name]
+            #         task.order = f2oind
+            #         f2oind = f2oind + 1
+            #         task.description = t2[:description]
+            #         task.flow_id = f2[:id]
+            #         task.save
+            #       end
+            #
+            #     end
+            #
+            #
+            #
+            #   end
+            # end
 
             if f[:tasks]
-              foind = 1
+
               f[:tasks].each do |t1|
                 task = Task.find(t1[:id])
-                task.name = t1[:name]
-                task.description = t1[:description]
-                task.order = foind
-                foind = foind + 1
-                task.flow_id = f[:id]
-                task.save
+                if task.name != t1[:name] or task.description != t1[:description]
+                  task.name = t1[:name]
+                  task.description = t1[:description]
+                  task.save
+                  #   send flow change
+
+                  $redis.publish 'hb' , {
+                                          uuid: uuid,
+                                          type: "taskDataChange",
+                                          board_id: id,
+                                          task: task
+                                      }.to_json
+                  render :json => "ok".to_json
+                  return
+                end
               end
-
             end
-
-
-
           end
         end
-        render :json => boardData.to_json
+        render :json => "ok".to_json
       end
     end
 
     def update_flow_order
       order = params[:data]
+      uuid = params[:uuid]
       ind = 1
       order.each do |i|
         flow = Flow::find(i)
@@ -261,6 +300,7 @@ module Api
       end
 
       $redis.publish 'hb' , {
+                              uuid: uuid,
                               type: "flowOrderChange",
                               board_id: Flow::find(order[0]).board.id,
                               order: order
@@ -273,6 +313,7 @@ module Api
     def update_task_order
       order = params[:data]
       id = params[:id]
+      uuid = params[:uuid]
       ind = 1
       order.each do |i|
         task = Task::find(i)
@@ -282,6 +323,7 @@ module Api
       end
 
       $redis.publish 'hb' , {
+                              uuid: uuid,
                               type: "taskOrderChange",
                               board_id: id.to_i,
                               flow_id: Task.find(order[0]).flow_id,
@@ -297,6 +339,7 @@ module Api
       sflow = params[:sFlow]
       dflow = params[:dFlow]
       order = params[:order]
+      uuid = params[:uuid]
 
       # move
       task = Task::find(task_id)
@@ -313,6 +356,7 @@ module Api
       end
 
       $redis.publish 'hb' , {
+                              uuid: uuid,
                               type: "taskMove",
                               board_id: board_id.to_i,
                               task_id: task_id.to_i,
