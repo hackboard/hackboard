@@ -27,18 +27,22 @@
       <i class="grid layout icon"></i> All boards
     </a>
 
-    <div class="item">
+    <div class="item" style="z-index: 1000;">
       <div class="ui circular labels">
         <div class="ui label" ng-repeat="user in board.users" ng-if="user.id != board.user_id">
           {{ user.name }}
           <i class="delete icon" ng-click="removeBoardMember(user.id);$event.preventDefault();" ></i>
         </div>
       </div>
-      <div class="ui inverted transparent left icon input">
-        <input type="text" placeholder="" ng-model="selpeople">
-        <i class="search icon"></i>
-      </div>
-      <div class="ui fluid blue small button" ng-click="addmember()" >Add Member</div>
+      <ui-select ng-model="selpeople" theme="selectize">
+        <ui-select-match placeholder="Select or search to add member">
+          {{ $select.selected.name }}
+        </ui-select-match>
+        <ui-select-choices repeat="item in people | filter: $select.search" ng-click="addmember()">
+          <div ng-bind-html="item.name | highlight: $select.search"></div>
+          <small ng-bind-html="item.email | highlight: $select.search"></small>
+        </ui-select-choices>
+      </ui-select>
     </div>
     <!--<div class="item">-->
       <!--<div class="ui styled fluid accordion black">-->
@@ -214,10 +218,15 @@
                 </div>
               </div>
               <div class="content aligned">
-                <div class="ui large label">
-                  List
-                  <div class="detail">
+                <div class="ui small header">
+                  <div class="ui large label">
+                    List
+                  </div>
+                  <div class="content" style="margin-left: 5px;">
                     Old List
+                    <div class="sub header">
+                      updated about 10 hours ago
+                    </div>
                   </div>
                 </div>
               </div>
@@ -232,10 +241,15 @@
                 </div>
               </div>
               <div class="content aligned">
-                <div class="ui large label">
-                  Task
-                  <div class="detail">
+                <div class="ui small header">
+                  <div class="ui large label">
+                    Task
+                  </div>
+                  <div class="content" style="margin-left: 5px;">
                     Old Task
+                    <div class="sub header">
+                      updated few seconds ago
+                    </div>
                   </div>
                 </div>
               </div>
