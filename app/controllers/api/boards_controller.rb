@@ -106,7 +106,15 @@ module Api
 
         input = input_params
 
-        flow = Flow.create(:name => 'New Flow' , max_task: 5, max_day: 5, board_id: input[:id])
+        order = Flow.where({ :board_id => input[:id].to_i }).count
+
+        flow = Flow.create(:name => 'New Flow' , max_task: 5, max_day: 5, board_id: input[:id] , order:order)
+
+        $redis.publish 'hb' , {
+                                type: "flowAdd",
+                                board_id: input[:id].to_i,
+                                flow: flow
+                            }.to_json
 
         render :json => flow.to_json( include:[:tasks , { :flows => {include: :tasks} } ] )
 
@@ -123,6 +131,12 @@ module Api
                             :name => 'new Task',
                             :description => 'new Task',
                             :flow_id => fid)
+
+        $redis.publish 'hb' , {
+                                type: "taskAdd",
+                                board_id: id.to_i,
+                                task: task
+                            }.to_json
 
         render :json => task.to_json
 

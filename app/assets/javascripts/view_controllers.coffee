@@ -418,8 +418,40 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
           processTaskOrderChange(message.flow_id , message.order)
         when "taskMove"
           processTaskMove(message.task_id , message.sFlow , message.dFlow , message.order)
+        when "taskAdd"
+          processTaskAdd(message.task)
+        when "flowAdd"
+          processFlowAdd(message.flow)
         else
           console.log message
+    return
+
+  processFlowAdd = (flow)->
+    console.log "processFlowAdd"
+    console.log flow
+    is_already = false
+    for key of $scope.board.flows
+      if $scope.board.flows[key].id == flow.id
+        is_already = true
+        break
+    if !is_already
+      flow.tasks = []
+      flow.flows = []
+      $scope.board.flows.push flow
+    return
+
+  processTaskAdd = (task)->
+    flowid = task.flow_id
+    for key of $scope.board.flows
+      if $scope.board.flows[key].id == flowid
+        has_task = false
+        for k2 of $scope.board.flows[key].tasks
+          if $scope.board.flows[key].tasks[k2].id == task.id
+            has_task = true
+            break
+
+        if !has_task
+          $scope.board.flows[key].tasks.push task
     return
 
   processTaskMove = (taskid , oldFlowID , newFlowID , order)->
