@@ -278,3 +278,17 @@ span.editable:focus {
     width: 100%;
     white-space: pre-wrap;
 }
+
+.popup .ui.small.header .content, .popup .ui.small.header .sub.header {
+    max-width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popup .ui.small.header .sub.header {
+    font-size: 0.89rem !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
+    color: rgba(0,0,0,.5) !important;
+}
