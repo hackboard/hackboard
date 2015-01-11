@@ -1,2 +1,2 @@
 
-$redis = Redis.new(:host => 'www.meigic.tw' , :port => 16379 , :password => "meigic1212")
+$redis = Redis.new(:host => 'localhost' , :port => 16379 , :password => "12345678")

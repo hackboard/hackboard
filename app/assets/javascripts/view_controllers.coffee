@@ -443,7 +443,7 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     )
 
 
-  hbSocket = io.connect 'http://www.meigic.tw:33555'
+  hbSocket = io.connect 'http://localhost:33555'
   hbSocket.on 'hb' , (message)->
 #    console.log message
     console.log "message from:" + message.uuid
