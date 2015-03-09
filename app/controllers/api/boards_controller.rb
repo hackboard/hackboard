@@ -45,6 +45,7 @@ module Api
       if current_user
         board = Board.new(:name => 'NewBoard', :wip => '10', :description => 'New Board', :user_id => current_user.id)
         board.save
+        board.board_members.create user: current_user
 
         Flow.create(:name => 'ToDo', order: 1, max_task: 5, max_day: 5, board_id: board.id)
         Flow.create(:name => 'Doing', order: 2, max_task: 5, max_day: 5, board_id: board.id)
@@ -197,7 +198,7 @@ module Api
           end
         end
       end
-      return
+      render text: ""
     end
 
     def delete_user
