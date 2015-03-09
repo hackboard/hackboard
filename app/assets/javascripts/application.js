@@ -20,7 +20,7 @@
 //= require angular-resource
 //= require angular-sanitize
 //= require angular-timeAgo
-//= require angular-semantic-ui
+//= require ng-semantic-ui-checkbox
 //= require select
 //= require ng-sortable
 //= require ng-rails-csrf
