@@ -1,3 +1,10 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+#
+# Examples:
+#
+#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.create(name: 'Emanuel', city: cities.first)
 #users
 user1 = User.new(:email => 'bob@meigic.tw', :name => 'Bob', :password => 'Bob0000', :sign_in_count => 0)
 user1.save
@@ -14,7 +21,7 @@ user4.save
 #board1
 board1 =Board.new(:name => 'work1', :wip => '10', :description => 'Board1 ,has two member,user3 and user4', :user_id => user1.id)
 board1.save
-BoardMember.create(:board_id => board1.id , :user_id=>user2.id , :permission=>1)
+BoardMember.create(:board_id => board1.id, :user_id => user2.id, :permission => 1)
 
 # types of board1
 b1type1 = Type.new(:name => 'normal', :color => '#00ff00', :board_id => board1.id)

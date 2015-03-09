@@ -38,7 +38,7 @@
           </div>
           <div class="inline fields">
             <div class="field">
-              <img class="ui tiny circular image middle aligned" ng-src="http://www.gravatar.com/avatar/{{ registerInfo.avatar }}" >
+              <img class="ui tiny circular image middle aligned" ng-src="http://www.gravatar.com/avatar/{{ registerInfo.avatar }}">
             </div>
             <div class="field">
               <input placeholder="shortname" name="nickName" type="text" required ng-model="registerInfo.nickname" ng-pattern="/^[a-zA-Z0-9_]*$/" ng-change="registerInfo.nicknameDirty=true">
@@ -140,8 +140,6 @@
 </div>
 <%= render 'common/footer' %>
 
-<script src="js/jquery.backstretch.js"></script>
-
 <script>
     $('.ui.checkbox').checkbox();
     $.backstretch([
@@ -166,7 +164,7 @@
     function switchCard(hideCard, showCard) {
         var hide = $(hideCard);
         var show = $(showCard);
-        if(!hide.hasClass("hidden")) {
+        if (!hide.hasClass("hidden")) {
             hide.transition('vertical flip', '100ms', function () {
                 show.transition('vertical flip', '100ms');
             });

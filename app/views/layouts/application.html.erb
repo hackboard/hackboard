@@ -2,23 +2,16 @@
 <html lang="zh-Hant-TW">
 <head>
   <title>Hackboard - Accelerate your works!</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-  <link href="/vendor/semantic-ui-1.6.1/semantic.min.css" rel="stylesheet">
-
-  <link href="/css/style.css" rel="stylesheet">
-
   <link rel="shortcut icon" href="/img/favicon.png">
-
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-
-  <script src="/vendor/semantic-ui-1.6.1/semantic.min.js"></script>
-
+  <link rel="stylesheet" href="/vendor/semantic-ui/semantic.min.css">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script src="/vendor/semantic-ui/semantic.min.js"></script>
 </head>
 <body>
+
 <%= yield %>
 
 </body>

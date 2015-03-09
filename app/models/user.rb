@@ -1,18 +1,20 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token
-  before_save {
-    self.email = email.downcase
-  }
-  has_secure_password
-  validates_presence_of :password_digest, :on => :create
+
   has_many :boards
   has_many :tasks
-  has_many :resources
-  has_many :logs
   has_many :user_pin_boards
   has_many :pin_boards, through: :user_pin_boards, source: :board
   has_many :board_members
   has_many :participate_boards, through: :board_members, source: :board
+
+  before_save {
+    self.email = email.downcase
+  }
+
+  has_secure_password
+
+  validates_presence_of :password_digest, on: :create
 
   def myBoards
     {
@@ -21,10 +23,13 @@ class User < ActiveRecord::Base
     }
   end
 
+  def getBoard(id)
+    self.boards.find(id) || self.participate_boards.find(id)
+  end
+
   def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(string,cost: cost)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
   end
 
   def User.new_token
@@ -41,17 +46,7 @@ class User < ActiveRecord::Base
   end
 
   def forget
-    update_attribute(:remember_digest,nil)
-  end
-  
-  def getBoard(id)
-
-    board = self.boards.find(id) || self.participate_boards.find(id)
-
-    if board
-       return board
-    end
-    return nil
+    update_attribute(:remember_digest, nil)
   end
 
 end

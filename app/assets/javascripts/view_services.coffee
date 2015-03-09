@@ -1,28 +1,28 @@
-services = angular.module 'hackboardServices' , []
+services = angular.module 'hackboardServices', []
 
 # 處理登入、登出、註冊的Service
-services.factory 'User' , ['$http' , ($http)->
-  login:(email , password, rememberMe)->
+services.factory 'User', ['$http', ($http)->
+  login: (email, password, rememberMe)->
     $http.post(
       '/api/user/login',
-        email: email,
-        password: password,
-        remember_me: rememberMe
+      email: email,
+      password: password,
+      remember_me: rememberMe
     )
   logout: ()->
-    return
-  signUp: (email,nickName,password,passwordConfirmation)->
+
+  signUp: (email, nickName, password, passwordConfirmation)->
     #Authenticity Token?
     $http.post(
       '/api/user/register',
-      email:email,
-      name:nickName,
-      password:password,
-      password_confirmation:passwordConfirmation
+      email: email,
+      name: nickName,
+      password: password,
+      password_confirmation: passwordConfirmation
     )
 ]
 
-services.factory 'Board' , ['$http' , ($http)->
+services.factory 'Board', ['$http', ($http)->
   create: ()->
     $http.post '/api/boards/'
 
@@ -48,8 +48,7 @@ services.factory 'Board' , ['$http' , ($http)->
     )
 ]
 
-services.factory 'Flow' , ['$http' , ($http)->
-
+services.factory 'Flow', ['$http', ($http)->
   flow: (board_id)->
     $http.get '/api/flows/' + board_id
 

@@ -5,7 +5,7 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User, 
 # 紀錄登入資訊的 Model
   $scope.loginInfo =
     email: "Alice@meigic.tw"
-    password: "12345678"
+    password: "Alice0000"
     rememberMe: false
     hasError: false
     hasWarning: false
@@ -39,16 +39,14 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User, 
     )
     .success((data, status)->
       $window.location.href = '/boards'
-      return
     )
     .error((data, status)->
       if data == "UMSE01" or data == "UMSE02"
         $scope.loginInfo.hasWarning = true
       else
         $scope.loginInfo.hasError = true
-      return
     )
-    return
+
 
   # 從登入轉到註冊卡片，並帶入資料
   $scope.btnRegister = ()->
@@ -58,17 +56,17 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User, 
 
   resetAllError = ()->
     $scope.loginInfo.hasError = $scope.loginInfo.hasWarning = $scope.registerInfo.hasError = $scope.registerInfo.hasWarning = false
-    return
+
 
   resetSignUpAllError = ()->
     $scope.registerInfo.hasError = $scope.registerInfo.hasWarning = false
     $scope.registerInfo.warning_message = ''
-    return
+
 
   cleanUpSignUpInformations = ()->
     $scope.registerInfo.email = $scope.registerInfo.nickname = $scope.registerInfo.password = $scope.registerInfo.password_confirmation = ''
     $scope.registerInfo.agree = false
-    return
+
 
   #按下註冊鈕
   $scope.btnSignUp = ()->
@@ -128,23 +126,22 @@ controllers.controller 'UserCtrl', ['$scope', 'User', '$window', ($scope, User, 
       if data == "UMSE03"
         $scope.registerInfo.hasWarning = true
         $scope.registerInfo.warning_message = 'Account already exist.'
-        return
+
       else if data == "UMSE04"
         $scope.registerInfo.hasWarning = true
         $scope.registerInfo.warning_message = 'Passwords dose not the same.'
-        return
+
       else
         $scope.registerInfo.hasError = true
     )
-    return
+
 
   #Change shortname when email been done (Cannot change when type in email account)
   $scope.putToNickname = ()->
     if !$scope.signUpForm.signUpEmail.$error.pattern
       $scope.registerInfo.nickname = $scope.registerInfo.email.split("@")[0]
-    return
 
-  return
+
 ]
 
 # Boards Page
@@ -188,7 +185,7 @@ controllers.controller 'BoardsCtrl', ['$scope', 'User', 'Board', '$window', 'tim
           $scope.boards.pin.push $scope.boards.other[key]
           $scope.boards.other.splice key, 1
           Board.pin(id)
-      return
+
 
     $scope.unpin = (id)->
       angular.forEach $scope.boards.pin, (value, key)->
@@ -196,7 +193,7 @@ controllers.controller 'BoardsCtrl', ['$scope', 'User', 'Board', '$window', 'tim
           $scope.boards.other.push $scope.boards.pin[key]
           $scope.boards.pin.splice key, 1
           Board.unpin(id)
-      return
+
 
     # new board
     $scope.newBoard = ()->
@@ -204,7 +201,7 @@ controllers.controller 'BoardsCtrl', ['$scope', 'User', 'Board', '$window', 'tim
 #      $scope.boards.other.push data.board
         $window.location.href = '/board/' + data.board.id
       )
-      return
+
 
     # click card to board
     $scope.toBoard = (id)->
@@ -213,7 +210,6 @@ controllers.controller 'BoardsCtrl', ['$scope', 'User', 'Board', '$window', 'tim
 
 # board Page
 controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($scope, $window, Board, $http)->
-
   $scope.uuid = guid()
 
   $scope.dontSend = false
@@ -226,12 +222,12 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
 
   $scope.stash = []
 
-  $scope.$watch('stash' , ((oldVal , newVal)->
-    $http.post('/api/boards/' + $scope.board.id + '/stash/' , {
+  $scope.$watch('stash', ((oldVal, newVal)->
+    $http.post('/api/boards/' + $scope.board.id + '/stash/', {
       uuid: $scope.uuid,
       stash: $scope.stash
     })
-  ) , true)
+  ), true)
 
   $scope.getlabelname = (shortname) ->
     return  unless shortname
@@ -251,7 +247,7 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     accept: (sourceItemHandleScope, destSortableScope)->
       $(sourceItemHandleScope.element).css("opacity", 0.5)
       return true
-    itemMoved:(obj)->
+    itemMoved: (obj)->
       console.log "itemMoved"
       console.log($scope.stash)
       console.log obj
@@ -267,10 +263,10 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
       flowOrder = []
       for key of $scope.board.flows
         flowOrder.push $scope.board.flows[key].id
-      $http.post('/api/flows/updateorder' , {
+      $http.post('/api/flows/updateorder', {
         data: flowOrder
       })
-      return
+
     itemMoved: (obj)->
       console.log obj
   }
@@ -286,11 +282,11 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
       taskOrder = []
       for key of obj.dest.sortableScope.modelValue
         taskOrder.push obj.dest.sortableScope.modelValue[key].id
-      $http.post('/api/boards/' + $scope.board.id + '/updatetaskorder' , {
+      $http.post('/api/boards/' + $scope.board.id + '/updatetaskorder', {
         uuid: $scope.uuid
         data: taskOrder
       })
-      return
+
     itemMoved: (obj)->
       console.log obj
 
@@ -303,20 +299,20 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
         for key2 of $scope.board.flows[key].tasks
           if $scope.board.flows[key].tasks[key2].id == task.id
             newFlowID = $scope.board.flows[key].id
-            $scope.board.flows[key].tasks[key2].flow_id =newFlowID
+            $scope.board.flows[key].tasks[key2].flow_id = newFlowID
 
 
       taskOrder = []
       for key of obj.dest.sortableScope.modelValue
         taskOrder.push obj.dest.sortableScope.modelValue[key].id
 
-      $http.post('/api/boards/' + $scope.board.id + '/task/move' , {
+      $http.post('/api/boards/' + $scope.board.id + '/task/move', {
         uuid: $scope.uuid
-        taskId:obj.source.itemScope.modelValue.id
+        taskId: obj.source.itemScope.modelValue.id
         sFlow: oldFlowID
         dFlow: newFlowID
         order: taskOrder
-      } )
+      })
 
   }
 
@@ -327,7 +323,6 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
       $scope.board.flows = data
 
       $scope.$watch('board', ((old, nv)->
-
         if $scope.dontSend == false
           $http.post('/api/update', {
             uuid: $scope.uuid
@@ -348,39 +343,34 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     $scope.$watch('current_user.name', (oldValue, newValue)->
       $scope.current_user.shortname = $scope.getlabelname($scope.current_user.name)
       if oldValue != newValue
-        $http.post('/api/user/' + $scope.current_user.id + '/save' , {
+        $http.post('/api/user/' + $scope.current_user.id + '/save', {
           name: $scope.current_user.name
         })
-      return
     )
   )
-#
+  #
   $scope.titleClick = (id)->
     $('#board-detail-modal').modal({
       transition: 'slide down',
       duration: '100ms',
       onVisible: ()->
         $(window).resize()
-        return
+
     }).modal('show')
-    return
+
 
   $scope.taskClick = (id)->
-    angular.forEach($scope.board.flows , (value , key)->
-      angular.forEach(value.tasks , (task,key)->
+    angular.forEach($scope.board.flows, (value, key)->
+      angular.forEach(value.tasks, (task, key)->
         if task.id == id
           $scope.taskData = task
-        return
       )
-      angular.forEach(value.flows , (subflow , key)->
-        angular.forEach(subflow.tasks , (task,  key)->
+      angular.forEach(value.flows, (subflow, key)->
+        angular.forEach(subflow.tasks, (task, key)->
           if task.id == id
             $scope.taskData = task
-          return
         )
-        return
       )
-      return
     )
 
     $('#task-detail-modal').modal({
@@ -388,9 +378,9 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
       duration: '100ms',
       onVisible: ()->
         $(window).resize()
-        return
+
     }).modal('show')
-    return
+
 
   $scope.removeBoardMember = (id)->
     angular.forEach($scope.board.users, (value, key)->
@@ -398,16 +388,16 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
         $http.post('/api/baords/' + $scope.board.id + '/users/delete/' + value.id)
         $scope.board.users.splice key, 1
     )
-    return
+
 
   $scope.newFlow = ()->
-    $http.post('/api/boards/' + $scope.board.id + '/flows/add' , {uuid:$scope.uuid}).success((data, status)->
+    $http.post('/api/boards/' + $scope.board.id + '/flows/add', {uuid: $scope.uuid}).success((data, status)->
       $scope.board.flows.push data
     )
-    return
+
 
   $scope.newTask = (id)->
-    $http.post('/api/boards/' + $scope.board.id + '/flows/' + id + '/task/add' , {uuid:$scope.uuid}).success(
+    $http.post('/api/boards/' + $scope.board.id + '/flows/' + id + '/task/add', {uuid: $scope.uuid}).success(
       (data, status)->
         angular.forEach($scope.board.flows, (flow, key)->
           angular.forEach(flow.flows, (subFlow, key2)->
@@ -418,7 +408,7 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
             flow.tasks.push data
         )
     )
-    return
+
 
   $scope.addmember = (member)->
     $http.post('/api/boards/' + $scope.board.id + '/users/add/' + member).success(
@@ -439,12 +429,11 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
       (data, status)->
         console.log data
         $scope.people = data
-        return
     )
 
 
   hbSocket = io.connect 'http://localhost:33555'
-  hbSocket.on 'hb' , (message)->
+  hbSocket.on 'hb', (message)->
 #    console.log message
     console.log "message from:" + message.uuid
     if message.board_id == $scope.board.id and message.uuid != $scope.uuid
@@ -453,9 +442,9 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
         when "flowOrderChange"
           processFlowOrderChange(message.order)
         when "taskOrderChange"
-          processTaskOrderChange(message.flow_id , message.order)
+          processTaskOrderChange(message.flow_id, message.order)
         when "taskMove"
-          processTaskMove(message.task_id , message.sFlow , message.dFlow , message.order)
+          processTaskMove(message.task_id, message.sFlow, message.dFlow, message.order)
         when "taskAdd"
           processTaskAdd(message.task)
         when "flowAdd"
@@ -468,7 +457,7 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
           processDataChange(message.task)
         else
           console.log message
-    return
+
 
   processDataChange = (task)->
     for key of $scope.board.flows
@@ -478,7 +467,6 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
           $scope.board.flows[key].tasks[key2].description = task.description
           $scope.board.flows[key].tasks[key2].updated_at = task.updated_at
           break
-    return
 
 
   processFlowChange = (flow)->
@@ -486,13 +474,13 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
       if $scope.board.flows[key].id == flow.id
         $scope.board.flows[key].name = flow.name
         break
-    return
+
 
   processBoardChange = (board)->
     console.log "processBoardChange"
     $scope.board.name = board.name
     $scope.board.description = board.description
-    return
+
 
   processFlowAdd = (flow)->
     console.log "processFlowAdd"
@@ -506,7 +494,7 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
       flow.tasks = []
       flow.flows = []
       $scope.board.flows.push flow
-    return
+
 
   processTaskAdd = (task)->
     flowid = task.flow_id
@@ -520,9 +508,9 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
 
         if !has_task
           $scope.board.flows[key].tasks.push task
-    return
 
-  processTaskMove = (taskid , oldFlowID , newFlowID , order)->
+
+  processTaskMove = (taskid, oldFlowID, newFlowID, order)->
     console.log "processTaskMove"
     for key of $scope.board.flows
       if $scope.board.flows[key].id == oldFlowID
@@ -534,12 +522,11 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
             for k3 of $scope.board.flows
               if $scope.board.flows[k3].id == newFlowID
                 $scope.board.flows[k3].tasks.push findInOldFlow
-                $scope.board.flows[key].tasks.splice k2 , 1
+                $scope.board.flows[key].tasks.splice k2, 1
                 break
-            processTaskOrderChange(newFlowID , order)
+            processTaskOrderChange(newFlowID, order)
             break
 
-    return
 
   processFlowOrderChange = (newOrder)->
     console.log "processFlowOrderChange"
@@ -556,10 +543,10 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
             newOrderFlows.push $scope.board.flows[key]
             break
       $scope.board.flows = newOrderFlows
-    return
 
-  processTaskOrderChange = ( flow_id ,  newOrder)->
-    console.log "processTaskOrderChange" , flow_id , newOrder
+
+  processTaskOrderChange = (flow_id, newOrder)->
+    console.log "processTaskOrderChange", flow_id, newOrder
     targetFlow = null
     for key of $scope.board.flows
       if $scope.board.flows[key].id == flow_id
@@ -582,6 +569,6 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
               break
 
         targetFlow.tasks = newOrderTasks
-    return
+
 
 ]

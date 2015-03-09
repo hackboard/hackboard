@@ -14,7 +14,6 @@ class ViewController < ApplicationController
         Rails.logger.debug('No current user...')
       end
     end
-
   end
 
   def boards

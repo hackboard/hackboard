@@ -1,0 +1,309 @@
+// Place all the styles related to the View controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+html, body {
+  overflow-x: hidden;
+  height: 100% !important;
+}
+
+header {
+  height: 65px;
+  z-index: 100;
+}
+
+.pusher {
+  height: 100% !important;
+}
+
+.thin-padding {
+  padding-top: 80px !important;
+  padding-bottom: 0px !important;
+  overflow: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.container {
+  position: relative;
+  min-height: 100%;
+  padding-top: 100px;
+  padding-bottom: 90px;
+  margin-bottom: -46px;
+}
+
+footer {
+  height: 46px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.align-middle {
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.background-cover {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 0;
+  background-color: rgba(34, 34, 34, 0.2);
+  transition-duration: 5s;
+  transition-timing-function: linear;
+}
+
+.through {
+  opacity: 0.95;
+}
+
+.solid {
+  opacity: 1;
+}
+
+.ui.fixed.menu > *, .ui.fixed.menu > .menu > .item {
+  line-height: 40px;
+  vertical-align: middle;
+}
+
+.pin:hover, .pin.active {
+  color: #d95c5c !important;
+}
+
+.sidebar.menu {
+  /*width: 200px !important;*/
+  z-index: 103 !important;
+}
+
+.ui.transparent.menu {
+  opacity: 0.95;
+}
+
+.launch.button {
+  position: fixed;
+  top: 10px;
+  right: -1px;
+  width: 55px;
+  height: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: 102;
+}
+
+.launch.button .icon {
+  margin-left: -15px;
+}
+
+.black p {
+  color: black !important;
+}
+
+.pushable {
+  background-color: #f7f7f7 !important;
+}
+
+.pusher {
+  background-color: transparent !important;
+}
+
+.pusher ::-webkit-scrollbar {
+  /*-webkit-appearance: none;*/
+  width: 10px;
+  height: 10px;
+}
+
+.pusher ::-webkit-scrollbar-button {
+  display: block;
+  height: 0px;
+  width: 7px;
+}
+
+.pusher ::-webkit-scrollbar-track {
+  background-color: rgba(211, 211, 211, 0.55);
+  border-radius: 5px;
+}
+
+.pusher ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.55);
+}
+
+.ui-board {
+  /*overflow-x: scroll !important;*/
+  overflow-y: hidden !important;
+  padding-bottom: 20px !important;
+}
+
+.ui-board-content {
+  display: -webkit-inline-flex !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-flex !important;
+}
+
+.ui-list {
+  /*margin-left: 15px !important;*/
+  width: inherit !important;
+  margin-top: 1px !important;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.ui-list-placeholder {
+  margin: 14px !important;
+  width: 320px !important;
+  height: 100px !important;
+}
+
+.ui-list-title {
+  width: 100%;
+}
+
+.ui-list-title span {
+  max-width: 50% !important;
+}
+
+.ui-list-wrapper, .ui-list-subflow {
+  width: 320px !important;
+  min-width: 320px !important;
+  margin-bottom: 0px !important;
+}
+
+.ui-list-content {
+  overflow-x: hidden !important;
+  /*overflow-y: scroll !important;*/
+  padding: 2px 5px 2px 5px !important;
+}
+
+.ui-list-content-tasks {
+  /*min-height: 14px;*/
+  padding-bottom: 14px;
+}
+
+.ui-list-new {
+  width: 150px !important;
+}
+
+.ui-task {
+  width: 100% !important;
+  /*width: 320px !important;*/
+  /*min-width: 300px !important;*/
+  /*width: 320px !important;*/
+}
+
+.ui-emergency-task {
+  position: absolute !important;
+  /*width: 320px !important;*/
+  /*width: 96% !important;*/
+  width: 92% !important;
+  /*height: 0px;*/
+  bottom: 50px;
+  /*left: 50%;*/
+  /*left: 25%;*/
+  /*right: 2%;*/
+}
+
+.ui-task:hover, .ui-card:hover {
+  cursor: pointer;
+  background-color: #FCFCFC;
+}
+
+.ui-flip-front {
+  margin-top: 0 !important;
+}
+
+.ui-flip-back {
+  margin-top: 0 !important;
+}
+
+.ui .modal .comment .actions {
+  background: none !important;
+  padding: 0 !important;
+  border-top: 0 !important;
+  text-align: left !important;
+}
+
+.ui-vertical-divider {
+  position: absolute;
+  padding: 0 !important;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  height: 80%;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+span.editable {
+  cursor: text;
+  display: inline-block;
+  min-width: 10%;
+  max-width: inherit;
+  overflow: hidden;
+  text-overflow: clip;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1px dashed #f0f0f0;
+  border-radius: 10px;
+  word-wrap: break-word;
+
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  -o-user-select: text;
+}
+
+span.editable:focus {
+  outline: 0;
+}
+
+.meta p, .description p {
+  width: inherit;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header span {
+  white-space: nowrap;
+}
+
+.sub.header span {
+  width: 100%;
+  white-space: pre-wrap;
+}
+
+.popup .ui.small.header .content, .popup .ui.small.header .sub.header {
+  max-width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.popup .ui.small.header .sub.header {
+  font-size: 0.89rem !important;
+  font-weight: 400 !important;
+  margin: 0 !important;
+  color: rgba(0, 0, 0, .5) !important;
+}
+
+#stashButton .as-sortable-placeholder {
+  background: none !important;
+  border: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}

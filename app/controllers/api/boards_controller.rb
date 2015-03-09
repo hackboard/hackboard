@@ -90,7 +90,7 @@ module Api
 
         stash.each do |s|
           if s.key?(:status)
-          #   flow
+            #   flow
             flow = Flow.find(s[:id].to_i)
             flow.status = "stash"
             flow.save
@@ -120,7 +120,7 @@ module Api
           return
         end
         flows = board.flows.order(:order)
-        render :json => flows.to_json( include:[{:tasks => { include: :user}} , { :flows => {include: :tasks , order: :order} } ] )
+        render :json => flows.to_json(include: [{:tasks => {include: :user}}, {:flows => {include: :tasks, order: :order}}])
         return
       else
         response = 'Not login'
@@ -135,18 +135,18 @@ module Api
         input = input_params
 
 
-        order = Flow.where({ :board_id => input[:id].to_i }).count
+        order = Flow.where({:board_id => input[:id].to_i}).count
 
-        flow = Flow.create(:name => 'New Flow' , max_task: 5, max_day: 5, board_id: input[:id] , order:order)
+        flow = Flow.create(:name => 'New Flow', max_task: 5, max_day: 5, board_id: input[:id], order: order)
 
-        $redis.publish 'hb' , {
-                                uuid: uuid,
-                                type: "flowAdd",
-                                board_id: input[:id].to_i,
-                                flow: flow
-                            }.to_json
+        $redis.publish 'hb', {
+                               uuid: uuid,
+                               type: "flowAdd",
+                               board_id: input[:id].to_i,
+                               flow: flow
+                           }.to_json
 
-        render :json => flow.to_json( include:[:tasks , { :flows => {include: :tasks} } ] )
+        render :json => flow.to_json(include: [:tasks, {:flows => {include: :tasks}}])
 
       end
     end
@@ -158,17 +158,17 @@ module Api
         fid = params[:fid]
         uuid = params[:uuid]
 
-        task = Task.create( :state => 'normal',
-                            :name => 'new Task',
-                            :description => 'new Task',
-                            :flow_id => fid)
+        task = Task.create(:state => 'normal',
+                           :name => 'new Task',
+                           :description => 'new Task',
+                           :flow_id => fid)
 
-        $redis.publish 'hb' , {
-                                uuid: uuid,
-                                type: "taskAdd",
-                                board_id: id.to_i,
-                                task: task
-                            }.to_json
+        $redis.publish 'hb', {
+                               uuid: uuid,
+                               type: "taskAdd",
+                               board_id: id.to_i,
+                               task: task
+                           }.to_json
 
         render :json => task.to_json
 
@@ -231,14 +231,14 @@ module Api
           board.description = boardData[:description]
           board.save
 
-        #   send baord change
+          #   send baord change
 
-          $redis.publish 'hb' , {
-                                  uuid: uuid,
-                                  type: "boardChange",
-                                  board_id: id,
-                                  board: board
-                              }.to_json
+          $redis.publish 'hb', {
+                                 uuid: uuid,
+                                 type: "boardChange",
+                                 board_id: id,
+                                 board: board
+                             }.to_json
           render :json => "ok".to_json
           return
         end
@@ -252,12 +252,12 @@ module Api
               flow.save
               #   send flow change
 
-              $redis.publish 'hb' , {
-                                      uuid: uuid,
-                                      type: "flowDataChange",
-                                      board_id: id,
-                                      flow: flow
-                                  }.to_json
+              $redis.publish 'hb', {
+                                     uuid: uuid,
+                                     type: "flowDataChange",
+                                     board_id: id,
+                                     flow: flow
+                                 }.to_json
               render :json => "ok".to_json
               return
             end
@@ -299,12 +299,12 @@ module Api
                   task.save
                   #   send flow change
 
-                  $redis.publish 'hb' , {
-                                          uuid: uuid,
-                                          type: "taskDataChange",
-                                          board_id: id,
-                                          task: task
-                                      }.to_json
+                  $redis.publish 'hb', {
+                                         uuid: uuid,
+                                         type: "taskDataChange",
+                                         board_id: id,
+                                         task: task
+                                     }.to_json
                   render :json => "ok".to_json
                   return
                 end
@@ -327,12 +327,12 @@ module Api
         flow.save
       end
 
-      $redis.publish 'hb' , {
-                              uuid: uuid,
-                              type: "flowOrderChange",
-                              board_id: Flow::find(order[0]).board.id,
-                              order: order
-                          }.to_json
+      $redis.publish 'hb', {
+                             uuid: uuid,
+                             type: "flowOrderChange",
+                             board_id: Flow::find(order[0]).board.id,
+                             order: order
+                         }.to_json
 
       render :json => "ok".to_json
 
@@ -350,20 +350,20 @@ module Api
         task.save
       end
 
-      $redis.publish 'hb' , {
-                              uuid: uuid,
-                              type: "taskOrderChange",
-                              board_id: id.to_i,
-                              flow_id: Task.find(order[0]).flow_id,
-                              order: order
-                          }.to_json
+      $redis.publish 'hb', {
+                             uuid: uuid,
+                             type: "taskOrderChange",
+                             board_id: id.to_i,
+                             flow_id: Task.find(order[0]).flow_id,
+                             order: order
+                         }.to_json
       render :json => "ok".to_json
     end
 
     def task_move
 
       board_id = params[:id]
-      task_id  = params[:taskId]
+      task_id = params[:taskId]
       sflow = params[:sFlow]
       dflow = params[:dFlow]
       order = params[:order]
@@ -383,15 +383,15 @@ module Api
         task2.save
       end
 
-      $redis.publish 'hb' , {
-                              uuid: uuid,
-                              type: "taskMove",
-                              board_id: board_id.to_i,
-                              task_id: task_id.to_i,
-                              sFlow: sflow.to_i,
-                              dFlow: dflow.to_i,
-                              order: order
-                          }.to_json
+      $redis.publish 'hb', {
+                             uuid: uuid,
+                             type: "taskMove",
+                             board_id: board_id.to_i,
+                             task_id: task_id.to_i,
+                             sFlow: sflow.to_i,
+                             dFlow: dflow.to_i,
+                             order: order
+                         }.to_json
       render :json => "ok".to_json
 
     end
