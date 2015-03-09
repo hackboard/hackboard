@@ -218,7 +218,6 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
   $scope.board = [
     flows: []
   ]
-  $scope.current_user = {}
 
   $scope.stash = []
 
@@ -241,7 +240,6 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
         name[i] = name[i].slice(0, 1)
         i++
       return name.join("").slice(0, 2).toUpperCase()
-
 
   $scope.stashSortOptions = {
     accept: (sourceItemHandleScope, destSortableScope)->
@@ -336,19 +334,6 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
     $window.location.href = "/boards"
   )
 
-  $http.get('/api/user/current_user').success((data, status)->
-    $scope.current_user = data
-    $scope.current_user.avatar = md5(data.email)
-    $scope.current_user.shortname = $scope.getlabelname(data.name)
-    $scope.$watch('current_user.name', (oldValue, newValue)->
-      $scope.current_user.shortname = $scope.getlabelname($scope.current_user.name)
-      if oldValue != newValue
-        $http.post('/api/user/' + $scope.current_user.id + '/save', {
-          name: $scope.current_user.name
-        })
-    )
-  )
-  #
   $scope.titleClick = (id)->
     $('#board-detail-modal').modal({
       transition: 'slide down',
@@ -381,15 +366,6 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
 
     }).modal('show')
 
-
-  $scope.removeBoardMember = (id)->
-    angular.forEach($scope.board.users, (value, key)->
-      if value.id == id
-        $http.post('/api/baords/' + $scope.board.id + '/users/delete/' + value.id)
-        $scope.board.users.splice key, 1
-    )
-
-
   $scope.newFlow = ()->
     $http.post('/api/boards/' + $scope.board.id + '/flows/add', {uuid: $scope.uuid}).success((data, status)->
       $scope.board.flows.push data
@@ -408,29 +384,6 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
             flow.tasks.push data
         )
     )
-
-
-  $scope.addmember = (member)->
-    $http.post('/api/boards/' + $scope.board.id + '/users/add/' + member).success(
-      (data, status)->
-        $scope.board.users.push(data)
-        $scope.selpeople = ""
-    ).error(()->
-      $scope.selpeople = ""
-    )
-
-  $scope.selpeople = ""
-
-  $scope.people = []
-
-  $scope.findPeople = (name)->
-    $http.get('/api/user/find/' + name)
-    .success(
-      (data, status)->
-        console.log data
-        $scope.people = data
-    )
-
 
   hbSocket = io.connect 'http://localhost:33555'
   hbSocket.on 'hb', (message)->
@@ -570,5 +523,88 @@ controllers.controller 'BoardCtrl', ['$scope', '$window', 'Board', '$http', ($sc
 
         targetFlow.tasks = newOrderTasks
 
+
+]
+
+controllers.controller 'BoardSidebarController' , ['$scope', '$window', 'Board', '$http', ($scope, $window, Board, $http)->
+  board_id = parseInt($window.location.pathname.split('/')[2])
+  $scope.board = [
+    flows: []
+  ]
+  $scope.current_user = {}
+
+  $http.get('/api/user/current_user').success((data, status)->
+    $scope.current_user = data
+    $scope.current_user.avatar = md5(data.email)
+    $scope.current_user.shortname = $scope.getlabelname(data.name)
+    $scope.$watch('current_user.name', (oldValue, newValue)->
+      $scope.current_user.shortname = $scope.getlabelname($scope.current_user.name)
+      if oldValue != newValue
+        $http.post('/api/user/' + $scope.current_user.id + '/save', {
+          name: $scope.current_user.name
+        })
+    )
+  )
+
+  Board.board(board_id).success((data, status)->
+    $scope.board = data
+
+    Board.flows($scope.board.id).success((data, status)->
+      $scope.board.flows = data
+
+      $scope.$watch('board', ((old, nv)->
+        if $scope.dontSend == false
+          $http.post('/api/update', {
+            uuid: $scope.uuid
+            board: $scope.board
+          })
+        else
+          $scope.dontSend = false
+      ), true)
+    )
+  ).error((data, status)->
+    $window.location.href = "/boards"
+  )
+
+  $scope.removeBoardMember = (id)->
+    angular.forEach($scope.board.users, (value, key)->
+      if value.id == id
+        $http.post('/api/baords/' + $scope.board.id + '/users/delete/' + value.id)
+        $scope.board.users.splice key, 1
+    )
+
+  $scope.selpeople = ""
+
+  $scope.people = []
+
+  $scope.findPeople = (name)->
+    $http.get('/api/user/find/' + name)
+    .success(
+      (data, status)->
+        console.log data
+        $scope.people = data
+    )
+
+  $scope.addmember = (member)->
+    $http.post('/api/boards/' + $scope.board.id + '/users/add/' + member).success(
+      (data, status)->
+        $scope.board.users.push(data)
+        $scope.selpeople = ""
+    ).error(()->
+      $scope.selpeople = ""
+    )
+
+  $scope.getlabelname = (shortname) ->
+    return  unless shortname
+    name = shortname.split(/[\s,]+/)
+    if name.length is 1
+      name = name[0].slice(0, 2).toUpperCase()
+      return name
+    else
+      i = 0
+      while i < name.length
+        name[i] = name[i].slice(0, 1)
+        i++
+      return name.join("").slice(0, 2).toUpperCase()
 
 ]
