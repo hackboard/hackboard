@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <title>Hackboard - Accelerate your works!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/vendor/semantic-ui/semantic.min.css">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <script src="/vendor/semantic-ui/semantic.min.js"></script>
+</head>
+<body class="pushable" ng-app="hackboardApp">
+
+<%= yield %>
+
+</body>
+</html>
