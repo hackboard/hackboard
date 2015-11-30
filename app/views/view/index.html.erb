@@ -1,0 +1,177 @@
+<div class="background-cover"></div>
+<div class="container" id="page" ng-controller="UserCtrl">
+  <div class="ui grid page">
+    <div class="ui grid sixteen wide mobile eight wide tablet eight wide computer column centered through">
+      <!-- Home Page -->
+      <div class="ui raised segment center aligned" id="selectCard">
+        <div class="content">
+          <div class="ui huge icon header">
+            <i class="rocket icon"></i>
+
+            <div class="content">
+              Hackboard
+            </div>
+          </div>
+          <div class="ui hidden divider"></div>
+          <div class="ui red large button" id="signupButton">Sign up</div>
+          <div class="ui green large button" id="loginButton">Log in</div>
+          <div class="ui hidden divider"></div>
+          <div class="description">
+            Accelerate, Customize, Board
+          </div>
+        </div>
+      </div>
+      <!-- Register Page -->
+      <div class="ui raised segment center aligned hidden" id="signupCard" style="display: none;">
+        <div class="ui grid center aligned">
+          <div class="ui column">
+            <div class="ui right floated circular icon button backButton">
+              <i class="ui arrow up icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <form class="ui error warning large form" name="signUpForm" ng-submit="btnSignUp()">
+          <div class="field ui left icon large input">
+            <input placeholder="user@email.com" name="signUpEmail" type="email" required ng-model="registerInfo.email" ng-blur="putToNickname()" ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/">
+            <i class="inbox icon"></i>
+          </div>
+          <div class="inline fields">
+            <div class="field">
+              <img class="ui tiny circular image middle aligned" ng-src="http://www.gravatar.com/avatar/{{ registerInfo.avatar }}">
+            </div>
+            <div class="field">
+              <input placeholder="shortname" name="nickName" type="text" required ng-model="registerInfo.nickname" ng-pattern="/^[a-zA-Z0-9_]*$/" ng-change="registerInfo.nicknameDirty=true">
+            </div>
+          </div>
+          <div class="field ui left icon large input">
+            <input placeholder="at least 8 chars" name="password" type="password" required ng-model="registerInfo.password" ng-pattern="/^[a-zA-Z0-9!@#$%^&*-=+\/_]*$/" ng-minlength="8">
+
+            <i class="privacy icon"></i>
+          </div>
+          <div class="field ui left icon large input">
+            <input placeholder="type password again" name="password_confirmation" type="password" required ng-model="registerInfo.password_confirmation" ng-pattern="/^[a-zA-Z0-9!@#$%^&*-=+\/]*$/" ng-minlength="8">
+
+            <i class="check icon"></i>
+          </div>
+          <div class="inline field">
+            <checkbox ng-model="registerInfo.agree">
+              I agree to the <a>Terms of Service</a>
+            </checkbox>
+          </div>
+          <div class="ui hidden divider"></div>
+          <div class="ui warning message" ng-show="registerInfo.hasWarning">
+            <div class="header">
+              <i class="info circle icon"></i>Could you check these:
+            </div>
+            <ul class="list">
+              <li>
+                {{registerInfo.warning_message}}
+              </li>
+            </ul>
+          </div>
+          <div class="ui error message" ng-show="registerInfo.hasError">
+            <div class="header">
+              <i class="remove circle icon"></i>Something went wrong :(
+            </div>
+            <ul class="list">
+              <li>
+                Sorry about that...
+              </li>
+            </ul>
+          </div>
+          <input type="submit" class="ui blue large button" value="Sign Up">
+        </form>
+      </div>
+      <!-- Login Page -->
+      <div class="ui raised segment center aligned hidden" id="loginCard" style="display: none;">
+        <div class="ui grid center aligned">
+          <div class="ui column">
+            <div class="ui right floated circular icon button backButton">
+              <i class="ui arrow up icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <form class="ui error warning large form" ng-submit="btnLogin()">
+          <div class="field ui left icon large input">
+            <input placeholder="user@email.com" type="email" required ng-model="loginInfo.email">
+
+            <i class="inbox icon"></i>
+          </div>
+          <div class="field ui left icon large input">
+            <input placeholder="at least 8 chars" type="password" required ng-model="loginInfo.password">
+
+            <i class="privacy icon"></i>
+          </div>
+          <div class="inline field">
+            <checkbox ng-model="loginInfo.rememberMe">Remember me</checkbox>
+          </div>
+          <div class="ui hidden divider"></div>
+          <div class="ui warning message" ng-show="loginInfo.hasWarning">
+            <div class="header">
+              <i class="info circle icon"></i>Could you check these:
+            </div>
+            <ul class="list">
+              <li>
+                Account or password is wrong!
+              </li>
+              <li ng-click="btnRegister()">
+                <a href="#">Not Join us yet?</a>
+              </li>
+            </ul>
+          </div>
+          <div class="ui error message" ng-show="loginInfo.hasError">
+            <div class="header">
+              <i class="remove circle icon"></i>Something went wrong :(
+            </div>
+            <ul class="list">
+              <li>
+                We are sorry about that, server might currently under maintenance.
+                Please try again after few minutes, or contact us if this continuous happen.
+              </li>
+            </ul>
+          </div>
+          <input type="submit" class="ui blue large button" value="Log in">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'common/footer' %>
+
+<script>
+    $('.ui.checkbox').checkbox();
+    $.backstretch([
+        "img/pot-holder.jpg",
+        "img/coffee.jpg",
+        "img/dome.jpg"
+    ], {
+        fade: 2000,
+        duration: 18000
+    });
+    $("#page").hide().transition('fade', '1000ms');
+    $("footer").hide().transition('fade');
+    $("#signupButton").click(function () {
+        switchCard($(this).parent().parent(), $("#signupCard"));
+    });
+    $("#loginButton").click(function () {
+        switchCard($(this).parent().parent(), $("#loginCard"));
+    });
+    $(".backButton").click(function () {
+        switchCard($(this).parent().parent().parent(), $("#selectCard"));
+    });
+    function switchCard(hideCard, showCard) {
+        var hide = $(hideCard);
+        var show = $(showCard);
+        if (!hide.hasClass("hidden")) {
+            hide.transition('vertical flip', '100ms', function () {
+                show.transition('vertical flip', '100ms');
+            });
+        } else {
+            show.transition('vertical flip', '100ms', function () {
+                hide.transition('vertical flip', '100ms');
+            });
+        }
+    }
+</script>

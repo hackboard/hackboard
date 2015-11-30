@@ -1,0 +1,252 @@
+<div class="background-cover"></div>
+<div style="position: relative;min-height: 100%;" ng-controller="BoardsCtrl">
+  <header class="ui main borderless fixed inverted large menu ui grid page" id="page">
+    <div class="item">
+      <i class="rocket icon"></i> All boards
+    </div>
+    <div class="item ui tablet only computer only row column">
+      <div class="ui icon buttons" id="view-mode">
+        <div class="ui button basic inverted disabled">Mode</div>
+        <div class="ui button yellow inverted active"><i class="list icon"></i></div>
+        <div class="ui button red inverted"><i class="sitemap icon"></i></div>
+      </div>
+      <div class="ui buttons" ng-click="newBoard()">
+        <div class="ui icon button blue inverted">
+          <i class="plus icon"></i>
+          New board
+        </div>
+      </div>
+    </div>
+    <div class="right menu">
+      <div class="ui dropdown item">
+        <img class="ui avatar image" ng-src="http://www.gravatar.com/avatar/{{ current_user.avatar }}s=200">
+        <span><%= current_user.name %></span>
+        <i class="caret down icon"></i>
+
+        <div class="menu">
+          <a class="item"><i class="settings icon"></i> Settings</a>
+          <a class="item" data-method="post" href="/api/user/logout"><i class="sign out icon"></i> Log out</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="ui grid page">
+      <div class="ui grid" id="pinned-boards">
+        <div class="ui column">
+          <div class="ui medium header">
+            <i class="pin icon"></i>
+
+            <div class="content">
+              Pinned
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="ui grid stackable three column" id="pinned-boards-content" as-sortable="pinBoardSortOptions" ng-model="boards.pin">
+            <div class="ui column board" id="sample-pinned-board" ng-repeat="board in boards.pin" as-sortable-item ng-click="toBoard(board.id)">
+              <div class="ui card ui-card" style="width: auto;">
+                <div class="content">
+                  <i class="right floated pin link icon active" ng-click="unpin(board.id)"></i>
+
+                  <div class="header" as-sortable-item-handle>{{ board.name }}</div>
+                  <div class="meta">
+                    updated {{ board.updated_at | timeAgo }}
+                  </div>
+                  <div class="description">
+                    <p>{{ board.description }}</p>
+                  </div>
+                </div>
+                <div class="extra content">
+                  <div class="ui labels">
+                    <div class="ui teal label">
+                      WIP
+                      <div class="detail">{{ board.wip }}</div>
+                    </div>
+                    <div class="ui blue label">
+                      Done
+                      <div class="detail">84</div>
+                    </div>
+                  </div>
+                  <div class="right floated author">
+                    <div style="display: inline">
+                      <a class="ui circular label people" semantic-popup>
+                        CH
+                      </a>
+
+                      <div class="ui popup">
+                        <div class="item">
+                          <img class="ui avatar image" src="img/sample-avatar.jpg"> Cheng-Han Wu
+                        </div>
+                      </div>
+                    </div>
+                    <div style="display: inline">
+                      <a class="ui circular label people" semantic-popup>
+                        G+
+                      </a>
+
+                      <div class="ui popup">
+                        <div class="item">
+                          <img class="ui avatar image" src="img/square-image.png">
+                          Chi-Cha Sun
+                        </div>
+                      </div>
+                    </div>
+                    <div style="display: inline">
+                      <a class="ui circular label people" semantic-popup>
+                        YC
+                      </a>
+
+                      <div class="ui popup">
+                        <div class="item">
+                          <img class="ui avatar image" src="img/square-image.png">
+                          Yi-Chun Lin
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+      <div class="ui grid" id="other-boards">
+        <div class="ui column">
+          <div class="ui medium header">
+            <div class="content">
+              Others
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ui grid stackable three column" id="other-boards-content" as-sortable="otherBoardSortOptions" ng-model="boards.other">
+            <div class="ui column" id="sample-other-board" ng-repeat="board in boards.other" as-sortable-item ng-click="toBoard(board.id)">
+              <div class="ui card ui-card" style="width: auto;">
+                <div class="content">
+                  <i class="right floated pin link icon" ng-click="pin(board.id)"></i>
+
+                  <div class="header" as-sortable-item-handle>{{ board.name }}</div>
+                  <div class="meta">
+                    updated {{ board.updated_at | timeAgo }}
+                  </div>
+                  <div class="description">
+                    <p>{{ board.description }}</p>
+                  </div>
+                </div>
+                <div class="extra content">
+                  <div class="ui labels">
+                    <div class="ui teal label">
+                      WIP
+                      <div class="detail">{{ board.wip }}</div>
+                    </div>
+                    <div class="ui blue label">
+                      Done
+                      <div class="detail">5</div>
+                    </div>
+                  </div>
+                  <div class="right floated author">
+                    <a class="ui circular label people" semantic-popup>
+                      CH
+                    </a>
+
+                    <div class="ui popup">
+                      <div class="item">
+                        <img class="ui avatar image" src="img/sample-avatar.jpg"> Cheng-Han Wu
+                      </div>
+                    </div>
+                    <a class="ui circular label people" semantic-popup>
+                      BH
+                    </a>
+
+                    <div class="ui popup">
+                      <div class="item">
+                        <img class="ui avatar image" src="img/square-image.png"> Bo-Hong Li
+                      </div>
+                    </div>
+                    <a class="ui circular label people" semantic-popup>
+                      2 more
+                    </a>
+
+                    <div class="ui popup">
+                      <div class="ui list">
+                        <div class="item">
+                          <img class="ui avatar image" src="img/square-image.png">
+                          &nbsp;
+                          Yi-Chun Lin
+                        </div>
+                        <div class="item">
+                          <img class="ui avatar image" src="img/square-image.png">
+                          &nbsp;
+                          Chi-Cha Sun
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--
+          <% if @board[:pin].length === 0 and @board[:other].length === 0 %>-->
+                <p>Nothing</p>
+                <!--
+          <% end %>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<%= render 'common/footer' %>
+
+<script>
+    var pined = $("#pinned-boards-content");
+    var other = $("#other-boards-content");
+
+    $(".ui.dropdown").dropdown();
+    $('#view-mode *').on('click', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+
+    var animationDuration = '150ms';
+
+
+    $(".pin").state({
+        onActivate: function () {
+            var target = $(this).closest(".board");
+            target.transition({
+                animation: 'fade down',
+                duration: animationDuration,
+                onComplete: function () {
+                    target.detach().appendTo(pined).transition('fade up', animationDuration);
+                }
+            });
+        },
+        onDeactivate: function () {
+            var target = $(this).closest(".board");
+            target.transition({
+                animation: 'fade up',
+                duration: animationDuration,
+                onComplete: function () {
+                    target.detach().appendTo(other).transition('fade down', animationDuration);
+                }
+            });
+        }
+    });
+
+    //        $(".card").each(function (index, value) {
+    //            var $this = $(this);
+    //            $this.hide();
+    //            setTimeout(function () {
+    //                $this.transition('fade');
+    //            }, index * 50);
+    //        });
+    $("header").hide().transition('fade');
+    $("footer").hide().transition('fade');
+</script>
